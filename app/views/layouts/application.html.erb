@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>WebsiteTemplate</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
+
+
+
+    <%= stylesheet_link_tag "style.css" %>
+    <%= stylesheet_link_tag "frontend-icon.css" %>
+    <%= stylesheet_link_tag "frontend-essential.css" %>
+  </head>
+
+  <body>
+    <%= yield %>
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+
+
+      <%= javascript_include_tag "corefrontend" %>
+      <%= javascript_include_tag "email-decode.min" %>
+      <%= javascript_include_tag "frontend" %>
+      <%= javascript_include_tag "profrontend" %>
+      <%= javascript_include_tag "https://fse.jegtheme.com/randai/wp-content/plugins/gutenverse-form/assets/js/frontend.js?ver=1.1.9", defer: true %>
+      <%= javascript_include_tag "https://fse.jegtheme.com/randai/wp-content/plugins/gutenverse/assets/js/frontend.js?ver=2.2.0", defer: true %>
+      <%= javascript_include_tag "https://fse.jegtheme.com/randai/wp-content/themes/randai/assets/js/essential/profrontend.js?ver=1.0.4", defer: true %>
+      <%= javascript_include_tag "https://fse.jegtheme.com/randai/wp-content/themes/randai/assets/js/essential/frontend.js?ver=1.0.4", defer: true %>
+
+  </body>
+</html>
