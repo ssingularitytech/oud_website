@@ -26,13 +26,3 @@ services:
       - "127.0.0.1:7918:7918"
     depends_on:
       - postgres
-  sidekiq:
-    build:
-      context: .
-    command: "bundle exec sidekiq"
-    volumes:
-      - .:/app
-    environment:
-      RAILS_ENV: "production"
-    depends_on:
-      - postgres
