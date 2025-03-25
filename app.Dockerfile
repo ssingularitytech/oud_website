@@ -20,7 +20,7 @@ RUN gem update --system 3.4.22 && \
 
 COPY . /app
 
-EXPOSE 7918
+EXPOSE 9918
 
 #RUN SECRET_KEY_BASE=1 RAILS_ENV=production bundle exec rake assets:precompile
 CMD ["bundle", "exec", "puma", "-C", "config/puma.rb"]
