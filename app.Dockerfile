@@ -14,7 +14,10 @@ RUN npm install -g yarn@1
 WORKDIR /app
 COPY Gemfile /app/Gemfile
 COPY Gemfile.lock /app/Gemfile.lock
-RUN bundle install
+RUN gem update --system 3.4.22 && \
+    gem install bundler -v 2.6.6 && \
+    bundle install
+
 COPY . /app
 
 EXPOSE 7918
