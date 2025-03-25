@@ -23,6 +23,6 @@ services:
     volumes:
       - .:/app
     ports:
-      - "127.0.0.1:7918:7918"
+      - "127.0.0.1:9918:9918"
     depends_on:
       - postgres
