@@ -1,24 +1,72 @@
-# README
+## Steps to run on Production
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+* Login to Server
 
-Things you may want to cover:
+```
+ssh root@ssingularitee.com
+```
+You will need the password for the server. Ask the team for it.
 
-* Ruby version
+* Go to the project directory
 
-* System dependencies
+```
+cd /var/www/projects/template_website/website_template/
+```
 
-* Configuration
+* Pull the latest code
 
-* Database creation
+```
+git pull origin master
+```
 
-* Database initialization
+* Find the container id of
 
-* How to run the test suite
+```
+docker ps | grep website_template
+```
+Fetch first value of the tab separated output as container id
 
-* Services (job queues, cache servers, search engines, etc.)
+e.g.
+```
+7e525222765f   website_template-app            "bash -c 'bundle exe…"   14 hours ago   Up 14 hours                 127.0.0.1:9918->9918/tcp                                                               website_template-app-1
+```
 
-* Deployment instructions
+7e525222765f from the above output is the container id
 
-* ...
+* Start the bash of the container
+
+```
+docker exec -it <container_id> bash
+e.g. 
+docker exec -it 7e525222765f bash
+```
+
+* Bundle install
+
+```
+bundle install
+```
+
+* Yarn install
+
+```
+yarn install
+```
+
+* Migrate the database
+
+```
+rails db:migrate
+```
+
+* Precompile the assets
+
+```
+rails assets:precompile
+```
+
+* Restart the server
+
+```
+rails restart
+```
