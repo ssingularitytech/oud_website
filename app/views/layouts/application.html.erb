@@ -26,17 +26,16 @@
   </head>
 
   <body>
+		<%= render "layouts/navbar" %>
     <%= yield %>
       <p class="notice"><%= notice %></p>
       <p class="alert"><%= alert %></p>
-
-
+    <%= render "layouts/footer" %>
       <%= javascript_include_tag "corefrontend" %>
       <%= javascript_include_tag "frontend-first" %>
       <%= javascript_include_tag "frontend-second" %>
       <%= javascript_include_tag "profrontend" %>
       <%= javascript_include_tag "frontend-third" %>
       <%= javascript_include_tag "email-decode.min" %>
-
   </body>
 </html>

@@ -8,7 +8,7 @@ class LandingController < ApplicationController
   def team
   end  
 
-  def show
+  def projects
   end 
   
   def studio
@@ -23,6 +23,14 @@ class LandingController < ApplicationController
   def news
   end 
 
+  def singlenews
+  end
+
   def contact
   end
+
+  def calendar
+  end
+
+
 end

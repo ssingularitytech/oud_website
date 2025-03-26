@@ -12,11 +12,14 @@ Rails.application.routes.draw do
   root "landing#index"
   get 'about', to: 'landing#about'
   get 'team', to: 'landing#team'
-  get 'show', to: 'landing#show'
+  get 'projects', to: 'landing#projects'
   get 'studio', to: 'landing#studio'
   get 'ticket', to: 'landing#ticket'
   get 'faq', to: 'landing#faq'
   get 'news', to: 'landing#news'
+  get 'single-news', to: 'landing#single-news'
   get 'contact', to: 'landing#contact'
+  get 'calendar', to: 'landing#calendar'
+  
 
 end
