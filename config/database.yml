@@ -80,5 +80,6 @@ test:
 production:
   <<: *default
   database: website_template_production
-  username: website_template
-  password: <%= ENV["WEBSITE_TEMPLATE_DATABASE_PASSWORD"] %>
+  host: <%= ENV["POSTGRES_HOST"] %>
+  username: <%= ENV["POSTGRES_USER"] %>
+  password: <%= ENV["POSTGRES_PASSWORD"] %>
