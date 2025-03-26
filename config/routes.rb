@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   get 'about', to: 'landing#about'
   get 'team', to: 'landing#team'
   get 'projects', to: 'landing#projects'
-  get 'studio', to: 'landing#studio'
+  get 'music', to: 'landing#music'
   get 'ticket', to: 'landing#ticket'
   get 'faq', to: 'landing#faq'
   get 'news', to: 'landing#news'

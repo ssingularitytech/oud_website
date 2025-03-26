@@ -11,7 +11,7 @@ class LandingController < ApplicationController
   def projects
   end 
   
-  def studio
+  def music
   end 
 
   def ticket
