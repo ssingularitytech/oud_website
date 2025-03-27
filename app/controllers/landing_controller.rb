@@ -30,4 +30,19 @@ class LandingController < ApplicationController
   end
 
 
+
+
+  def projectone
+  end
+
+  def projecttwo
+  end
+
+  def projectthree
+  end
+
+  def projectfour
+  end
+
+
 end

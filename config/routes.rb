@@ -20,5 +20,8 @@ Rails.application.routes.draw do
   get 'contact', to: 'landing#contact'
   get 'calendar', to: 'landing#calendar'
   
-
+  get 'project/details1', to: 'landing#projectone'
+  get 'project/details2', to: 'landing#projecttwo'
+  get 'project/details3', to: 'landing#projectthree'
+  get 'project/details4', to: 'landing#projectfour'
 end
