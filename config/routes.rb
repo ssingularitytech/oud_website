@@ -10,13 +10,12 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
   root "landing#index"
-  get 'about', to: 'landing#about'
-  get 'team', to: 'landing#team'
-  get 'projects', to: 'landing#projects'
-  get 'studio', to: 'landing#studio'
-  get 'ticket', to: 'landing#ticket'
-  get 'faq', to: 'landing#faq'
+  get 'biography', to: 'landing#biography'
   get 'news', to: 'landing#news'
+  get 'projects', to: 'landing#projects'
+  get 'music', to: 'landing#music'
+  get 'video', to: 'landing#video'
+  get 'press', to: 'landing#press'
   get 'single-news', to: 'landing#single-news'
   get 'contact', to: 'landing#contact'
   get 'calendar', to: 'landing#calendar'
