@@ -2,7 +2,7 @@ class LandingController < ApplicationController
   def index
   end
 
-  def about
+  def biography
   end
 
   def team
@@ -14,13 +14,10 @@ class LandingController < ApplicationController
   def music
   end 
 
-  def ticket
+  def video
   end 
 
-  def faq
-  end 
-
-  def news
+  def press
   end 
 
   def singlenews
