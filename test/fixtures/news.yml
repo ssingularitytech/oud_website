@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  news_date: 2025-03-28
+  news_name: MyString
+  news_image: MyString
+  news_link: MyString
+
+two:
+  news_date: 2025-03-28
+  news_name: MyString
+  news_image: MyString
+  news_link: MyString

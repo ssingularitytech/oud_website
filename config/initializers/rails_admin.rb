@@ -38,5 +38,43 @@ RailsAdmin.config do |config|
     ## With an audit adapter, you can add:
     # history_index
     # history_show
+
+    config.model 'News' do
+      edit do
+        field :news_date
+        field :news_name
+        field :news_description
+        field :news_link
+        field :news_image, :active_storage
+      end
+  
+      show do
+        field :news_date
+        field :news_name
+        field :news_description
+        field :news_link
+        field :news_image do
+          pretty_value do
+            if bindings[:object].news_image.attached?
+              bindings[:view].tag(:img, src: Rails.application.routes.url_helpers.rails_blob_path(bindings[:object].news_image, only_path: true), style: 'max-width: 200px; max-height: 200px;')
+            end
+          end
+        end
+      end
+  
+      list do
+        field :news_date
+        field :news_name
+        field :news_description
+        field :news_link
+        field :news_image do
+          pretty_value do
+            if bindings[:object].news_image.attached?
+              bindings[:view].tag(:img, src: Rails.application.routes.url_helpers.rails_blob_path(bindings[:object].news_image, only_path: true), style: 'max-width: 100px; max-height: 100px;')
+            end
+          end
+        end
+      end
+    end
   end
 end
