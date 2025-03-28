@@ -11,17 +11,7 @@ Rails.application.routes.draw do
   # root "posts#index"
   root "landing#index"
   get 'biography', to: 'landing#biography'
-  get 'news', to: 'landing#news'
-  get 'projects', to: 'landing#projects'
-  get 'music', to: 'landing#music'
-  get 'video', to: 'landing#video'
-  get 'press', to: 'landing#press'
-  get 'single-news', to: 'landing#single-news'
-  get 'contact', to: 'landing#contact'
-  get 'calendar', to: 'landing#calendar'
-  
-  get 'project/details1', to: 'landing#projectone'
-  get 'project/details2', to: 'landing#projecttwo'
-  get 'project/details3', to: 'landing#projectthree'
-  get 'project/details4', to: 'landing#projectfour'
+  get 'news', to: 'news#index'
+
+
 end

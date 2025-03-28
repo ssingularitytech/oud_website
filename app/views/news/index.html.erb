@@ -1,0 +1,395 @@
+
+    <style>
+        .news-image {
+            height: 400px !important; 
+            width: 100%;
+            object-fit: fit;
+        }
+
+  /*bottom to top animation */
+    .fade-news-card {
+    opacity: 0;
+    transform: translateY(80px); 
+    transition: all 0.9s ease-out;
+    }
+
+    .fade-news-card.show {
+    opacity: 1;
+    transform: translateY(0); 
+    }
+    .news-body-text{
+      min-height: 170px;
+    }
+    </style>
+
+
+<div class="container">
+  <h2 class="text-center text-white pt-md-5 pt-3 caudex-bold">NEWS</h2>
+    <div class="row row-cols-1 row-cols-lg-3 row-cols-md-2 g-4 pt-md-5 pt-3">
+
+        <div class="col">
+            <div class="card border-0 fade-news-card ">
+                <%= image_tag "news-image/press-image-1.png", alt: "Company", class: "img-fluid news-image" %>
+                <div class="news-body-text text-center p-3 caudex-bold">
+                    <h4>20 NOV 2024 * Safa is Bandcamp’s Album of the Day!</h4>
+                    <p class="caudex-normal collapse" id="collapseExample1">I am incredibly grateful and proud that Safa has been chosen as Bandcamp”s Album of the Day!
+
+                      ‘Safa, meaning purity, reveals an oud master reaching new heights. And although the sounds on the record are in one sense Rohana’s alone, he seems to play with an urgency supplemented by a collective Palestinian resilience on the world stage.. Safa is an emphatic achievement that affirms Rohana’s individual proficiency even as it clarifies the necessity of art, forged in the crucible of politics, to gesture at something greater.’
+                      
+                      Check out the full article below:
+                      <a href="https://daily.bandcamp.com/album-of-the-day/nizar-rohana-safa-review?fbclid=IwY2xjawGsjORleHRuA2FlbQIxMQABHaxSu7E8SRKOnXxZovZAQBCe_xIoMkRDPBdJSN-2EL-SGFKTDk2KKSrqpg_aem_EvtBT8R_Xtzj3HfZHqPaRg" target="_blank" style="color: rgb(215, 104, 104);">https://shorturl.at/CChOR</a>
+                    </p>
+                      
+                      
+                      <div class="text-end">
+                        <button class="rounded text-white p-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample1" aria-expanded="false" aria-controls="collapseExample" style="background-color: #2f2c2c;">
+                          Read More
+                        </button>
+                      </div>
+                </div>
+            </div>
+        </div>
+
+            <div class="col">
+              <div class="card border-0 fade-news-card">
+                  <%= image_tag "news-image/press-image-2.jpg", alt: "Company", class: "img-fluid news-image" %>
+                  <div class="news-body-text text-center p-3 caudex-bold">
+                      <h4>15 NOV 2024 * Album Release: Safa</h4>
+                      <p class="caudex-normal collapse" id="collapseExample2">Worlds Within Worlds are proud to announce ‘Safa’, a record of solo oud from acclaimed Palestinian musician Nizar Rohana. Listen now at:
+
+                        https://lnk.to/Nizar-Rohana-Safa
+                        
+                        For Nizar Rohana, the oud has been part of his life as long as he can remember. He grew up to the sight and sound of his father with an oud in his hands. At family gatherings, his father would play, often accompanied by his mother on Darbukah or whatever percussion instrument was available. 
+                        
+                        “This might sound cliché, but I can’t imagine my life without music,” explains Nizar. “My life is about music; I connect to the world through music. It has always and still is guiding my development as a person and as a human being.”
+                        
+                        On Safa, the acclaimed Palestinian oud player presents his third full-length album, and the first focused purely on solo oud performances. It is his most refined and intimate release to date – a reflection on his life’s journey with the oud, and where those snaking paths might lead in future. It traces the long path from his first days with the instrument, through to his 2008 debut Sard (Narration), and the 2016 release Furat (Euphrates) – Nizar’s first trio album, which explored the combination of oud, double bass and percussion.
+                        
+                        “Safa has few meanings in Arabic. The primary one for me is purity – but it also could mean fineness, clearness, or lucidity. While it is easier to ‘impress’ with a bigger ensemble, I find recording a solo album more challenging. It is as up-close, as intimate, and as personal as it gets. Pure and revealing.”
+                        
+                        The record contains a number of strands, beautifully woven together. First are compositions which carry Nizar’s signature style – Safa, Mayadin, and Madar Hijaz all feature a melodic and rhythmic pattern or motif that repeats and transforms, not unlike the preludes by J.S. Bach.
+                        
+                        Second are the pieces Yasamin and Song Without Words, which take a more lyrical approach. These beautiful song-like pieces gently unfold with a gentleness that speaks to Nizar’s maturity as a musician.
+                        
+                        Finally, the pieces Rast, Bayati and Mufradat Nahawand are grounded in Taqsim – the improvisational genre in Arab classical music. These pieces have their genesis in Nizar’s PHD studies, and are inspired by two of his musical heroes: Muhammad al-Qasabji (1898-1964) and Riyad al-Sunbati (1906-1981), each of whom are considered two pillars of modern Arabic music.
+                        
+                        This is a record which draws together these different approaches, developing a unique style that while drawing on influences from Egyptian, Iraqi and Turkish traditions of oud, marks out Nizar’s unique artistic vision as a contemporary Palestinian musician. 
+                        
+                        “A large part of the process of creating this album was during the recent war on Gaza. It has been a challenging period especially mentally. There were many moments of despair and hesitation about the meaning of life and the meaning of creating music. But at the end, as a human being and especially as a Palestinian musician I feel the need to create new music, today more than ever. Music is about personal expression as well as collective identity. “
+                        
+                        “There is also a very personal side to this album. One of the pieces is named Darwish. Here I refer to my late father. In Persian, this word originally meant the person who opens the door. My father was the one who ‘opened the door’ for oud and music in my life. In Arabic, especially through history, the word meant a wanderer or a simple and humble person who is satisfied with very little. Though my father didn’t live a life of a Darwish, I think he was a Darwish in his soul. This album is dedicated to his memory.”
+                        
+                        Safa was recorded by Fieke van den Hurk (Kayhan Kalhor & Rembrandt Frerichs Trio) at Dearworld Studio, mixed by Bishara Khell at VSTLive Studio, and mastered by Andreas Balaskas at Masterlab Masteringstudios. Bishara Khell – one of Palestine’s leading composers and arrangers – worked with Nizar as a composition mentor, having worked with Nizar for the past decade. The album is supported by the Ud Festival in Netherlands, and Executive Producers Abhilash Nambiar and Claypot Technologies.
+                        
+                        Nizar has had a storied career, having performed across Europe and the Arab world – from The Netherlands, Germany, Belgium and Switzerland, to Palestine, Morocco, Jordan and Egypt – as well as in Turkey and Japan. In recent years he has performed at prestigious venues in the Netherlands such as the National Opera & Ballet in Amsterdam, and made multiple appearances at the Netherlands Ud Festival.
+                        
+                        With his new album Safa, Nizar Rohana can comfortably be proclaimed as one of the most profound and engaging masters of the oud in the contemporary scene. He not only carries forth the torch of the Palestinian oud tradition, but also weaves together the legacies of Egyptian, Iraqi and Turkish traditions of oud, and Arab classical music.  
+                        
+                        Credits
+                        Releases November 15, 2024
+                        
+                        Recorded on 23-25 September 2023 at Dearworld Studio (NL)
+                        
+                        Recording: Fieke van den Hurk
+                        Mixing: Bishara Khell
+                        Mastering: Andreas Balaskas
+                        
+                        Artistic Supervision: Bishara Khell
+                        Artwork and Design: Ivana Djukic
+                        Photography: Michel Gasco
+                        
+                        Executive Producers: Abhilash Nambiar & Claypot Technologies
+                        
+                        Supported by Ud Festival</p>
+                        <div class="text-end">
+                          <button class="rounded text-white p-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample" style="background-color: #2f2c2c;">
+                            Read More
+                          </button>
+                        </div>
+                  </div>
+              </div>
+          </div>
+
+          <div class="col">
+            <div class="card border-0 fade-news-card">
+                <%= image_tag "news-image/press-image-3.jpg", alt: "Company", class: "img-fluid news-image" %>
+                <div class="news-body-text text-center p-3 caudex-bold">
+                    <h4>31 OCT 2024 * Scene Noise Yasamin Video Premier</h4>
+                    <p class="caudex-normal collapse" id="collapseExample3">A video recording of my newly released single Yasamin has premiered on the renowned music magazine Scene Noise. Check it out at the link below!</p>
+                      <div class="text-end">
+                        <button class="rounded text-white p-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample3" aria-expanded="false" aria-controls="collapseExample" style="background-color: #2f2c2c;">
+                          Read More
+                        </button>
+                      </div>
+                </div>
+            </div>
+          </div>
+
+            <div class="col">
+              <div class="card border-0 fade-news-card">
+                  <%= image_tag "news-image/press-image-4.jpg", alt: "Company", class: "img-fluid news-image" %>
+                  <div class="news-body-text text-center p-3 caudex-bold">
+                      <h4>18 OCT 2024 * New Single: Yasamin</h4>
+                      <p class="caudex-normal collapse" id="collapseExample4">Introducing Yasamin, a second single from Safa album. Yasamin, or jasmine, is a symbol of purity in many cultures. In this piece, I embrace a lyrical approach to composition, seeking beauty through simplicity of sound.</p>
+                        <div class="text-end">
+                          <button class="rounded text-white p-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample4" aria-expanded="false" aria-controls="collapseExample" style="background-color: #2f2c2c;">
+                            Read More
+                          </button>
+                        </div>
+                  </div>
+              </div>
+          </div>
+
+          <div class="col">
+            <div class="card border-0 fade-news-card">
+                <%= image_tag "news-image/press-image-5.jpg", alt: "Company", class: "img-fluid news-image" %>
+                <div class="news-body-text text-center p-3 caudex-bold">
+                    <h4>03 OCT 2024 * Interview & Album Review Blogfoolk (Italian)</h4>
+                    <p class="caudex-normal collapse" id="collapseExample5">“An extraordinary album, thoughtful, but also capable of immediacy, spontaneity.”
+
+                      My upcoming album Safa has been selected as the feature of the Italian music magazine Blogfoolk for their October 2024 edition, with the first editorial lines dedicated to it! I am deeply honored and grateful for this recognition, as well as for the wonderful first review and interview (in Italian).</p>
+                      <div class="text-end">
+                        <button class="rounded text-white p-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample5" aria-expanded="false" aria-controls="collapseExample" style="background-color: #2f2c2c;">
+                          Read More
+                        </button>
+                      </div>
+                </div>
+            </div>
+        </div>
+
+          <div class="col">
+            <div class="card border-0 fade-news-card">
+                <%= image_tag "news-image/press-image-6.webp", alt: "Company", class: "img-fluid news-image" %>
+                <div class="news-body-text text-center p-3 caudex-bold">
+                    <h4>12 SEP 2024 * Safa Video Premiere KLOF MAG</h4>
+                    <p class="caudex-normal collapse" id="collapseExample6">A video recording of my newly released single Safa has premiered on the renowned music magazine Klofmag. Check it out at the link below!</p>
+                      <div class="text-end">
+                        <button class="rounded text-white p-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample6" aria-expanded="false" aria-controls="collapseExample" style="background-color: #2f2c2c;">
+                          Read More
+                        </button>
+                      </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col">
+          <div class="card border-0 fade-news-card">
+              <%= image_tag "news-image/press-image-7.png", alt: "Company", class: "img-fluid news-image" %>
+              <div class="news-body-text text-center p-3 caudex-bold">
+                  <h4>06 SEP 2024 * New Single: Safa</h4>
+                  <p class="caudex-normal collapse" id="collapseExample7">The title piece of my upcoming album out now! Stream and pre-order your copy in the following link:</p>
+                    <div class="text-end">
+                      <button class="rounded text-white p-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample7" aria-expanded="false" aria-controls="collapseExample" style="background-color: #2f2c2c;">
+                        Read More
+                      </button>
+                    </div>
+              </div>
+          </div>
+      </div>
+
+      <div class="col">
+        <div class="card border-0 fade-news-card">
+            <%= image_tag "news-image/press-image-8.png", alt: "Company", class: "img-fluid news-image" %>
+            <div class="news-body-text text-center p-3 caudex-bold">
+                <h4>01 DEC 2023 * AFAC Grant 2023</h4>
+                <p class="caudex-normal collapse" id="collapseExample8">I am deeply grateful to have received a grant from the Arab Fund for Arts and Culture (AFAC) for the third time. This generous support goes to my upcoming album, Sujūd (Adoration), together with Iranian Oud player Yasamin Shahosseini and German percussionist Ruven Ruppik.</p>
+                  <div class="text-end">
+                    <button class="rounded text-white p-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample8" aria-expanded="false" aria-controls="collapseExample" style="background-color: #2f2c2c;">
+                      Read More
+                    </button>
+                  </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col">
+      <div class="card border-0 fade-news-card">
+          <%= image_tag "news-image/press-image-9.jpg", alt: "Company", class: "img-fluid news-image" %>
+          <div class="news-body-text text-center p-3 caudex-bold">
+              <h4>01 SEP 2023 * Upcoming Release with Worlds Within Worlds</h4>
+              <p class="caudex-normal collapse" id="collapseExample9">To all my fans who’ve been eagerly awaiting a solo Oud album—the time has finally come! I’m thrilled to announce that I’ve just signed a contract with the Australian label Worlds Within Worlds, and my first solo album will be released next spring</p>
+                <div class="text-end">
+                  <button class="rounded text-white p-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample9" aria-expanded="false" aria-controls="collapseExample" style="background-color: #2f2c2c;">
+                    Read More
+                  </button>
+                </div>
+          </div>
+      </div>
+  </div>
+
+
+  <div class="col">
+    <div class="card border-0 fade-news-card">
+        <%= image_tag "news-image/press-image-10.jpeg", alt: "Company", class: "img-fluid news-image" %>
+        <div class="news-body-text text-center p-3 caudex-bold">
+            <h4>16 DEC 2021 * PhD in Artistic Research</h4>
+            <p class="caudex-normal collapse" id="collapseExample10">On 15 December 2021, I completed my PhD in artistic research at Leiden University Academy for Creative and Performing Arts. The graduation ceremony included a concert at the venue Sijthoff, followed by the defence at the prestigious Academiegebouw of Leiden University.
+
+              My thesis, ‘Ūd Taqsīm as a Model of Pre-Composition, includes a number of new compositions for solo Oud inspired by the improvisations of the great Egyptian ud players Muhmmad al-Qasabji and Riyad al-Sunbati. These pieces include some of the favourable works among my audience such as Safsaf Abyad (White Willow) and Mufradat Nahawand. 
+              
+              Find out more about my PhD project here: </p>
+              <div class="text-end">
+                <button class="rounded text-white p-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample10" aria-expanded="false" aria-controls="collapseExample" style="background-color: #2f2c2c;">
+                  Read More
+                </button>
+              </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="col">
+  <div class="card border-0 fade-news-card">
+      <%= image_tag "news-image/press-image-11.png", alt: "Company", class: "img-fluid news-image" %>
+      <div class="news-body-text text-center p-3 caudex-bold">
+          <h4>25 SEP 2021 * New Release: Hopscotch</h4>
+          <p class="caudex-normal collapse" id="collapseExample11">I’m happy to announce the release of ‘Hopscotch’, a duet for Oud and piano composed by the great Palestinian composer Bishara Khell.
+
+            Tossing a stone into a pattern of rectangles puts drama in a different scope, somewhere between hop and jump in the spirit of a game.
+            
+            Nizar Rohana – Oud
+            
+            Fadi Deeb- piano
+            
+            Bishara Khell – composition
+            
+            Image by Paul Brown
+            
+            Watch and listen via the following link</p>
+            <div class="text-end">
+              <button class="rounded text-white p-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample11" aria-expanded="false" aria-controls="collapseExample" style="background-color: #2f2c2c;">
+                Read More
+              </button>
+            </div>
+      </div>
+  </div>
+</div>
+
+
+<div class="col">
+  <div class="card border-0 fade-news-card">
+      <%= image_tag "news-image/press-image-12.png", alt: "Company", class: "img-fluid news-image" %>
+      <div class="news-body-text text-center p-3 caudex-bold">
+          <h4>31 MAY 2021 * Gaudeuamus Podcast</h4>
+          <p class="caudex-normal collapse" id="collapseExample12">‘New podcast! Palestinian ud player and composer Nizar Rohana made a new entry to our Curious Ears podcast series, in which composers and musicians present a listening guide to the musical genre that is most dear to them. Nizar tells us everything about the temporal aspects of Arabic improvisation!’
+
+            Listen to the podcast: https://soundcloud.com/…/taqsim-journey-appreciating…
+            Or, first watch an interview between Nizar and our curator Jonás Bisquert, talking about the themes of the podcast: https://youtu.be/J8goOwuOYgk</p>
+            <div class="text-end">
+              <button class="rounded text-white p-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample12" aria-expanded="false" aria-controls="collapseExample" style="background-color: #2f2c2c;">
+                Read More
+              </button>
+            </div>
+      </div>
+  </div>
+</div>
+
+
+<div class="col">
+  <div class="card border-0 fade-news-card">
+      <%= image_tag "news-image/press-image-13.jpg", alt: "Company", class: "img-fluid news-image" %>
+      <div class="news-body-text text-center p-3 caudex-bold">
+          <h4>10 MAY 2019 * New Release: Acamar</h4>
+          <p class="caudex-normal collapse" id="collapseExample13">Madar Ensemble album Acamar is out now! Stream and order your copy from any of the following: 
+
+            Stream
+            Spotify / Youtube
+            
+            CD
+            Challenge Records 
+            
+            About the album
+            
+            ‘In orbit, you’re keyed up and aware of everything going on, every little noise, anything that may have special meaning because of where you are.’
+            – John Glenn 
+            
+            Madar(literally ‘an orbit’) is the fruit of the musical friendship between the Palestinian ud player Nizar Rohana and Dutch bassist Tony Overwater. They invited three prominent musicians from the Arab world and the Netherlands: Tunisian violinist and viola d’amore player Jasser Haj Youssef; Jordanian percussionist Nasser Salameh and Dutch clarinet player Maarten Ornstein. With genuine curiosity for and understanding of each other’s musical language, they have come together with the purpose of creating something new, built on a deeply shared respect for the qualities of their various musical worlds. 
+            
+            Acamar, from the Arabic ākhir an-nahr meaning “the end of the river”, is a star located in the constellation Eridanus, variously associated by ancient astronomers with rivers across the Mediterranean and MiddleEast, including the Nile, Po and Euphrates. The music in this album is inspired by the classical civilizations of Mesopotamia and the Mediterranean which relied in daily life on an understanding of the cosmos. 
+            
+            The album’s 10 tracks include six original compositions and four improvisations. It was recorded and mixed by Fieke van der Hurk at Wisseloord Studios and was mastered by Frans de Rond. 
+            
+            The album was produced by Kepera Records and is distributed by Challenge Records International. This album was supported by The Arab Fund for Arts and Culture (AFAC).</p>
+            <div class="text-end">
+              <button class="rounded text-white p-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample13" aria-expanded="false" aria-controls="collapseExample" style="background-color: #2f2c2c;">
+                Read More
+              </button>
+            </div>
+      </div>
+  </div>
+</div>
+
+
+<div class="col">
+  <div class="card border-0 fade-news-card">
+      <%= image_tag "news-image/press-image-14.jpg", alt: "Company", class: "img-fluid news-image" %>
+      <div class="news-body-text text-center p-3 caudex-bold">
+          <h4>09 APR 2019 * Injazz 2019</h4>
+          <p class="caudex-normal collapse" id="collapseExample14">I am happy to announce that Nizar Rohana Trio will showcase at the Dutch international conference and festival Injazz: An initiative of Dutch collecting society BumaStemra, inJazz has become known as the Netherlands’ main showcase, conference and networking event for jazz music and its affiliate genres.The event will take place in the city of Rotterdam on 27-28 June!  
+
+            For more info follow the link below:
+            
+            https://bit.ly/2D5z4ZU</p>
+            <div class="text-end">
+              <button class="rounded text-white p-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample14" aria-expanded="false" aria-controls="collapseExample" style="background-color: #2f2c2c;">
+                Read More
+              </button>
+            </div>
+      </div>
+  </div>
+</div>
+
+
+<div class="col">
+  <div class="card border-0 fade-news-card">
+      <%= image_tag "news-image/press-image-15.jpeg", alt: "Company", class: "img-fluid news-image" %>
+      <div class="news-body-text text-center p-3 caudex-bold">
+          <h4>27 NOV 2018 * Ud Festival Said Chraibi Prize</h4>
+          <p class="caudex-normal collapse" id="collapseExample15">I’m honoured to receive the Said Chraibi Prize at the closing ceremony and concert of Ud Festival. The ceremony and concert were held on 23 November 2018 at Muzikgebouw in Amsterdam. </p>
+            <div class="text-end">
+              <button class="rounded text-white p-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample15" aria-expanded="false" aria-controls="collapseExample" style="background-color: #2f2c2c;">
+                Read More
+              </button>
+            </div>
+      </div>
+  </div>
+</div>
+
+
+    </div>
+</div>
+
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const elements = document.querySelectorAll(".fade-news-card"); 
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("show");
+            }
+          });
+        },
+        { threshold: 0.2 }
+      );
+
+      elements.forEach((el) => observer.observe(el));
+    });
+    
+  </script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+
+
+
+
+
+
+
