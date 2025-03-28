@@ -1,9 +1,9 @@
-  .background-color{
+  .comman-bg-color{
     background-color: #181d23;
   }
   .overlay{
     background: linear-gradient(180deg, rgba(41, 43, 44, 1) 0%, rgba(41, 43, 44, 0) 100%);
-    opacity: 0.9;
+    /* opacity: 0.9; */
   }
 
 

@@ -81,11 +81,12 @@
 
     ul li ul li a {
         color: black !important; 
-        padding: 10px 15px;
+        padding: 5px 5px;
     }
 
     ul li ul li a:hover {
-        background: #f0f0f0;
+        background: black;
+        color: white !important;
     }
 
     /* .left-close-btn{
@@ -98,21 +99,26 @@
 <body>
 
 <!-- Navbar -->
-<nav class="navbar p-3">
+<nav class="navbar py-3 px-3">
     <%= image_tag "logo.png", alt: "Company Logo", class: "img-fluid" %>
     <div class="d-md-block d-none">
-        <ul class="list-unstyled d-flex justify-content-center gap-5 m-0 caudex-normal">
-            <li><a href="#">Home</a></li>
+        <ul class="list-unstyled d-flex justify-content-center gap-lg-5 gap-3 m-0 caudex-normal">
+            <li><a href="/">Home</a></li>
+            <li><a href="/biography">Biography</a></li>
             <li>
-                <a href="#">Biography</a>
+                <div class="d-flex align-items-center">
+                    <a href="#">Features</a>
+                    <span class=""><a href=""><i class="bi bi-chevron-down text-white"></i></a></span>
+                </div>
+                
                 <ul>
-                    <li><a href="#">News</a></li>
+                    <li><a href="/news">News</a></li>
                     <li><a href="#">Calendar</a></li>
                     <li><a href="#">Projects</a></li>
                     <li><a href="#">Music</a></li>
+                    <li><a href="#">Video</a></li>
                 </ul>
             </li>
-            <li><a href="#">Video</a></li>
             <li><a href="#">Press</a></li>
             <li><a href="#">Contact</a></li>
         </ul>

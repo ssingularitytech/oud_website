@@ -1,0 +1,112 @@
+
+  <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    .biography-image{
+      width: 100%;
+      height: 40rem;
+      object-fit: fit;
+    }
+    .name-box{
+      background-color: #2f2c2c;
+      position: relative;
+      top: -60px;
+    }
+
+
+  /* right to left animation css */
+    .fade-nizar-text {
+    opacity: 0;
+    transform: translateX(80px);
+    transition: all 0.9s ease-out;
+    overflow-x: hidden;
+    }
+
+  .fade-nizar-text.show {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  
+  /*bottom to top animation */
+    .fade-name-box {
+    opacity: 0;
+    transform: translateY(80px); 
+    transition: all 0.9s ease-out;
+    }
+
+    .fade-name-box.show {
+    opacity: 1;
+    transform: translateY(0); 
+    }
+
+
+
+ /* filling animation css */
+    .underline {
+      width: 0;
+      height: 5px;
+      margin: 10px auto 0;
+      transition: width 0.8s ease-out;
+    }
+  </style>
+
+
+  <div class="container-fluid background-color">
+    <h2 class="text-center text-white pt-5 caudex-bold">Biography</h2>
+      <div class="row pt-5 px-lg-5">
+        <div class="col-lg-6">
+          <%= image_tag "biography-image.jpg", alt: "Company Logo", class: "img-fluid biography-image rounded" %>
+          <div class="px-5">
+          <div class="name-box fade-name-box text-white text-center py-5 caudex-bold">
+              <h3>Nizar Rohana</h3>
+          </div>
+          </div>
+        </div>
+
+          <div class="col-lg-6 text-white caudex-normal d-flex align-items-center justify-content-center" style="background-color: #1b1b1b;">
+            <div class="fade-nizar-text" style="opacity: 0.5;">
+            <p>Nizar Rohana is an acclaimed Palestinian Oud player, distinguished for combining virtuosity within fresh contemporary compositions while maintaining the Oud’s idiomatic language. </p>
+            <p>Born in 1975 in the village of ‘Isifya on Mount Carmel, near Haifa, Rohana grew up in a musical family, with his father playing the Oud at communal celebrations and his mother accompanying him on percussion. He began playing music early, picking up the Oud at age 12. </p>
+            <p>In 2000, Rohana graduated from the Rubin Academy in Jerusalem, where he learned Oud from Tayseer Elias and Naseem Dakwar, while concentrating on Arabic music theory and aesthetics under the mentorship of Khaled Jubran. In 2004, he completed a Master’s degree in musicology at the Hebrew University with a specialization in the songs of Umm Kulthum, composed by Muhammad al-Qasabji.</p>
+            <p>Rohana became a prominent figure in the Palestinian music scene through his various collaborations, including work with percussionist Youssef Hbeisch and singer Sanaa Moussa to explore new interpretations of Palestinian folklore. His teaching career at the Edward Said National Conservatory in Jerusalem, Ramallah, and Bethlehem further solidified his impact, eventually leading him to the role of deputy for academic affairs.</p>
+            <p>In 2008, Rohana shifted his focus to a solo career and released his debut album, Sard (Narration). His passion for innovation led him to study composition with the renowned Palestinian composer Bishara Khell in 2012. Since then, under Khell’s supervision, he has dedicated himself to crafting contemporary Oud compositions, taking inspiration from the techniques of prominent 20th-century middle-eastern composers like Tanburi Cemil Bey and Muhammad Abd al-Wahab, as well as Western composers such as Bach, Beethoven, and Chopin.</p>
+            <p>Amid the deteriorating political situation following the Second Intifada and the Iraq war, Rohana moved to Europe to advance his music career, eventually settling in the Netherlands in 2013. Shortly before his move, he formed the Nizar Rohana Trio with the late Hungarian double bassist Mátyás Szandai and French percussionist Wassim Halal, releasing the album Furat (Euphrates) in 2016.</p>
+            </div>
+          </div>
+      </div>
+        <div class="row px-lg-5 text-white mt-5" style="opacity: 0.5;">
+           <p>In the Netherlands, Rohana teamed up with acclaimed bass player Tony Overwater to form the Madar Ensemble, which also featured clarinetist Maarten Ornstein, Tunisian violinist Jasser Haj Youssef, and Jordanian percussionist Nasser Salameh. Their album, Acamar, was released in May 2019.</p>
+           <p>Rohana continued his academic journey, earning a PhD in practice-led research from Leiden University’s Academy for Creative and Performing Arts in 2021. His thesis showcased new compositions for solo Oud, influenced by the improvisational styles of Egyptian music legends Muhammad al-Qasabji and Riyad al-Sunbati.</p>
+           <p>For over two decades, Rohana has performed on prestigious stages and at festivals worldwide. His extensive stage experience as both a soloist and ensemble member, covers modal, improvisational, experimental, and modern music. In addition to performing, Rohana frequently serves as a guest lecturer at institutions such as Codarts and the University of Amsterdam</p>
+           <p>Recently, Nizar Rohana released Safa (Purity), his first album dedicated to solo oud performances, through the Australian label Worlds Within Worlds. Looking ahead, he is reimagining his trio with renowned Dutch double bass player Tony Overwater and esteemed German percussionist Ruven Ruppik, with plans to release a new album in Autumn 2025. Additionally, he is working on another project, Sujuud (Adoration), in collaboration with Iranian oud master Yasamin Shahhosseini and percussionist Ruven Ruppik, supported by the Arab Fund for Arts and Culture (AFAC).</p>
+        </div>
+
+  </div>
+
+
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const elements = document.querySelectorAll(".fade-nizar-text, .fade-name-box");
+    
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("show");
+            // } else {
+            //   entry.target.classList.remove("show");
+            }
+          });
+        },
+        { threshold: 0.2 }
+      );
+    
+      elements.forEach((el) => observer.observe(el));
+    });
+    
+      </script>
