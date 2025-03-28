@@ -1,24 +1,24 @@
-/*
-Theme Name: Randai
-Description: Randai is a modern and clean Theater Entertainment & Performing Arts Gutenverse theme for or contemporary theater, performing arts, cinema, tickets, opera, drama, and any other arts & culture entertainment. Randai is the ideal platform for a professional, stunning website that showcases theatrical performances and enhances the arts & culture experience.
-Author: jegtheme
-Author URI: https://support.jegtheme.com/
-Theme URI: https://fse.jegtheme.com/randai/
-Version: 1.0.0
-Stable tag: 1.0.0
-Requires at least: 6.2
-Tested up to: 6.6
-Requires PHP: 7.4
-License: GNU General Public License v3 or later.
-License URI: https://www.gnu.org/licenses/gpl-3.0.html
-Text Domain: randai
-Tags: block-patterns,custom-logo,custom-menu,editor-style,featured-images,full-site-editing
-Copyright: © jegtheme. All rights reserved.
-*/
+  .background-color{
+    background-color: #181d23;
+  }
+  .overlay{
+    background: linear-gradient(180deg, rgba(41, 43, 44, 1) 0%, rgba(41, 43, 44, 0) 100%);
+    opacity: 0.9;
+  }
 
-:root{
-    
-}
-.editor-styles-wrapper .block-editor-block-list__layout.is-root-container > .block-library-block__reusable-block-container {
-    max-width: 100%;
-}
+
+
+  @font-face {
+    font-family: "fa-regular";
+    src: url("/fonts/fa-regular-400.ttf") format("truetype");
+  }
+  
+  .caudex-bold {
+    font-family: "fa-regular";
+    font-weight: 600;
+  }
+
+  .caudex-normal {
+    font-family: "fa-regular";
+    font-weight: 400;
+  }
