@@ -49,9 +49,11 @@
                 <span class="full-desc d-none"><%= news.news_description.to_plain_text %></span>
                 <br>
                 <button class="read-more-btn btn btn-link p-0" style="color: white;">Read More</button>
+                <% if news.news_link.present? %>
                 <p class="m-0">
                   <%= link_to news.news_link, news.news_link, target: "_blank", rel: "noopener noreferrer", style: "color: rgb(201, 95, 95);" %>
                 </p>
+              <% end %>
               </p>
             </div>
           </div>
