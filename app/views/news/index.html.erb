@@ -40,7 +40,7 @@
               <img src="<%= url_for(news.news_image) %>" class="img-fluid news-image">
             <% end %>
             <div class="news-body-text caudex-bold py-3 px-3">
-              <h5><%= news.news_date %></h5>
+              <h5><%= news.news_date.strftime("%d %b %Y") %></h5>
               <h5><%= news.news_name %></h5>
               <p class="caudex-normal">
                 <% words = news.news_description.to_plain_text.split(" ") %>
