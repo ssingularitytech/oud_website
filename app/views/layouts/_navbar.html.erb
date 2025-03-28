@@ -94,13 +94,20 @@
         top: -20px;
         right: -200px;
     } */
+
+    @media (max-width: 768px) {
+    .navbar-logo {
+        height: 40px; 
+        width: 130px; 
+    }
+   }
     </style>
 </head>
 <body>
 
 <!-- Navbar -->
 <nav class="navbar py-3 px-3">
-    <%= image_tag "logo.png", alt: "Company Logo", class: "img-fluid" %>
+    <%= image_tag "logo.png", alt: "Company Logo", class: "img-fluid navbar-logo" %>
     <div class="d-md-block d-none">
         <ul class="list-unstyled d-flex justify-content-center gap-lg-5 gap-3 m-0 caudex-normal">
             <li><a href="/">Home</a></li>
