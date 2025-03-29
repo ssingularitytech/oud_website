@@ -24,7 +24,7 @@
           <p class="event-details m-md-0"><strong><%= upcoming_event.title %></strong></p>
       </div>
       <div class="col-md-4">
-          <p class="event-details m-md-0"><strong>Date :</strong> <%= upcoming_event.date %></p>
+        <p class="event-details m-md-0"><strong>Date :</strong> <%= upcoming_event.date.strftime("%B %d, %Y") %></p>
       </div>
       <div class="col-md-4">
         <p class="event-details m-0"><strong>Venue :</strong> <%= upcoming_event.venue %></p>
@@ -39,7 +39,9 @@
         <p class="event-details m-md-0"><strong>City :</strong> <%= upcoming_event.city %></p>
       </div>
       <div class="col-md-4">
-        <p class="event-details m-md-0"><strong>Link :</strong> <%= link_to upcoming_event.link, upcoming_event.link, target: "_blank", rel: "noopener noreferrer", style: "color: rgb(201, 95, 95); word-wrap: break-word; overflow-wrap: break-word;" %></p>
+        <% if upcoming_event.link.present? %>
+          <p class="event-details m-md-0"><strong>Link :</strong> <%= link_to upcoming_event.link, upcoming_event.link, target: "_blank", rel: "noopener noreferrer", style: "color: rgb(201, 95, 95); word-wrap: break-word; overflow-wrap: break-word;" %></p>
+        <% end %>
       </div>
     </div>
   </div>
