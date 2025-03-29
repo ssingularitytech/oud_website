@@ -1,0 +1,65 @@
+<style>
+  .event-card {
+      background: transparent;
+      border-radius: 10px;
+      color: white;
+      transition: background 0.4s ease-in-out;
+      border: 2px solid grey;
+  }
+  .event-card.first-card {
+      background: #2f2c2c;
+  }
+  .event-card:not(.first-card):hover,
+  .event-card.active {
+      background: #2f2c2c;
+      transition: background 1s ease-in-out;
+  }
+</style>
+
+<div class="container">
+<% @upcoming_events.each_with_index do |upcoming_event, index| %>
+  <div class="event-card py-md-5 py-3 px-4 mt-5 <%= 'first-card' if index == 0 %>">
+    <div class="row">
+      <div class="col-md-4">
+          <p class="event-details m-md-0"><strong><%= upcoming_event.title %></strong></p>
+      </div>
+      <div class="col-md-4">
+          <p class="event-details m-md-0"><strong>Date :</strong> <%= upcoming_event.date %></p>
+      </div>
+      <div class="col-md-4">
+        <p class="event-details m-0"><strong>Venue :</strong> <%= upcoming_event.venue %></p>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-md-4">
+        <p class="event-details m-md-0"><strong>Ensemble :</strong> <%= upcoming_event.ensemble %></p>
+      </div>
+      <div class="col-md-4">
+        <p class="event-details m-md-0"><strong>City :</strong> <%= upcoming_event.city %></p>
+      </div>
+      <div class="col-md-4">
+        <p class="event-details m-md-0"><strong>Link :</strong> <%= link_to upcoming_event.link, upcoming_event.link, target: "_blank", rel: "noopener noreferrer", style: "color: rgb(201, 95, 95); word-wrap: break-word; overflow-wrap: break-word;" %></p>
+      </div>
+    </div>
+  </div>
+<% end %>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    let cards = document.querySelectorAll(".event-card:not(.first-card)");
+
+    let observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("active");
+            } else {
+                entry.target.classList.remove("active");
+            }
+        });
+    }, { threshold: 0.5 });
+
+    cards.forEach(card => observer.observe(card));
+});
+</script>

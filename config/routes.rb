@@ -12,6 +12,5 @@ Rails.application.routes.draw do
   root "landings#index"
   get 'biography', to: 'landings#biography'
   get 'news', to: 'news#index'
-
-
+  resources :upcoming_events
 end
