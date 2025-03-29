@@ -58,9 +58,11 @@
             <p class="event-details m-md-0"><strong>City :</strong> <%= upcoming_event.city %></p>
           </div>
           <div class="col-md-4">
-            <% if upcoming_event.link.present? %>
-              <p class="event-details m-md-0"><strong>Link :</strong> <%= link_to upcoming_event.link, upcoming_event.link, target: "_blank", rel: "noopener noreferrer", style: "color: rgb(201, 95, 95); word-wrap: break-word; overflow-wrap: break-word;" %></p>
-            <% end %>
+            <p class="event-details m-md-0"><strong>Link :</strong>
+                <% if upcoming_event.link.present? %>
+                  <%= link_to upcoming_event.link, upcoming_event.link, target: "_blank", rel: "noopener noreferrer", style: "color: rgb(201, 95, 95); word-wrap: break-word; overflow-wrap: break-word;" %>
+                <% end %>
+            </p>
           </div>
         </div>
       </div>
