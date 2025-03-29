@@ -50,9 +50,9 @@
                 <br>
                 <button class="read-more-btn btn btn-link p-0" style="color: white;">Read More</button>
                 <% if news.news_link.present? %>
-                <p class="m-0">
-                  <%= link_to news.news_link, news.news_link, target: "_blank", rel: "noopener noreferrer", style: "color: rgb(201, 95, 95);" %>
-                </p>
+                <div class="m-0">
+                  <%= link_to news.news_link, news.news_link, target: "_blank", rel: "noopener noreferrer", style: "color: rgb(201, 95, 95); word-wrap: break-word; overflow-wrap: break-word;" %>
+                </div>
               <% end %>
               </p>
             </div>
