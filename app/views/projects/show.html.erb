@@ -1,15 +1,25 @@
 
   <style>
-    .project-image {
-        height: 30rem;
-        width: 100%;
-        object-fit: contain;
-    }
+
+      @media (min-width: 768px) {
+      .project-image {
+      height: 30rem;
+      width: 100%;
+      object-fit: contain;
+  }
+  }
+  @media (max-width: 768px) {
+        .project-image {
+          height: 15rem;
+          width: 100%;
+          object-fit: contain;
+      }
+  }
   </style>
 
   <div class="container">
     <h2 class="text-center text-white pt-md-5 pt-3 caudex-bold">PROJECT</h2>
-    <div class="row text-white px-5">
+    <div class="row text-white px-md-5 px-2">
         <div class="text-center mt-2 gap-2 d-flex justify-content-center">
             <p><%= @project.name %></p>
         </div>
@@ -18,7 +28,7 @@
             <% if detail.image.attached? %>
                 <img src="<%= url_for(detail.image) %>" class="img-fluid project-image">
             <% end %>
-            <div class="description mt-5">
+           <div class="project-description mt-md-5 mt-3">
                 <p><%= detail.description %></p>
             </div>
             <% end %>
