@@ -1,121 +1,44 @@
-
-    <style>
-        .news-image {
-            height: 400px; 
-            width: 100%;
-            object-fit: fill;
-            border-top-left-radius: 12px;
-            border-top-right-radius: 12px;
-
-        }
-
-        /*bottom to top animation */
-          .fade-news-card {
-          opacity: 0;
-          transform: translateY(80px); 
-          transition: all 0.9s ease-out;
-          }
-
-          .fade-news-card.show {
-          opacity: 1;
-          transform: translateY(0); 
-          }
-          .news-body-text{
-            background-color: #2f2c2c;
-            color: white;
-            min-height: 230px !important;
-            border-bottom-left-radius: 12px;
-            border-bottom-right-radius: 12px;
-          }
-    </style>
+<style>
+    .news-image {
+        height: 23rem;
+        width: 100%;
+        object-fit: fill;
+        border-top-left-radius: 12px;
+        border-top-right-radius: 12px;
+    }
 
 
-  <div class="container-fluid px-md-5">
+    .news-body-text {
+        background-color: #2f2c2c;
+        color: white;
+        border-bottom-left-radius: 12px;
+        border-bottom-right-radius: 12px;
+        min-height: 200px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .view-details-btn {
+        margin-top: auto; 
+    }
+</style>
+
+<div class="container-fluid px-md-5">
     <h2 class="text-center text-white pt-md-5 pt-3 caudex-bold">NEWS</h2>
-      <div class="row row-cols-1 row-cols-lg-3 row-cols-md-2 pt-md-5 pt-3">
-        
+    <div class="row row-cols-1 row-cols-lg-3 row-cols-md-2 pt-md-5 pt-3">
         <% @news.each do |news| %>
-          <div class="col mt-4">
-            <% if news.news_image.attached? %>
-              <img src="<%= url_for(news.news_image) %>" class="img-fluid news-image">
-            <% end %>
-            <div class="news-body-text caudex-bold py-3 px-3">
-              <h5><%= news.news_date.strftime("%d %b %Y") %></h5>
-              <h5><%= news.news_name %></h5>
-              <p class="caudex-normal">
-                <% words = news.news_description.to_plain_text.split(" ") %>
-                <% short_description = words.first(8).join(" ") %>
-                <span class="short-desc"><%= short_description %>...</span>
-                <span class="full-desc d-none"><%= news.news_description.to_plain_text %></span>
-                <br>
-                <button class="read-more-btn btn btn-link p-0" style="color: white;">Read More</button>
-                <% if news.news_link.present? %>
-                <div class="m-0">
-                  <%= link_to news.news_link, news.news_link, target: "_blank", rel: "noopener noreferrer", style: "color: rgb(201, 95, 95); word-wrap: break-word; overflow-wrap: break-word;" %>
+            <div class="col mt-4">
+                <% if news.news_image.attached? %>
+                    <img src="<%= url_for(news.news_image) %>" class="img-fluid news-image">
+                <% end %>
+                <div class="news-body-text caudex-bold py-3 px-3">
+                    <h5><%= news.news_date.strftime("%d %b %Y") %></h5>
+                    <h5><%= news.news_name %></h5>
+                    <a href="<%= news_path(news) %>" class="text-white view-details-btn">Know More</a>
                 </div>
-              <% end %>
-              </p>
             </div>
-          </div>
-      <% end %>
-    
-      </div>
-  </div>
-
-
-  <script>
-
-document.addEventListener("DOMContentLoaded", function () {
-    document.querySelectorAll(".read-more-btn").forEach(button => {
-      button.addEventListener("click", function () {
-        const parent = this.parentElement;
-        const shortDesc = parent.querySelector(".short-desc");
-        const fullDesc = parent.querySelector(".full-desc");
-
-        if (shortDesc.classList.contains("d-none")) {
-          // Collapse to short description
-          shortDesc.classList.remove("d-none");
-          fullDesc.classList.add("d-none");
-          this.textContent = "Read More";
-        } else {
-          // Expand to full description
-          shortDesc.classList.add("d-none");
-          fullDesc.classList.remove("d-none");
-          this.textContent = "Read Less";
-        }
-      });
-    });
-  });
-
-
-
-
-    document.addEventListener("DOMContentLoaded", function () {
-      const elements = document.querySelectorAll(".fade-news-card"); 
-
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add("show");
-            }
-          });
-        },
-        { threshold: 0.2 }
-      );
-
-      elements.forEach((el) => observer.observe(el));
-    });
-    
-  </script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-
-
-
-
-
-
-
+        <% end %>
+    </div>
+</div>
 
 

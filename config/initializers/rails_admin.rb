@@ -76,5 +76,43 @@ RailsAdmin.config do |config|
         end
       end
     end
+
+    config.model 'ProjectDetail' do
+      edit do
+        field :project
+        field :description
+        field :image, :active_storage
+      end
+    
+      show do
+        field :project
+        field :description
+        field :image do
+          pretty_value do
+            if bindings[:object].image.attached?
+              bindings[:view].tag(:img, 
+                src: Rails.application.routes.url_helpers.rails_blob_path(bindings[:object].image, only_path: true), 
+                style: 'max-width: 200px; max-height: 200px;'
+              )
+            end
+          end
+        end
+      end
+    
+      list do
+        field :project
+        field :description
+        field :image do
+          pretty_value do
+            if bindings[:object].image.attached?
+              bindings[:view].tag(:img, 
+                src: Rails.application.routes.url_helpers.rails_blob_path(bindings[:object].image, only_path: true), 
+                style: 'max-width: 100px; max-height: 100px;'
+              )
+            end
+          end
+        end
+      end
+    end    
   end
 end
