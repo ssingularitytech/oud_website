@@ -2,6 +2,10 @@ class NewsController < ApplicationController
   def index
     @news = News.all
   end
+
+  def show
+    @news = News.find(params[:id]) # Ensure a single artist is retrieved
+  end
   
 
   def create

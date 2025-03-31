@@ -1,0 +1,49 @@
+<style>
+    .project-image {
+        height: 20rem;
+        width: 100%;
+        object-fit: cover;
+        border-top-left-radius: 12px;
+        border-top-right-radius: 12px;
+    }
+
+    .project-body-text {
+        background-color: #2f2c2c;
+        color: white;
+        border-bottom-left-radius: 12px;
+        border-bottom-right-radius: 12px;
+        min-height: 200px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .view-details-btn {
+        margin-top: auto; 
+    }
+</style>
+
+<div class="container-fluid px-md-5">
+    <h2 class="text-center text-white pt-md-5 pt-3 caudex-bold">PROJECTS</h2>
+    <div class="row row-cols-1 row-cols-lg-3 row-cols-md-2 pt-md-5 pt-3">
+        <% @projects.each do |project| %>
+            <div class="col mt-4">
+                <% first_detail = project.project_details.first %>
+                <% if first_detail && first_detail.image.attached? %>
+                    <img src="<%= url_for(first_detail.image) %>" class="img-fluid project-image">
+                <% end %>
+                <div class="project-body-text caudex-bold py-3 px-3">
+                    <h5><%= project.name %></h5>
+                    <% if first_detail %>
+                        <p class="caudex-normal m-0">
+                            <% words = first_detail.description.split(" ") %>
+                            <% short_description = words.first(20).join(" ") %>
+                            <span class="short-desc"><%= short_description %>...</span>
+                            <span class="full-desc d-none"><%= first_detail.description %></span>
+                        </p>
+                    <% end %>
+                    <a href="<%= project_path(project) %>" class="text-white view-details-btn">Know More</a>
+                </div>
+            </div>
+        <% end %>
+    </div>
+</div>

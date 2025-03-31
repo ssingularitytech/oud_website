@@ -1,0 +1,33 @@
+    <style>
+        .news-image {
+            height: 30rem;
+            width: 100%;
+            object-fit: contain;
+        }
+    </style>
+
+    <div class="container">
+        <h2 class="text-center text-white pt-md-5 pt-3 caudex-bold">NEWS</h2>
+        <div class="row text-white px-5">
+            
+                    <div class="text-center mt-2 gap-2 d-flex justify-content-center">
+                        <p><%= @news.news_date.strftime("%d %b %Y") %></p>
+                        <p><%= @news.news_name %></p>
+                    </div>
+            
+                    <% if @news.news_image.attached? %>
+                        <img src="<%= url_for(@news.news_image) %>" class="img-fluid news-image">
+                    <% end %>
+                    <div class="description mt-5">
+                        <p><%= @news.news_description %></p>
+                        <% if @news.news_link.present? %>
+                            <div class="m-0">
+                                <%= link_to @news.news_link, @news.news_link, target: "_blank", rel: "noopener noreferrer", style: "color: rgb(201, 95, 95); word-wrap: break-word; overflow-wrap: break-word;" %>
+                            </div>
+                        <% end %>
+                    </div>
+                    <buttonc><a href="<%= news_path %>" class="btn btn-secondary px-5">Go Back</a></buttonc>
+        </div>
+    </div>
+
+
