@@ -1,10 +1,24 @@
 <style>
+
+
+            @media (min-width: 768px) {
     .news-image {
         height: 25rem;
         width: 100%;
         object-fit: fill;
         border-top-left-radius: 12px;
         border-top-right-radius: 12px;
+    }
+    }
+
+        @media (max-width: 768px) {
+    .news-image {
+        height: 15rem;
+        width: 100%;
+        object-fit: fill;
+        border-top-left-radius: 12px;
+        border-top-right-radius: 12px;
+    }
     }
 
 
@@ -33,8 +47,8 @@
                 <% end %>
                 <div class="news-body-text caudex-normal py-3 px-3">
                     <h5><%= news.news_date.strftime("%d %b %Y") %></h5>
-                    <h5><%= news.news_name %></h5>
-                    <p><%= news.news_description.to_plain_text.split[0...15].join(' ') %>...</p>
+                    <h5><%= news.news_name.split[0...4].join(' ') %>...</h5>
+                    <p style="font-size: 17px;"><%= news.news_description.to_plain_text.split[0...15].join(' ') %>...</p>
                     <a href="<%= news_path(news) %>" class="text-white view-details-btn">Know More</a>
                 </div>
             </div>

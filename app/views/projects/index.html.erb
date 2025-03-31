@@ -1,4 +1,5 @@
 <style>
+        @media (min-width: 768px) {
     .project-image {
         height: 22rem;
         width: 100%;
@@ -6,13 +7,24 @@
         border-top-left-radius: 12px;
         border-top-right-radius: 12px;
     }
+    }
+
+        @media (max-width: 768px) {
+     .project-image {
+        height: 15rem;
+        width: 100%;
+        object-fit: cover;
+        border-top-left-radius: 12px;
+        border-top-right-radius: 12px;
+    }
+    }
 
     .project-body-text {
         background-color: #2f2c2c;
         color: white;
         border-bottom-left-radius: 12px;
         border-bottom-right-radius: 12px;
-        min-height: 200px;
+        min-height: 255px !important;
         display: flex;
         flex-direction: column;
     }
@@ -31,12 +43,12 @@
                 <% if first_detail && first_detail.image.attached? %>
                     <img src="<%= url_for(first_detail.image) %>" class="img-fluid project-image">
                 <% end %>
-                <div class="project-body-text caudex-bold py-3 px-3">
-                    <h5><%= project.name %></h5>
+                <div class="project-body-text py-3 px-3">
+                    <h5 class="caudex-bold"><%= project.name %></h5>
                     <% if first_detail %>
-                        <p class="caudex-normal m-0">
+                        <p class="caudex-normal m-0" style="font-size: 17px;">
                             <% words = first_detail.description.split(" ") %>
-                            <% short_description = words.first(35).join(" ") %>
+                            <% short_description = words.first(28).join(" ") %>
                             <span class="short-desc"><%= short_description %>...</span>
                             <span class="full-desc d-none"><%= first_detail.description %></span>
                         </p>

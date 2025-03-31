@@ -1,20 +1,20 @@
     <style>
-
-
+        
         @media (min-width: 768px) {
-            .news-image {
+            .show-news-image {
             height: 30rem;
             width: 100%;
             object-fit: contain;
-        }
-    }
-        @media (max-width: 768px) {
-                .news-image {
-                height: 22rem;
-                width: 100%;
-                object-fit: contain;
             }
-        }
+            }
+
+            @media (max-width: 768px) {
+            .show-news-image {
+            height: 21rem;
+            width: 100%;
+            object-fit: contain;
+            }
+            }
     </style>
 
     <div class="container">
@@ -22,24 +22,28 @@
         <div class="row text-white px-md-5 px-2">
             
                     <div class="text-center mt-2 gap-2 d-md-flex justify-content-center">
-                        <p><%= @news.news_date.strftime("%d %b %Y") %></p>
-                        <p><%= @news.news_name %></p>
+                        <h5><%= @news.news_date.strftime("%d %b %Y") %></h5>
+                        <h5><%= @news.news_name %></h5>
                     </div>
             
                     <% if @news.news_image.attached? %>
-                        <img src="<%= url_for(@news.news_image) %>" class="img-fluid news-image">
+                        <img src="<%= url_for(@news.news_image) %>" class="img-fluid show-news-image mt-2">
                     <% end %>
-                    <div class="news-description mt-md-5">
+                    <div class="description mt-md-4 mt-2">
                         <p><%= @news.news_description %></p>
                         <% if @news.news_link.present? %>
-                            <div class="m-0">
-                                <%= link_to @news.news_link, @news.news_link, target: "_blank", rel: "noopener noreferrer", style: "color: rgb(201, 95, 95); word-wrap: break-word; overflow-wrap: break-word;" %>
-                            </div>
-                        <% end %>
+                        <div class="m-0">
+                          <% @news.news_link.split.each do |link| %>
+                            <%= link_to link, link.start_with?('http') ? link : "https://#{link}", target: "_blank", rel: "noopener noreferrer", style: "color: rgb(201, 95, 95); word-wrap: break-word; overflow-wrap: break-word;" %>
+                            <br> <!-- Yeh har link ke baad ek new line add karega -->
+                          <% end %>
+                        </div>
+                      <% end %>
+                      
                     </div>
-            <div class="project-btn mt-3">
-              <%= link_to "Go Back", news_index_path, class: "btn btn-secondary px-5 rounded" %>
-            </div>
+                    <div class="project-btn mt-3">
+                    <%= link_to "Go Back", news_index_path, class: "btn btn-secondary px-5 rounded" %>
+                    </div>
         </div>
     </div>
 
