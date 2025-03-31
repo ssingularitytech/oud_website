@@ -34,6 +34,7 @@
                 <div class="news-body-text caudex-bold py-3 px-3">
                     <h5><%= news.news_date.strftime("%d %b %Y") %></h5>
                     <h5><%= news.news_name %></h5>
+                    <p><%= news.news_description.to_plain_text.split[0...8].join(' ') %>...</p>
                     <a href="<%= news_path(news) %>" class="text-white view-details-btn">Know More</a>
                 </div>
             </div>
