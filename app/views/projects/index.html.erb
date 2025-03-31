@@ -36,7 +36,7 @@
                     <% if first_detail %>
                         <p class="caudex-normal m-0">
                             <% words = first_detail.description.split(" ") %>
-                            <% short_description = words.first(20).join(" ") %>
+                            <% short_description = words.first(35).join(" ") %>
                             <span class="short-desc"><%= short_description %>...</span>
                             <span class="full-desc d-none"><%= first_detail.description %></span>
                         </p>
