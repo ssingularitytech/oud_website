@@ -15,4 +15,5 @@ Rails.application.routes.draw do
   resources :upcoming_events
   resources :projects
   resources :videos
+  resources :press
 end
