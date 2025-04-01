@@ -157,6 +157,41 @@ RailsAdmin.config do |config|
         field :updated_at
       end
     end
+
+    config.model 'Press' do
+      edit do
+        field :name
+        field :date
+        field :link
+        field :image, :active_storage
+      end
+  
+      show do
+        field :name
+        field :date
+        field :link
+        field :image do
+          pretty_value do
+            if bindings[:object].image.attached?
+              bindings[:view].tag(:img, src: Rails.application.routes.url_helpers.rails_blob_path(bindings[:object].image, only_path: true), style: 'max-width: 200px; max-height: 200px;')
+            end
+          end
+        end
+      end
+  
+      list do
+        field :name
+        field :date
+        field :link
+        field :image do
+          pretty_value do
+            if bindings[:object].image.attached?
+              bindings[:view].tag(:img, src: Rails.application.routes.url_helpers.rails_blob_path(bindings[:object].image, only_path: true), style: 'max-width: 100px; max-height: 100px;')
+            end
+          end
+        end
+      end
+    end
     
   end
 end
