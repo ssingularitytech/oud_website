@@ -1,22 +1,8 @@
 <style>
-        @media (min-width: 768px) {
     .project-image {
-        height: 25rem;
-        width: 100%;
-        object-fit: cover;
+        aspect-ratio: 3/2.5;
         border-top-left-radius: 12px;
         border-top-right-radius: 12px;
-    }
-    }
-
-        @media (max-width: 768px) {
-     .project-image {
-        height: 18rem;
-        width: 100%;
-        object-fit: cover;
-        border-top-left-radius: 12px;
-        border-top-right-radius: 12px;
-    }
     }
 
     .project-body-text {
@@ -24,7 +10,7 @@
         color: white;
         border-bottom-left-radius: 12px;
         border-bottom-right-radius: 12px;
-        min-height: 205px !important;
+        min-height: 212px !important;
         display: flex;
         flex-direction: column;
     }
@@ -34,11 +20,12 @@
     }
 </style>
 
-<div class="container-fluid px-md-5">
+<div class="container">
     <h2 class="text-center text-white pt-md-5 pt-3 caudex-bold">PROJECTS</h2>
     <div class="row row-cols-xl-3 row-cols-md-2 row-cols-1 pt-md-5 pt-3">
         <% @projects.each do |project| %>
-            <div class="col mt-4">
+        <div class="col mt-4 d-flex justify-content-center">
+            <div class="news-card" style="width: 90%;">
                 <% first_detail = project.project_details.first %>
                 <% if first_detail && first_detail.image.attached? %>
                     <img src="<%= url_for(first_detail.image) %>" class="img-fluid project-image">
@@ -55,6 +42,7 @@
                     <% end %>
                     <a href="<%= project_path(project) %>" class="text-white view-details-btn">Know More</a>
                 </div>
+            </div>
             </div>
         <% end %>
     </div>
