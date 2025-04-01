@@ -72,4 +72,5 @@ group :test do
 end
   gem "devise"
   gem "rails_admin"
-gem "sassc-rails"
+  gem "sassc-rails"
+  gem 'cancancan'
