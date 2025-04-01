@@ -26,7 +26,7 @@
     <div class="row row-cols-xl-3 row-cols-md-2 row-cols-1 pt-md-5 pt-3">
         <% @projects.each do |project| %>
         <div class="col mt-4 d-flex justify-content-center">
-            <div class="news-card" style="width: 90%;">
+            <div class="news-card" style="width: 95%;">
                 <% first_detail = project.project_details.first %>
                 <% if first_detail && first_detail.image.attached? %>
                     <img src="<%= url_for(first_detail.image) %>" class="img-fluid project-image">
