@@ -180,6 +180,7 @@ RailsAdmin.config do |config|
       end
   
       list do
+        sort_by :id
         field :name
         field :date
         field :link
