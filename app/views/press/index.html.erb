@@ -20,7 +20,7 @@
     }
 
   .press-body-text {
-      background-color: #2f2c2c;
+      /* background-color: #2f2c2c; */
       color: white;
       border-bottom-left-radius: 12px;
       border-bottom-right-radius: 12px;
@@ -35,6 +35,17 @@
     .view-details-btn {
           margin-top: auto; 
       }
+
+      .press-body-text {
+        color: white;
+        text-shadow: 0 1px 0 #000;
+        --border-angle: 0turn;
+        --main-bg: conic-gradient(from var(--border-angle), #213, #112 5%, #112 60%, #213 95%);
+        background: var(--main-bg);
+        background-position: center center;
+        animation: bg-spin 3s linear infinite;
+      }
+
 </style>
 
 <div class="container">
@@ -43,7 +54,7 @@
       <% @press.each do |press| %>
       <div class="col mt-4 d-flex justify-content-center">
         <!-- Wrap the entire card in an <a> tag -->
-          <div class="news-card" style="width: 95%;">
+          <div class="press-card" style="width: 95%;">
         <a href="<%= press.link %>" class="text-decoration-none">
             <% if press.image.attached? %>
               <img src="<%= url_for(press.image) %>" class="img-fluid press-image">
