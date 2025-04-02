@@ -8,19 +8,16 @@
     }
     
 
-    .news-body-text {
-        /* background-color: #2f2c2c; */
-        color: white;
-        min-height: 212px;
-        display: flex;
-        flex-direction: column;
-    }
-
     .view-details-btn {
         margin-top: auto; 
     }
 
     .comman-border {
+        border: 3px solid #08f;
+        border-radius: 12px;
+      }
+
+      .news-body-text{
         color: white;
         text-shadow: 0 1px 0 #000;
         --border-angle: 0turn;
@@ -28,8 +25,11 @@
         background: var(--main-bg);
         background-position: center center;
         animation: bg-spin 3s linear infinite;
-        border: 3px solid #08f;
-        border-radius: 12px;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        min-height: 212px;
+        display: flex;
+        flex-direction: column;
       }
 </style>
 
