@@ -16,4 +16,5 @@ Rails.application.routes.draw do
   resources :projects
   resources :videos
   resources :press
+  resources :contacts
 end
