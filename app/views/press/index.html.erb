@@ -46,7 +46,7 @@
       <div class="col mt-4 d-flex justify-content-center">
        
         <div class="press-card-wrapper" style="position: relative; width: 95%;">
-          <a href="<%= press_path(press) %>" class="news-card-link" style="position: absolute; inset: 0; z-index: 10;"></a>
+          <a href="<%= press.link %>" class="news-card-link" style="position: absolute; inset: 0; z-index: 10;"></a>
             <div class="project-card comman-border" style="width: 100%; position: relative; z-index: 5;">
                 <% if press.image.attached? %>
                   <img src="<%= url_for(press.image) %>" class="img-fluid press-image">
