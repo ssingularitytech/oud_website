@@ -1,9 +1,8 @@
 <style>
     .project-image {
-        aspect-ratio: 3/2.5;
-        width: 100%;
-        border-top-left-radius: 12px;
-        border-top-right-radius: 12px;
+        aspect-ratio: 3/2.6;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
     }
 
     .project-body-text {
@@ -21,7 +20,7 @@
     }
 
 
-    .project-body-text {
+    .comman-border {
         color: white;
         text-shadow: 0 1px 0 #000;
         --border-angle: 0turn;
@@ -30,6 +29,7 @@
         background-position: center center;
         animation: bg-spin 3s linear infinite;
         border: 3px solid #08f;
+        border-radius: 12px;
       }
 </style>
 
@@ -38,24 +38,29 @@
     <div class="row row-cols-xl-3 row-cols-md-2 row-cols-1 pt-md-5 pt-3">
         <% @projects.each do |project| %>
         <div class="col mt-4 d-flex justify-content-center">
-            <div class="news-card" style="width: 95%;">
-                <% first_detail = project.project_details.first %>
-                <% if first_detail && first_detail.image.attached? %>
-                    <img src="<%= url_for(first_detail.image) %>" class="img-fluid project-image">
-                <% end %>
-                <div class="project-body-text py-3 px-3">
-                    <h5 class="caudex-bold"><%= project.name %></h5>
-                    <% if first_detail %>
-                        <p class="caudex-normal m-0" style="font-size: 17px;">
-                            <% words = first_detail.description.split(" ") %>
-                            <% short_description = words.first(20).join(" ") %>
-                            <span class="short-desc"><%= short_description %>...</span>
-                            <span class="full-desc d-none"><%= first_detail.description %></span>
-                        </p>
+
+            <div class="project-card-wrapper" style="position: relative; width: 95%;">
+                <a href="<%= project_path(project) %>" class="news-card-link" style="position: absolute; inset: 0; z-index: 10;"></a>
+                <div class="project-card comman-border" style="width: 100%; position: relative; z-index: 5;">
+                    <% first_detail = project.project_details.first %>
+                    <% if first_detail && first_detail.image.attached? %>
+                        <img src="<%= url_for(first_detail.image) %>" class="img-fluid project-image">
                     <% end %>
-                    <a href="<%= project_path(project) %>" class="text-white view-details-btn">Know More</a>
+                    <div class="project-body-text py-3 px-3">
+                        <h5 class="caudex-bold"><%= project.name %></h5>
+                        <% if first_detail %>
+                            <p class="caudex-normal m-0" style="font-size: 17px;">
+                                <% words = first_detail.description.split(" ") %>
+                                <% short_description = words.first(20).join(" ") %>
+                                <span class="short-desc"><%= short_description %>...</span>
+                                <span class="full-desc d-none"><%= first_detail.description %></span>
+                            </p>
+                        <% end %>
+                        <a href="<%= project_path(project) %>" class="text-white view-details-btn caudex-normal">Know More</a>
+                    </div>
                 </div>
             </div>
+
             </div>
         <% end %>
     </div>

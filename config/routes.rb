@@ -17,4 +17,6 @@ Rails.application.routes.draw do
   resources :videos
   resources :press
   resources :contacts
+
+  get 'event', to: 'upcoming_events#event'
 end
