@@ -1,0 +1,57 @@
+<style>
+  .music-image {
+      aspect-ratio: 3/2.6;
+      width: 100%;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+  }
+  .view-details-btn {
+      margin-top: auto;
+  }
+  .common-border {
+      border: 3px solid #08f;
+      border-radius: 12px;
+      box-shadow: 1px 4px 4px rgba(0, 136, 255, 0.5);
+  }
+  .music-body-text {
+      color: white;
+      text-shadow: 0 1px 0 #000;
+      --border-angle: 0turn;
+      --main-bg: conic-gradient(from var(--border-angle), #213, #112 5%, #112 60%, #213 95%);
+      background: var(--main-bg);
+      background-position: center center;
+      animation: bg-spin 3s linear infinite;
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
+      min-height: 212px;
+      display: flex;
+      flex-direction: column;
+  }
+</style>
+
+<div class="container">
+  <h2 class="text-center text-white pt-md-5 pt-3 caudex-bold">Music</h2>
+  <div class="row row-cols-xl-3 row-cols-md-2 row-cols-1 pt-md-5 pt-3">
+      <% @musics.each do |music| %>
+      <div class="col mt-4 d-flex justify-content-center">
+          <div class="music-card-wrapper" style="position: relative; width: 95%;">
+              <a href="<%= music_path(music) %>" class="music-card-link" style="position: absolute; inset: 0; z-index: 10;"></a>
+              <div class="music-card common-border" style="width: 100%; position: relative; z-index: 5;">
+                  <% if music.image.attached? %>
+                      <img src="<%= url_for(music.image) %>" class="img-fluid music-image" loading="lazy">
+                  <% end %>
+                  <div class="music-body-text py-3 px-3 d-flex flex-column h-100">
+                      <h5 class="caudex-bold"><%= music.date.strftime("%d %b %Y") %></h5>
+                      <h5 class="caudex-bold"><%= music.name %></h5>
+                      <p class="caudex-normal" style="font-size: 17px;"><%= music.description.to_plain_text.split[0...10].join(' ') %>...</p>
+                      
+                      <div class="mt-auto">
+                          <a href="<%= music_path(music) %>" class="text-white view-details-btn caudex-normal">Know More</a>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <% end %>
+  </div>
+</div>

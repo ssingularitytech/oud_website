@@ -193,6 +193,111 @@ RailsAdmin.config do |config|
         end
       end
     end
+
+    config.model 'Music' do
+      edit do
+        field :name
+        field :date
+        field :description, :action_text
+        field :link
+        field :image, :active_storage
+      end
+    
+      show do
+        field :name
+        field :date
+        field :description
+        field :link
+        field :image do
+          pretty_value do
+            if bindings[:object].image.attached?
+              bindings[:view].tag(:img, 
+                src: Rails.application.routes.url_helpers.rails_blob_path(bindings[:object].image, only_path: true), 
+                style: 'max-width: 200px; max-height: 200px;'
+              )
+            end
+          end
+        end
+        field :created_at
+        field :updated_at
+      end
+    
+      list do
+        sort_by :id
+        field :name
+        field :date
+        field :description
+        field :link
+        field :image do
+          pretty_value do
+            if bindings[:object].image.attached?
+              bindings[:view].tag(:img, 
+                src: Rails.application.routes.url_helpers.rails_blob_path(bindings[:object].image, only_path: true), 
+                style: 'max-width: 100px; max-height: 100px;'
+              )
+            end
+          end
+        end
+        field :created_at
+        field :updated_at
+      end
+    end
+
+
+    
+    config.model 'Audio' do
+      edit do
+        field :title
+        field :music do
+          associated_collection_scope do
+            Proc.new { |scope| scope.all }
+          end
+        end
+        field :audio, :active_storage
+      end
+    
+      show do
+        field :title
+        field :music
+        field :audio do
+          pretty_value do
+            if bindings[:object].audio.attached?
+              bindings[:view].tag(:audio, 
+                controls: true, 
+                src: Rails.application.routes.url_helpers.rails_blob_path(bindings[:object].audio, only_path: true)
+              )
+            else
+              "No audio file attached"
+            end
+          end
+        end
+        field :created_at
+        field :updated_at
+      end
+    
+      list do
+        field :title
+        field :music
+        field :audio do
+          pretty_value do
+            if bindings[:object].audio.attached?
+              bindings[:view].tag(:audio, 
+                controls: true, 
+                src: Rails.application.routes.url_helpers.rails_blob_path(bindings[:object].audio, only_path: true),
+                style: 'width: 100px;'
+              )
+            else
+              "No audio file"
+            end
+          end
+        end
+        field :created_at
+        field :updated_at
+      end
+    end
+    
+
+    
     
   end
 end

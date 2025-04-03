@@ -1,0 +1,80 @@
+<style>
+    .music-image {
+        height: 20rem;
+        width: 100%;
+        object-fit: contain;
+        border-top-left-radius: 11px;
+        border-bottom-left-radius: 11px;
+    }
+    .music-out-border{
+      border: 3px solid #08f;
+      border-radius: 12px;
+    }
+
+      .music-audio-box {
+       background-color: #221133;
+  }
+</style>
+
+  <div class="container">
+      <h2 class="text-center text-white pt-md-5 pt-3 caudex-bold">MUSIC</h2>
+      <div class="row text-white px-md-5 px-2">
+          <div class="text-center mt-2 justify-content-center">
+              <h5><%= @music.name %></h5>
+          </div>
+
+
+          <div class="image-audio-section px-4">
+          <div class="row music-out-border mt-2 music-audio-box">
+            <div class="col-md-5 p-0">
+              <% if @music.image.attached? %>
+              <img src="<%= url_for(@music.image) %>" class="img-fluid music-image">
+              <% end %>
+            </div>
+
+            <div class="col-md-7" style="height: 20rem; overflow-y: auto;">
+              <% @music.audios.each do |audio| %>
+                <div class="row mb-3 p-2 border rounded">
+                  <div class="col-2 d-flex align-items-center justify-content-center">
+                    <p class="m-0 text-center"><%= audio.title %></p>
+                  </div>
+            
+                  <div class="col-10 d-flex align-items-center justify-content-center">
+                    <% if audio.audio.attached? %>
+                      <audio controls class="w-100">
+                        <source src="<%= url_for(audio.audio) %>" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                      </audio>
+                    <% end %>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          </div>
+          </div>
+
+
+          <div class="description mt-md-4 mt-2">
+              <p><%= @music.description %></p>
+                  <% if @music.link.present? %>
+                    <div class="m-0">
+                      <% @music.link.split.each do |link| %>
+                        <%= link_to link, link.start_with?('http') ? link : "https://#{link}", target: "_blank", rel: "noopener noreferrer", style: "color: rgb(201, 95, 95); word-wrap: break-word; overflow-wrap: break-word;" %>
+                        <br> <!-- Yeh har link ke baad ek new line add karega -->
+                      <% end %>
+                    </div>
+              <% end %>
+          </div>
+
+          <div class="back-button">
+              <a href="/musics" style="text-decoration: none;">
+                  <button class="comman-bg-color mt-3" style="border: 2px solid #08f; border-radius: 12px; color: white;">
+                      <div class="d-flex justify-content-center align-items-center gap-2 caudex-bold py-2 px-4">
+                          <i style="font-size: 20px;" class="bi bi-chevron-left"></i>
+                          <span style="font-size: 20px;">Go Back</span>
+                      </div>
+                  </button>
+              </a>
+          </div>
+      </div>
+  </div>
