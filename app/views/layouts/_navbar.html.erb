@@ -1,7 +1,5 @@
 
     <style>
-        /* Sidebar styles */
-
         @media (min-width: 768px) {
         .sidebar {
             position: fixed;
@@ -16,8 +14,6 @@
             z-index: 1050;
         }
         }
-
-
         @media (max-width: 768px) {
             .sidebar {
             position: fixed;
@@ -32,15 +28,10 @@
             z-index: 1050;
         }
         }
-
-
-
-
         .sidebar.active {
             left: 0;
         }
 
-        /* Navbar button styles */
         .menu-icon, .close-icon {
             cursor: pointer;
             background: none;
@@ -50,7 +41,7 @@
             color: white;
         }
         .close-icon {
-            display: none; /* Initially hidden */
+            display: none; 
         }
         
         /* Close button inside sidebar */
@@ -62,9 +53,6 @@
             justify-content: space-between;
         }
 
-
-
-     /* Style for the main navigation */
      ul {
         list-style: none;
         padding: 0;
@@ -113,12 +101,6 @@
         color: white !important;
     }
 
-    /* .left-close-btn{
-        position: relative;
-        top: -20px;
-        right: -200px;
-    } */
-
     @media (max-width: 768px) {
     .navbar-logo {
         height: 40px; 
@@ -126,82 +108,82 @@
     }
    }
     </style>
-</head>
-<body>
 
-<!-- Navbar -->
-<nav class="navbar py-3 px-3">
-    <%= image_tag "logo.png", alt: "Company Logo", class: "img-fluid navbar-logo" %>
-    <div class="d-md-block d-none">
-        <ul class="list-unstyled d-flex justify-content-center gap-lg-5 gap-3 m-0 caudex-normal">
-            <li><a href="/">Home</a></li>
-            <li><a href="/biography">Biography</a></li>
-            <li>
-                <div class="d-flex align-items-center">
-                    <a href="#">Features</a>
-                    <span class=""><a href=""><i class="bi bi-chevron-down text-white"></i></a></span>
-                </div>
-                
-                <ul class="z-1">
-                    <li><a href="/news">News</a></li>
-                    <li><a href="/upcoming_events">Calendar</a></li>
-                    <li><a href="/projects">Projects</a></li>
-                    <li><a href="/musics">Music</a></li>
-                    <li><a href="/videos">Video</a></li>
-                </ul>
-            </li>
-            <li><a href="/press">Press</a></li>
-            <li><a href="/contacts">Contact</a></li>
+
+    <nav class="navbar py-3 px-3">
+        <a href="/">
+            <%= image_tag "logo.png", alt: "Company Logo", class: "img-fluid navbar-logo" %>
+        </a>
+        <div class="d-md-block d-none">
+            <ul class="list-unstyled d-flex justify-content-center gap-lg-5 gap-3 m-0 caudex-normal">
+                <li><a href="/">Home</a></li>
+                <li><a href="/biography">Biography</a></li>
+                <li>
+                    <div class="d-flex align-items-center">
+                        <a href="#">Features</a>
+                        <span class=""><a href=""><i class="bi bi-chevron-down text-white"></i></a></span>
+                    </div>
+                    
+                    <ul class="z-1">
+                        <li><a href="/news">News</a></li>
+                        <li><a href="/upcoming_events">Calendar</a></li>
+                        <li><a href="/projects">Projects</a></li>
+                        <li><a href="/musics">Music</a></li>
+                        <li><a href="/videos">Video</a></li>
+                    </ul>
+                </li>
+                <li><a href="/press">Press</a></li>
+                <li><a href="/contacts">Contact</a></li>
+            </ul>
+        </div>
+        
+        <button class="menu-icon" id="toggleSidebar">
+            <i class="bi bi-list"></i>
+        </button>
+        <button class="close-icon" id="closeSidebarIcon">
+        <i class="bi bi-x-lg"></i>
+        </button>
+    </nav>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <!-- <button class="btn btn-danger m-3" id="closeSidebarBtn">Close</button> -->
+        <ul class="list-unstyled px-3 caudex-normal">
+            <div class="row d-flex justify-content-center align-items-center">
+                <div class="col"><li><a href="/" class="text-white d-block py-2">Home</a></li></div>
+                <div class="col text-center"><i class="bi bi-x-lg" id="closeSidebarBtn"></i></div>
+            </div>
+            <li><a href="/biography" class="text-white d-block py-2">Biography</a></li>
+            <li><a href="/news" class="text-white d-block py-2">News</a></li>
+            <li><a href="/upcoming_events" class="text-white d-block py-2">Calendar</a></li>
+            <li><a href="/projects" class="text-white d-block py-2">Projects</a></li>
+            <li><a href="/musics" class="text-white d-block py-2">Music</a></li>
+            <li><a href="/videos" class="text-white d-block py-2">Video</a></li>
+            <li><a href="/press" class="text-white d-block py-2">Press</a></li>
+            <li><a href="/contacts" class="text-white d-block py-2">Contact</a></li>
         </ul>
     </div>
-    
-    <button class="menu-icon" id="toggleSidebar">
-        <i class="bi bi-list"></i>
-    </button>
-    <button class="close-icon" id="closeSidebarIcon">
-      <i class="bi bi-x-lg"></i>
-    </button>
-</nav>
 
-<!-- Sidebar -->
-<div class="sidebar" id="sidebar">
-    <!-- <button class="btn btn-danger m-3" id="closeSidebarBtn">Close</button> -->
-    <ul class="list-unstyled px-3 caudex-normal">
-        <div class="row d-flex justify-content-center align-items-center">
-            <div class="col"><li><a href="/" class="text-white d-block py-2">Home</a></li></div>
-            <div class="col text-center"><i class="bi bi-x-lg" id="closeSidebarBtn"></i></div>
-        </div>
-        <li><a href="/biography" class="text-white d-block py-2">Biography</a></li>
-        <li><a href="/news" class="text-white d-block py-2">News</a></li>
-        <li><a href="/upcoming_events" class="text-white d-block py-2">Calendar</a></li>
-        <li><a href="/projects" class="text-white d-block py-2">Projects</a></li>
-        <li><a href="/musics" class="text-white d-block py-2">Music</a></li>
-        <li><a href="/videos" class="text-white d-block py-2">Video</a></li>
-        <li><a href="/press" class="text-white d-block py-2">Press</a></li>
-        <li><a href="/contacts" class="text-white d-block py-2">Contact</a></li>
-    </ul>
-</div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const toggleSidebar = document.getElementById("toggleSidebar"); 
+            const closeSidebarIcon = document.getElementById("closeSidebarIcon");
+            const closeSidebarBtn = document.getElementById("closeSidebarBtn");
+            const sidebar = document.getElementById("sidebar");
 
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const toggleSidebar = document.getElementById("toggleSidebar"); // Hamburger button
-        const closeSidebarIcon = document.getElementById("closeSidebarIcon"); // Close "X" icon
-        const closeSidebarBtn = document.getElementById("closeSidebarBtn"); // Red Close Button
-        const sidebar = document.getElementById("sidebar");
+            // Toggle sidebar and buttons
+            function toggleMenu() {
+                const isActive = sidebar.classList.toggle("active");
+                toggleSidebar.style.display = isActive ? "none" : "block"; 
+                closeSidebarIcon.style.display = isActive ? "block" : "none";  
+                closeSidebarBtn.style.display = isActive ? "block" : "none";
+            }
 
-        // Toggle sidebar and buttons
-        function toggleMenu() {
-            const isActive = sidebar.classList.toggle("active");
-            toggleSidebar.style.display = isActive ? "none" : "block"; // Hide hamburger when open
-            closeSidebarIcon.style.display = isActive ? "block" : "none";  // Show close icon
-            closeSidebarBtn.style.display = isActive ? "block" : "none";  // Show red close button
-        }
+            // Open sidebar
+            toggleSidebar.addEventListener("click", toggleMenu);
 
-        // Open sidebar
-        toggleSidebar.addEventListener("click", toggleMenu);
-
-        // Close sidebar (both close icon and button)
-        closeSidebarIcon.addEventListener("click", toggleMenu);
-        closeSidebarBtn.addEventListener("click", toggleMenu);
-    });
-</script>
+            // Close sidebar (both close icon and button)
+            closeSidebarIcon.addEventListener("click", toggleMenu);
+            closeSidebarBtn.addEventListener("click", toggleMenu);
+        });
+    </script>

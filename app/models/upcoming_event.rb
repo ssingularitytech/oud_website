@@ -1,6 +1,3 @@
 class UpcomingEvent < ApplicationRecord
-
-  def event
-    
-  end
+  default_scope { order(id: :asc) }
 end
