@@ -32,12 +32,14 @@
                     <div class="description mt-md-4 mt-2">
                         <p><%= @news.news_description %></p>
                         
+                        <% if @news.news_link.present? %>
                         <% @news.news_link.split(' ').each do |link| %>
-                        <p>
-                          <a href="<%= link.strip %>" target="_blank" rel="noopener">
-                            <%= link.strip %>
-                          </a>
-                        </p>
+                          <p>
+                            <a href="<%= link.strip %>" target="_blank" rel="noopener">
+                              <%= link.strip %>
+                            </a>
+                          </p>
+                        <% end %>
                       <% end %>
                     </div>
                     <div class="back-button">
