@@ -16,8 +16,9 @@ Rails.application.routes.draw do
   resources :projects
   resources :videos
   resources :press
-  resources :contacts
   resources :musics
 
+  get  '/contacts', to: 'contacts#new',    as: 'contacts'
+  post '/contacts', to: 'contacts#create'
   get 'event', to: 'upcoming_events#event'
 end

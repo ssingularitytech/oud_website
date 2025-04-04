@@ -1,78 +1,120 @@
 <style>
-    .music-image {
-        height: 20rem;
-        width: 20rem;
-        border-radius: 12px;
-    }
-    .music-out-border{
-      border: 3px solid #08f;
+  .music-image {
+      height: 20rem;
+      width: 100%;
       border-radius: 12px;
-    }
-
-      .music-audio-box {
-       background-color: #221133;
   }
+  .music-out-border{
+    border: 3px solid #08f;
+    border-radius: 12px;
+  }
+
+    .music-audio-box {
+     background-color: #221133;
+}
 </style>
 
-  <div class="container">
-      <h2 class="text-center text-white pt-md-5 pt-3 caudex-bold">MUSIC</h2>
-      <div class="row text-white px-md-5 px-2">
-          <div class="text-center mt-2 justify-content-center">
-              <h5><%= @music.name %></h5>
+<div class="container">
+    <h2 class="text-center text-white pt-md-5 pt-3 caudex-bold">MUSIC</h2>
+    <div class="row text-white px-md-5 px-2">
+        <div class="text-center mt-2 justify-content-center">
+            <h5><%= @music.name %></h5>
+        </div>
+
+
+        <div class="image-audio-section px-4">
+        <div class="row music-out-border mt-2 music-audio-box py-md-4 px-md-4">
+          <div class="col-md-5 p-0 d-flex justify-content-center">
+            <% if @music.image.attached? %>
+            <img src="<%= url_for(@music.image) %>" class="img-fluid music-image">
+            <% end %>
           </div>
 
-
-          <div class="image-audio-section px-4">
-          <div class="row music-out-border mt-2 music-audio-box py-4 px-4">
-            <div class="col-md-5 p-0 d-flex justify-content-center">
-              <% if @music.image.attached? %>
-              <img src="<%= url_for(@music.image) %>" class="img-fluid music-image">
-              <% end %>
+          <div class="col-md-2 text-center d-flex align-items-center justify-content-center py-2 mt-2">
+            <div class="row w-100 h-100">
+              <div class="col-md-12 col-8 d-flex align-items-center justify-content-center">
+                <a target="_blank" href="https://open.spotify.com/album/52z0eL1svCLsmV7HxvTHgB?..." style="text-decoration: none; color: white;">
+                  <h5>Save on Spotify</h5>
+                </a>
+              </div>
+              <div class="col-md-12 col-4 d-flex align-items-center justify-content-center">
+                <a target="_blank" href="https://open.spotify.com/album/52z0eL1svCLsmV7HxvTHgB?...">
+                  <h3><i class="bi bi-spotify text-info"></i></h3>
+                </a>
+              </div>
             </div>
+          </div>
+          
 
-            <div class="col-md-7" style="height: 20rem; overflow-y: auto;">
-              <% @music.audios.each do |audio| %>
-                <div class="row mb-3 p-2">
-                  <div class="col-2 d-flex align-items-center justify-content-center">
-                    <p class="m-0 text-center"><%= audio.title %></p>
-                  </div>
-            
-                  <div class="col-10 d-flex align-items-center justify-content-center">
-                    <% if audio.audio.attached? %>
-                      <audio controls class="w-100">
-                        <source src="<%= url_for(audio.audio) %>" type="audio/mpeg">
-                        Your browser does not support the audio element.
-                      </audio>
+          <div class="col-md-5" style="height: 20rem; overflow-y: auto;">
+            <% @music.audios.each do |audio| %>
+              <div class="row">
+                <div class="col-12 d-flex align-items-center justify-content-center p-2">
+                  <% if audio.audio.attached? %>
+                    <div class="border rounded d-flex flex-column align-items-center w-100 shadow-sm py-2 px-2" style="background: #f8f9fa;">
+                      <p class="m-0 text-center fw-bold w-100 text-black"><%= audio.title %></p>
+                      <div class="d-flex align-items-center w-100">
+                        <i class="bi bi-music-note-beamed fs-4 text-info"></i>
+                        <audio controls class="flex-grow-1">
+                          <source src="<%= url_for(audio.audio) %>" type="audio/mpeg">
+                          Your browser does not support the audio element.
+                        </audio>
+                      </div>
+                
+                    </div>
+                  <% end %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+
+        </div>
+        </div>
+
+
+        <div class="description mt-md-4 mt-2">
+            <p><%= @music.description %></p>
+                <% if @music.link.present? %>
+                  <div class="m-0">
+                    <% @music.link.split.each do |link| %>
+                      <%= link_to link, link.start_with?('http') ? link : "https://#{link}", target: "_blank", rel: "noopener noreferrer", style: "color: rgb(201, 95, 95); word-wrap: break-word; overflow-wrap: break-word;" %>
+                      <br>
                     <% end %>
                   </div>
-                </div>
-              <% end %>
-            </div>
-          </div>
-          </div>
+            <% end %>
+        </div>
 
-
-          <div class="description mt-md-4 mt-2">
-              <p><%= @music.description %></p>
-                  <% if @music.link.present? %>
-                    <div class="m-0">
-                      <% @music.link.split.each do |link| %>
-                        <%= link_to link, link.start_with?('http') ? link : "https://#{link}", target: "_blank", rel: "noopener noreferrer", style: "color: rgb(201, 95, 95); word-wrap: break-word; overflow-wrap: break-word;" %>
-                        <br> <!-- Yeh har link ke baad ek new line add karega -->
-                      <% end %>
+        <div class="back-button">
+            <a href="/musics" style="text-decoration: none;">
+                <button class="comman-bg-color mt-3" style="border: 2px solid #08f; border-radius: 12px; color: white;">
+                    <div class="d-flex justify-content-center align-items-center gap-2 caudex-bold py-2 px-4">
+                        <i style="font-size: 20px;" class="bi bi-chevron-left"></i>
+                        <span style="font-size: 20px;">Go Back</span>
                     </div>
-              <% end %>
-          </div>
+                </button>
+            </a>
+        </div>
+    </div>
+</div>
 
-          <div class="back-button">
-              <a href="/musics" style="text-decoration: none;">
-                  <button class="comman-bg-color mt-3" style="border: 2px solid #08f; border-radius: 12px; color: white;">
-                      <div class="d-flex justify-content-center align-items-center gap-2 caudex-bold py-2 px-4">
-                          <i style="font-size: 20px;" class="bi bi-chevron-left"></i>
-                          <span style="font-size: 20px;">Go Back</span>
-                      </div>
-                  </button>
-              </a>
-          </div>
-      </div>
-  </div>
+
+
+<!-- JavaScript to Stop Previous Audio -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+let allAudios = document.querySelectorAll("audio");
+
+allAudios.forEach(audio => {
+  audio.addEventListener("play", function () {
+    allAudios.forEach(otherAudio => {
+      if (otherAudio !== this) {
+        otherAudio.pause(); // Stop other playing audio
+        otherAudio.currentTime = 0; // Reset to start
+        otherAudio.volume = 1.0; // Reset volume to full
+      }
+    });
+  });
+});
+});
+
+</script>

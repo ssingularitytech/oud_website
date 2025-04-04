@@ -31,15 +31,14 @@
                     <% end %>
                     <div class="description mt-md-4 mt-2">
                         <p><%= @news.news_description %></p>
-                        <% if @news.news_link.present? %>
-                        <div class="m-0">
-                          <% @news.news_link.split.each do |link| %>
-                            <%= link_to link, link.start_with?('http') ? link : "https://#{link}", target: "_blank", rel: "noopener noreferrer", style: "color: rgb(201, 95, 95); word-wrap: break-word; overflow-wrap: break-word;" %>
-                            <br> <!-- Yeh har link ke baad ek new line add karega -->
-                          <% end %>
-                        </div>
+                        
+                        <% @news.news_link.split(' ').each do |link| %>
+                        <p>
+                          <a href="<%= link.strip %>" target="_blank" rel="noopener">
+                            <%= link.strip %>
+                          </a>
+                        </p>
                       <% end %>
-                      
                     </div>
                     <div class="back-button">
                       <a href="/news" style="text-decoration: none;">
