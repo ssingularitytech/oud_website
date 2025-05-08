@@ -80,13 +80,17 @@ RailsAdmin.config do |config|
     config.model 'ProjectDetail' do
       edit do
         field :project
-        field :description
+        field :description, :action_text
         field :image, :active_storage
       end
     
       show do
         field :project
-        field :description
+        field :description do
+          pretty_value do
+            bindings[:object].description&.body&.to_s&.html_safe
+          end
+        end
         field :image do
           pretty_value do
             if bindings[:object].image.attached?
@@ -101,7 +105,11 @@ RailsAdmin.config do |config|
     
       list do
         field :project
-        field :description
+        field :description do
+          pretty_value do
+            ActionController::Base.helpers.strip_tags(bindings[:object].description.to_s).truncate(100)
+          end
+        end
         field :image do
           pretty_value do
             if bindings[:object].image.attached?
@@ -205,7 +213,11 @@ RailsAdmin.config do |config|
       show do
         field :name
         field :date
-        field :description
+        field :description do
+          pretty_value do
+            bindings[:object].description&.body&.to_s&.html_safe
+          end
+        end
         field :link
         field :image do
           pretty_value do
@@ -224,7 +236,11 @@ RailsAdmin.config do |config|
       list do
         field :name
         field :date
-        field :description
+        field :description do
+          pretty_value do
+            ActionController::Base.helpers.strip_tags(bindings[:object].description.to_s).truncate(100)
+          end
+        end
         field :link
         field :image do
           pretty_value do
