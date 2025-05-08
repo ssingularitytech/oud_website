@@ -31,7 +31,7 @@
             <div class="col mt-4 d-flex justify-content-center">
 
                 <div class="project-card-wrapper" style="position: relative; width: 95%;">
-                    <a href="<%= project_path(project) %>" class="news-card-link" style="position: absolute; inset: 0; z-index: 10;"></a>
+                    <a href="<%= project_path(project) %>" target="_blank" class="news-card-link" style="position: absolute; inset: 0; z-index: 10;"></a>
                     <div class="project-card comman-border" style="width: 100%; position: relative; z-index: 5;">
                         <% first_detail = project.project_details.first %>
                         <% if first_detail && first_detail.image.attached? %>
