@@ -15,7 +15,8 @@
       }
       .news-body-text{
         color: white;
-        background-color: #221133;
+        /* background-color: #221133; */
+        background-color: black;
         border-bottom-left-radius: 10px;
         border-bottom-right-radius: 10px;
         min-height: 212px;
@@ -25,7 +26,7 @@
 </style>
 
     <div class="container">
-        <h2 class="text-center text-white pt-md-5 pt-3 caudex-bold">NEWS</h2>
+        <h4 class="text-center text-white pt-md-5 pt-3 caudex-bold">NEWS</h4>
         <div class="row row-cols-xl-3 row-cols-md-2 row-cols-1 pt-md-5 pt-3">
             <% @news.each do |news| %>
             <div class="col mt-4 d-flex justify-content-center">
@@ -38,7 +39,7 @@
                         <% end %>
                         <div class="news-body-text py-3 px-3">
                             <h5 class="caudex-bold"><%= news.news_date.strftime("%d %b %Y") %></h5>
-                            <h5 class="caudex-bold"><%= news.news_name.split[0...4].join(' ') %>...</h5>
+                            <h5 class="caudex-bold"><%= news.news_name %></h5>
                             <p class="caudex-normal" style="font-size: 17px;"><%= news.news_description.to_plain_text.split[0...10].join(' ') %>...</p>
                             <a href="<%= news_path(news) %>" class="text-white view-details-btn caudex-normal">Know More</a>
                         </div>

@@ -1,6 +1,6 @@
     <style>
         .project-image {
-            aspect-ratio: 3/2.6;
+            aspect-ratio: 3/2;
             width: 100%;
             border-top-left-radius: 10px;
             border-top-right-radius: 10px;
@@ -15,7 +15,8 @@
         }
         .project-body-text{
             color: white;
-            background-color: #221133;
+            /* background-color: #221133; */
+             background-color: black;
             border-bottom-left-radius: 10px;
             border-bottom-right-radius: 10px;
             min-height: 212px;
@@ -25,12 +26,12 @@
     </style>
 
     <div class="container">
-        <h2 class="text-center text-white pt-md-5 pt-3 caudex-bold">PROJECTS</h2>
-        <div class="row row-cols-xl-3 row-cols-md-2 row-cols-1 pt-md-5 pt-3">
+        <h4 class="text-center text-white pt-md-5 pt-3 caudex-bold">PROJECTS</h4>
+        <div class="row row-cols-xl-2 row-cols-md-2 row-cols-1 pt-md-5 pt-3">
             <% @projects.each do |project| %>
             <div class="col mt-4 d-flex justify-content-center">
 
-                <div class="project-card-wrapper" style="position: relative; width: 95%;">
+                <div class="project-card-wrapper" style="position: relative; width: 90%;">
                     <a href="<%= project_path(project) %>" target="_blank" class="news-card-link" style="position: absolute; inset: 0; z-index: 10;"></a>
                     <div class="project-card comman-border" style="width: 100%; position: relative; z-index: 5;">
                         <% first_detail = project.project_details.first %>
@@ -39,14 +40,15 @@
                         <% end %>
                         <div class="project-body-text py-3 px-3">
                             <h5 class="caudex-bold"><%= project.name %></h5>
-                            <% if first_detail %>
-                                <p class="caudex-normal m-0" style="font-size: 17px;">
-                                    <% words = first_detail.description.split(" ") %>
-                                    <% short_description = words.first(20).join(" ") %>
-                                    <span class="short-desc"><%= short_description %>...</span>
-                                    <span class="full-desc d-none"><%= first_detail.description %></span>
-                                </p>
-                            <% end %>
+                           <% if first_detail && first_detail.description.present? %>
+  <% words = strip_tags(first_detail.description).split(" ") %>
+  <% short_description = words.first(20).join(" ") %>
+  <p class="caudex-normal m-0" style="font-size: 17px;">
+    <span class="short-desc"><%= short_description %>...</span>
+    <span class="full-desc d-none"><%= strip_tags(first_detail.description) %></span>
+  </p>
+<% end %>
+
                             <a href="<%= project_path(project) %>" class="text-white view-details-btn caudex-normal">Know More</a>
                         </div>
                     </div>
