@@ -123,48 +123,52 @@ RailsAdmin.config do |config|
       end
     end 
     
-    config.model 'Video' do
-      edit do
-        field :name
-        field :video, :active_storage
-      end
-    
-      show do
-        field :name
-        field :video do
-          pretty_value do
-            if bindings[:object].video.attached?
-              bindings[:view].tag.video(
-                controls: true,
-                width: 200,
-                height: 200,
-                src: Rails.application.routes.url_helpers.rails_blob_path(bindings[:object].video, only_path: true)
-              )
-            end
-          end
+  config.model 'Video' do
+  edit do
+    field :name
+    field :video, :active_storage
+    field :youtube_url
+  end
+
+  show do
+    field :name
+    field :video do
+      pretty_value do
+        if bindings[:object].video.attached?
+          bindings[:view].tag.video(
+            controls: true,
+            width: '320',
+            height: '240',
+            src: Rails.application.routes.url_helpers.rails_blob_path(bindings[:object].video, only_path: true)
+          )
+        else
+          "No video attached"
         end
-        field :created_at
-        field :updated_at
-      end
-    
-      list do
-        field :name
-        field :video do
-          pretty_value do
-            if bindings[:object].video.attached?
-              bindings[:view].tag.video(
-                controls: true,
-                width: 100,
-                height: 100,
-                src: Rails.application.routes.url_helpers.rails_blob_path(bindings[:object].video, only_path: true)
-              )
-            end
-          end
-        end
-        field :created_at
-        field :updated_at
       end
     end
+    field :youtube_url
+  end
+
+  list do
+    field :name
+    field :video do
+      pretty_value do
+        if bindings[:object].video.attached?
+          bindings[:view].tag.video(
+            controls: true,
+            width: '160',
+            height: '120',
+            src: Rails.application.routes.url_helpers.rails_blob_path(bindings[:object].video, only_path: true)
+          )
+        else
+          "No video"
+        end
+      end
+    end
+    field :youtube_url
+  end
+end
+
 
     config.model 'Press' do
       edit do
