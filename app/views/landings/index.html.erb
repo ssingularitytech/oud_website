@@ -10,7 +10,7 @@
 
 </style>
 
-<div class="container-fluid p-0" style="border: 2px solid red; overflow: hidden;">
+<div class="container-fluid p-0" style="overflow: hidden;">
   <div class="row">
     <div class="position-relative p-0">
       <%= image_tag "home-bg-image.jpg", alt: "Company Logo", class: "w-100 home-bg-image" %>
@@ -20,18 +20,9 @@
 
     </div>
 
-    <h4 class="text-center text-white pt-md-5 pt-3 caudex-bold">NEW RELEASE</h4>
 
-    <div class="row row-cols-xl-3 row-cols-md-2 row-cols-1 pt-md-5 pt-3 justify-content-center align-items-center">
-      <div class="col">
-        <a href="https://lnk.to/Nizar-Rohana-Safa" target="_blank">
-          <%= image_tag "biography/biography-second-image.jpeg", alt: "Company Logo", class: "w-100 rounded" %>
-        </a>
-      </div>
-    </div>
-    
-     <%= render partial: 'layouts/video' %>
-
+    <%= render partial: 'layouts/newrelease' %>
+    <%= render partial: 'layouts/video' %>
     <%= render partial: 'layouts/upcoming_event' %>
   </div>
 </div>

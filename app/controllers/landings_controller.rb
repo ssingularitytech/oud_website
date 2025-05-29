@@ -1,4 +1,6 @@
 class LandingsController < ApplicationController
+  def newrelease
+  end 
   def index
    @upcoming_events = UpcomingEvent.order(date: :asc).limit(5)
    @videos = Video.order(created_at: :desc).limit(1)
