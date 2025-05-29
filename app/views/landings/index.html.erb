@@ -3,26 +3,36 @@
 
 .home-bg-image {
     width: 100%;
-    height: auto; /* Let the image maintain its natural aspect ratio */
-    max-height: 800px; /* Adjust this as needed */
-    object-fit: cover; /* Ensures the whole image is visible without cropping */
+    height: auto; 
+    max-height: 800px; 
+    object-fit: cover;
 }
 
 </style>
 
-<div class="container-fluid">
+<div class="container-fluid p-0" style="border: 2px solid red; overflow: hidden;">
+  <div class="row">
+    <div class="position-relative p-0">
+      <%= image_tag "home-bg-image.jpg", alt: "Company Logo", class: "w-100 home-bg-image" %>
+      <h5 class="position-absolute bottom-0 start-50 translate-middle-x text-white mb-5 py-2">
+         Oud player Composer Educator
+      </h5>
 
-  <%= image_tag "home-bg-image.jpg", alt: "Company Logo", class: "home-bg-image" %>
-  <h4 class="text-center text-white pt-md-5 pt-3 caudex-bold">New Release</h4>
- <div class="row row-cols-xl-3 row-cols-md-2 row-cols-1 pt-md-5 pt-3 justify-content-center align-items-center">
-   <div class="col">
-     <a href="https://lnk.to/Nizar-Rohana-Safa" target="_blank"><%= image_tag "biography/biography-second-image.jpeg", alt: "Company Logo", class: "home-bg-image rounded" %></a>
     </div>
-   <div class="col mt-md-0 mt-4">
-     <a href="https://lnk.to/Nizar-Rohana-Safa" target="_blank"><%= image_tag "biography/biography-second-image.jpeg", alt: "Company Logo", class: "home-bg-image rounded" %></a>
+
+    <h4 class="text-center text-white pt-md-5 pt-3 caudex-bold">NEW RELEASE</h4>
+
+    <div class="row row-cols-xl-3 row-cols-md-2 row-cols-1 pt-md-5 pt-3 justify-content-center align-items-center">
+      <div class="col">
+        <a href="https://lnk.to/Nizar-Rohana-Safa" target="_blank">
+          <%= image_tag "biography/biography-second-image.jpeg", alt: "Company Logo", class: "w-100 rounded" %>
+        </a>
+      </div>
     </div>
- 
+    
+     <%= render partial: 'layouts/video' %>
+
+    <%= render partial: 'layouts/upcoming_event' %>
+  </div>
 </div>
 
-<%= render partial: 'layouts/upcoming_event'%>
-</div>

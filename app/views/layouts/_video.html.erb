@@ -1,0 +1,42 @@
+
+<style>
+  .video-card {
+    width: 100%; 
+    max-width: 400px;
+    height: 250px;
+    object-fit: cover;
+  }
+</style>
+
+
+
+<div class="container px-md-5">
+  <h4 class="text-center text-white pt-md-5 pt-3 caudex-bold">VIDEO</h4>
+  <div class="row row-cols-xl-3 row-cols-md-2 row-cols-1 pt-3 justify-content-center align-items-center">
+    <% @videos.each do |video| %>
+      <div class="col mt-4 text-center">
+        <% if video.youtube_url.present? %>
+          <% youtube_id = video.youtube_url[%r{(?:youtube\.com/watch\?v=|youtu\.be/)([\w\-]+)}, 1] %>
+
+          <iframe
+            width="100%"
+            height="315"
+            src="https://www.youtube.com/embed/<%= youtube_id %>"
+            title="<%= video.name %>"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            class="img-fluid video-card"
+          ></iframe>
+        <% elsif video.video.attached? %>
+          <video class="img-fluid video-card" controls>
+            <source src="<%= url_for(video.video) %>" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        <% end %>
+        <h5 class="caudex-bold text-white mt-2"><%= video.name %></h5>
+      </div>
+    <% end %>
+  </div>
+</div>
+
