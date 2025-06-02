@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   resources :press
   resources :musics
   resources :new_releases
+    resources :photos
 
   get  '/contacts', to: 'contacts#new',    as: 'contacts'
   post '/contacts', to: 'contacts#create'
