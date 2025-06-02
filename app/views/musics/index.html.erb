@@ -38,7 +38,7 @@
                   <div class="music-body-text py-3 px-3 d-flex flex-column h-100">
                       <h5 class="caudex-bold"><%= music.date.strftime("%d %b %Y") %></h5>
                       <h5 class="caudex-bold"><%= music.name %></h5>
-                      <p class="caudex-normal" style="font-size: 17px;"><%= music.description.to_plain_text.split[0...10].join(' ') %>...</p>
+                      <p class="caudex-normal" style="font-size: 17px;"><%= music.description.to_plain_text.split[0...8].join(' ') %>...</p>
                       
                       <div class="mt-auto">
                           <a href="<%= music_path(music) %>" class="text-white view-details-btn caudex-normal">Know More</a>
