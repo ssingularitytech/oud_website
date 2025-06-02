@@ -82,8 +82,9 @@ RailsAdmin.config do |config|
         field :project
         field :description, :action_text
         field :image, :active_storage
+        field :youtube_url  # ✅ added here
       end
-    
+
       show do
         field :project
         field :description do
@@ -94,15 +95,16 @@ RailsAdmin.config do |config|
         field :image do
           pretty_value do
             if bindings[:object].image.attached?
-              bindings[:view].tag(:img, 
-                src: Rails.application.routes.url_helpers.rails_blob_path(bindings[:object].image, only_path: true), 
+              bindings[:view].tag(:img,
+                src: Rails.application.routes.url_helpers.rails_blob_path(bindings[:object].image, only_path: true),
                 style: 'max-width: 200px; max-height: 200px;'
               )
             end
           end
         end
+        field :youtube_url  # ✅ added here
       end
-    
+
       list do
         field :project
         field :description do
@@ -113,15 +115,17 @@ RailsAdmin.config do |config|
         field :image do
           pretty_value do
             if bindings[:object].image.attached?
-              bindings[:view].tag(:img, 
-                src: Rails.application.routes.url_helpers.rails_blob_path(bindings[:object].image, only_path: true), 
+              bindings[:view].tag(:img,
+                src: Rails.application.routes.url_helpers.rails_blob_path(bindings[:object].image, only_path: true),
                 style: 'max-width: 100px; max-height: 100px;'
               )
             end
           end
         end
+        field :youtube_url  # ✅ added here
       end
-    end 
+    end
+
     
   config.model 'Video' do
   edit do

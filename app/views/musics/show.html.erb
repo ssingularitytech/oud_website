@@ -1,122 +1,165 @@
 <style>
   .music-image {
-      height: 20rem;
-      width: 100%;
+      height: 15rem;
+      width: 50%;
       border-radius: 12px;
   }
-  .music-out-border{
-    border: 3px solid #08f;
-    border-radius: 12px;
+  .first-row{
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
   }
 
-    .music-audio-box {
-     background-color: #221133;
-}
+    .second-row{
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+  }
+
+
 </style>
 
-<div class="container">
-    <h4 class="text-center text-white pt-md-5 pt-3 caudex-bold">MUSIC</h4>
-    <div class="row text-white px-md-5 px-2">
-        <div class="text-center mt-2 justify-content-center">
-            <h5><%= @music.name %></h5>
-        </div>
-
-
-        <div class="image-audio-section px-4">
-        <div class="row music-out-border mt-2 music-audio-box py-md-4 px-md-4">
-          <div class="col-md-5 p-0 d-flex justify-content-center">
-            <% if @music.image.attached? %>
-            <img src="<%= url_for(@music.image) %>" class="img-fluid music-image">
-            <% end %>
+  <div class="container">
+      <div class="row text-white px-md-5 px-2">
+          <div class="text-center mt-2 justify-content-center d-flex gap-2">
+              <h5><%= @music.name %></h5>
+              <h5><%= @music.date.strftime("%Y") %></h5>
           </div>
 
-          <div class="col-md-2 text-center d-flex align-items-center justify-content-center py-2 mt-2">
-            <div class="row w-100 h-100">
-              <div class="col-md-12 col-8 d-flex align-items-center justify-content-center">
-                <a target="_blank" href="https://open.spotify.com/album/52z0eL1svCLsmV7HxvTHgB?..." style="text-decoration: none; color: white;">
+
+          
+          <!-- first row -->
+          <div class="row first-row mt-2 py-md-4 px-md-4" style="background-color: #305838;">
+            <div class="col-6 p-0 justify-content-start d-flex gap-4">
+              <% if @music.image.attached? %>
+              <img src="<%= url_for(@music.image) %>" class="img-fluid music-image">
+              <% end %>
+              <div>
+
+                <h5><%= @music.name %></h5>
+                <div class="d-flex gap-2">
+                  <h4><i class="bi bi-plus-circle"></i></h4>
                   <h5>Save on Spotify</h5>
-                </a>
-              </div>
-              <div class="col-md-12 col-4 d-flex align-items-center justify-content-center">
-                <a target="_blank" href="https://open.spotify.com/album/52z0eL1svCLsmV7HxvTHgB?...">
-                  <h3><i class="bi bi-spotify text-info"></i></h3>
-                </a>
+                </div>
               </div>
             </div>
-          </div>
-          
 
-          <div class="col-md-5" style="height: 20rem; overflow-y: auto;">
-            <% @music.audios.each do |audio| %>
-              <div class="row">
-                <div class="col-12 d-flex align-items-center justify-content-center p-2">
+            <div class="col-6 py-2 mt-2 d-flex justify-content-end">
+              <a target="_blank" href="https://open.spotify.com/album/52z0eL1svCLsmV7HxvTHgB?...">
+                <h3 class="mb-0"><i class="bi bi-spotify text-white"></i></h3>
+              </a>
+            </div>
+          </div>
+
+          <!-- second row -->
+            <div class="row second-row py-3" style="height: 15rem; overflow-y: auto; background-color: #203624;">
+              <% @music.audios.each do |audio| %>
+                <div class="audio-card d-flex justify-content-between align-items-center text-white px-3 py-2 mb-2 rounded">
+                  <div class="d-flex align-items-center gap-3">
+                    <button class="play-button bg-transparent border-0 text-white" onclick="togglePlay(this, '<%= audio.id %>')">
+                      <i class="bi bi-play-fill fs-4"></i>
+                    </button>
+                    <div>
+                      <p class="m-0 fw-bold"><%= audio.title %></p>
+                    </div>
+                  </div>
+
                   <% if audio.audio.attached? %>
-                    <div class="border rounded d-flex flex-column align-items-center w-100 shadow-sm py-2 px-2" style="background: #f8f9fa;">
-                      <p class="m-0 text-center fw-bold w-100 text-black"><%= audio.title %></p>
-                      <div class="d-flex align-items-center w-100">
-                        <i class="bi bi-music-note-beamed fs-4 text-info"></i>
-                        <audio controls class="flex-grow-1">
-                          <source src="<%= url_for(audio.audio) %>" type="audio/mpeg">
-                          Your browser does not support the audio element.
-                        </audio>
-                      </div>
-                
+                    <div class="d-flex align-items-center gap-2">
+                      <audio id="audio-<%= audio.id %>" src="<%= url_for(audio.audio) %>" preload="metadata"></audio>
+                      <span class="current-time">0:00</span>
+                      <span>/</span>
+                      <span id="duration-<%= audio.id %>">--:--</span>
                     </div>
                   <% end %>
                 </div>
-              </div>
-            <% end %>
+              <% end %>
+            </div>
+
+          
+
+
+          <div class="description mt-md-4 mt-2">
+              <p><%= @music.description %></p>
+
+              <% if @music.link.present? %>
+              <% @music.link.split(' ').each do |link| %>
+                <p>
+                  <a href="<%= link.strip %>" target="_blank" rel="noopener">
+                    <%= link.strip %>
+                  </a>
+                </p>
+                <% end %>
+              <% end %>
           </div>
 
-        </div>
-        </div>
-
-
-        <div class="description mt-md-4 mt-2">
-            <p><%= @music.description %></p>
-
-            <% if @music.link.present? %>
-            <% @music.link.split(' ').each do |link| %>
-              <p>
-                <a href="<%= link.strip %>" target="_blank" rel="noopener">
-                  <%= link.strip %>
-                </a>
-              </p>
-              <% end %>
-            <% end %>
-        </div>
-
-        <div class="">
-            <a href="/musics" style="text-decoration: none;">
-                <button class="back-button mt-3" style="border: 2px solid #08f; border-radius: 12px; color: white;">
-                    <div class="d-flex justify-content-center align-items-center gap-2 caudex-bold py-2 px-4">
-                        <i style="font-size: 20px;" class="bi bi-chevron-left"></i>
-                        <span style="font-size: 20px;">Go Back</span>
-                    </div>
-                </button>
-            </a>
-        </div>
-    </div>
-</div>
+          <div class="">
+              <a href="/musics" style="text-decoration: none;">
+                  <button class="back-button mt-3" style="border: 2px solid #08f; border-radius: 12px; color: white;">
+                      <div class="d-flex justify-content-center align-items-center gap-2 caudex-bold py-2 px-4">
+                          <i style="font-size: 20px;" class="bi bi-chevron-left"></i>
+                          <span style="font-size: 20px;">Go Back</span>
+                      </div>
+                  </button>
+              </a>
+          </div>
+      </div>
+  </div>
 
 
 
 <!-- JavaScript to Stop Previous Audio -->
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-let allAudios = document.querySelectorAll("audio");
+function togglePlay(button, audioId) {
+  const audio = document.getElementById(`audio-${audioId}`);
+  const icon = button.querySelector('i');
+  
+  // Stop all other audios
+  document.querySelectorAll('audio').forEach(otherAudio => {
+    if (otherAudio.id !== `audio-${audioId}`) {
+      otherAudio.pause();
+      otherAudio.currentTime = 0;
+      const otherButton = otherAudio.closest('.audio-card').querySelector('.play-button i');
+      if (otherButton) otherButton.classList.replace('bi-pause-fill', 'bi-play-fill');
+    }
+  });
 
-allAudios.forEach(audio => {
-  audio.addEventListener("play", function () {
-    allAudios.forEach(otherAudio => {
-      if (otherAudio !== this) {
-        otherAudio.pause(); // Stop other playing audio
-        otherAudio.currentTime = 0; // Reset to start
-        otherAudio.volume = 1.0; // Reset volume to full
+  if (audio.paused) {
+    audio.play();
+    icon.classList.replace('bi-play-fill', 'bi-pause-fill');
+  } else {
+    audio.pause();
+    icon.classList.replace('bi-pause-fill', 'bi-play-fill');
+  }
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+  document.querySelectorAll("audio").forEach(audio => {
+    // Load duration
+    audio.addEventListener("loadedmetadata", function() {
+      const duration = audio.duration;
+      const minutes = Math.floor(duration / 60);
+      const seconds = Math.floor(duration % 60).toString().padStart(2, "0");
+      const durationDisplay = document.getElementById("duration-" + audio.id.split("-")[1]);
+      if (durationDisplay) {
+        durationDisplay.textContent = `${minutes}:${seconds}`;
       }
+    });
+
+    // Update current time
+    audio.addEventListener("timeupdate", function() {
+      const currentTime = audio.currentTime;
+      const minutes = Math.floor(currentTime / 60);
+      const seconds = Math.floor(currentTime % 60).toString().padStart(2, "0");
+      const timeDisplay = audio.closest('.audio-card').querySelector('.current-time');
+      if (timeDisplay) {
+        timeDisplay.textContent = `${minutes}:${seconds}`;
+      }
+    });
+
+    // Reset play button when audio ends
+    audio.addEventListener("ended", function() {
+      const button = this.closest('.audio-card').querySelector('.play-button i');
+      if (button) button.classList.replace('bi-pause-fill', 'bi-play-fill');
     });
   });
 });
-});
-
 </script>

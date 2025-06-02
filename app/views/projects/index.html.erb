@@ -1,60 +1,79 @@
-    <style>
-        .project-image {
-            aspect-ratio: 3/2;
-            width: 100%;
-            border-top-left-radius: 10px;
-            border-top-right-radius: 10px;
-        }
-        .view-details-btn {
-            margin-top: auto; 
-        }
-        .comman-border {
-            border: 2px solid #08f;
-            border-radius: 12px;
-            box-shadow: 1px 4px 4px rgba(0, 136, 255, 0.5);
-        }
-        .project-body-text{
-            color: white;
-            /* background-color: #221133; */
-             background-color: black;
-            border-bottom-left-radius: 10px;
-            border-bottom-right-radius: 10px;
-            min-height: 212px;
-            display: flex;
-            flex-direction: column;
-        }
-    </style>
+<style>
+  .project-image {
+    aspect-ratio: 1/0.7;
+    width: 100%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+  .view-details-btn {
+    margin-top: auto; 
+  }
+  .comman-border {
+    border: 2px solid grey; 
+    border-radius: 12px;
+    box-shadow: 1px 4px 4px rgba(128, 128, 128, 0.5);
+  }
+  .project-body-text {
+    color: white;
+    background-color: black;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    min-height: 185px;
+    display: flex;
+    flex-direction: column;
+  }
+  /* Remove link underline and set display block on full card link */
+  .project-card-link {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+  }
+</style>
 
-    <div class="container">
-        <h4 class="text-center text-white pt-md-5 pt-3 caudex-bold">PROJECTS</h4>
-        <div class="row row-cols-xl-2 row-cols-md-2 row-cols-1 pt-md-5 pt-3">
-            <% @projects.each do |project| %>
-            <div class="col mt-4 d-flex justify-content-center">
+<div class="container">
+  <h4 class="text-center text-white pt-md-5 pt-3 caudex-bold">PROJECTS</h4>
+  <div class="row row-cols-xl-3 row-cols-md-2 row-cols-1 pt-md-5 pt-3">
+    <% @projects.each do |project| %>
+      <div class="col mt-4 d-flex justify-content-center">
+        <div class="project-card-wrapper comman-border" style="width: 95%;">
+          
+          <%= link_to project_path(project), target: "_blank", class: "project-card project-card-link", style: "width: 100%; display: block;" do %>
 
-                <div class="project-card-wrapper" style="position: relative; width: 90%;">
-                    <a href="<%= project_path(project) %>" target="_blank" class="news-card-link" style="position: absolute; inset: 0; z-index: 10;"></a>
-                    <div class="project-card comman-border" style="width: 100%; position: relative; z-index: 5;">
-                        <% first_detail = project.project_details.first %>
-                        <% if first_detail && first_detail.image.attached? %>
-                            <img src="<%= url_for(first_detail.image) %>" class="img-fluid project-image" loading="lazy">
-                        <% end %>
-                        <div class="project-body-text py-3 px-3">
-                            <h5 class="caudex-bold"><%= project.name %></h5>
-                           <% if first_detail && first_detail.description.present? %>
-  <% words = strip_tags(first_detail.description).split(" ") %>
-  <% short_description = words.first(20).join(" ") %>
-  <p class="caudex-normal m-0" style="font-size: 17px;">
-    <span class="short-desc"><%= short_description %>...</span>
-    <span class="full-desc d-none"><%= strip_tags(first_detail.description) %></span>
-  </p>
-<% end %>
-
-                            <a href="<%= project_path(project) %>" class="text-white view-details-btn caudex-normal">Know More</a>
-                        </div>
-                    </div>
-                   </div>
-
-                </div>
+            <% first_detail = project.project_details.first %>
+            <% if first_detail && first_detail.image.attached? %>
+              <img src="<%= url_for(first_detail.image) %>" class="img-fluid project-image" loading="lazy" alt="<%= project.name %> image">
             <% end %>
+
+            <div class="project-body-text py-3 px-3">
+              <h5 class="caudex-bold"><%= project.name %></h5>
+
+              <% if first_detail && first_detail.youtube_url.present? %>
+                <h5 class="caudex-bold">
+                  <a href="<%= first_detail.youtube_url %>" 
+                     target="_blank" 
+                     rel="noopener noreferrer" 
+                     class="text-white text-decoration-underline" 
+                     onclick="event.stopPropagation();">
+                    <%= first_detail.youtube_url %>
+                  </a>
+                </h5>
+              <% end %>
+
+              <% if first_detail && first_detail.description.present? %>
+                <% words = strip_tags(first_detail.description).split(" ") %>
+                <% short_description = words.first(12).join(" ") %>
+                <p class="caudex-normal m-0" style="font-size: 17px;">
+                  <span class="short-desc"><%= short_description %>...</span>
+                  <span class="full-desc d-none"><%= strip_tags(first_detail.description) %></span>
+                </p>
+              <% end %>
+
+              <span class="text-white view-details-btn caudex-normal">Know More</span>
+            </div>
+
+          <% end %>
         </div>
-    </div>
+      </div>
+    <% end %>
+  </div>
+</div>
