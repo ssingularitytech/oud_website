@@ -317,6 +317,61 @@ end
         field :updated_at
       end
     end
+
+  
+    config.model 'NewRelease' do
+      edit do
+        field :name
+        field :date
+        field :youtube_url
+        field :image, :active_storage
+      end
+
+      show do
+        field :name
+        field :date
+        field :youtube_url
+        field :image do
+          pretty_value do
+            if bindings[:object].image.attached?
+              bindings[:view].image_tag(
+                Rails.application.routes.url_helpers.rails_blob_path(
+                  bindings[:object].image, only_path: true
+                ),
+                class: 'img-fluid', style: 'max-height: 150px;'
+              )
+            else
+              "No image attached"
+            end
+          end
+        end
+        field :created_at
+        field :updated_at
+      end
+
+      list do
+        field :name
+        field :date
+        field :youtube_url
+        field :image do
+          pretty_value do
+            if bindings[:object].image.attached?
+              bindings[:view].image_tag(
+                Rails.application.routes.url_helpers.rails_blob_path(
+                  bindings[:object].image, only_path: true
+                ),
+                style: 'height: 50px;'
+              )
+            else
+              "No image"
+            end
+          end
+        end
+        field :created_at
+      end
+    end
+
+
     
 
     

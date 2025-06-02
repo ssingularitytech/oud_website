@@ -1,0 +1,2 @@
+module NewReleasesHelper
+end
