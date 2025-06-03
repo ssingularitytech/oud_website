@@ -2,7 +2,7 @@
         
         @media (min-width: 768px) {
             .show-news-image {
-            height: 30rem;
+            height: 35rem;
             width: 100%;
             object-fit: fill;
             border-radius: 12px;
@@ -33,7 +33,7 @@
         </div>
         <div class="row text-white px-md-5 px-2 mt-4">
             
-          <div class="col-lg-6 d-flex flex-column justify-content-center align-items-center pe-md-5">
+          <div class="col-lg-6  pe-md-5">
             <% if @news.news_image.attached? %>
               <img src="<%= url_for(@news.news_image) %>" class="img-fluid show-news-image">
             <% end %>

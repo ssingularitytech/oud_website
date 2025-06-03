@@ -1,16 +1,17 @@
 <style>
   .music-image {
-      aspect-ratio: 1/0.7;
-      width: 100%;
-      border-top-left-radius: 10px;
-      border-top-right-radius: 10px;
+        aspect-ratio: 1/0.85;
+        width: 100%;
+        object-fit: fill;
+        /* border-top-left-radius: 10px;
+        border-top-right-radius: 10px; */
   }
   .view-details-btn {
       margin-top: auto;
   }
   .common-border {
       border: 2px solid grey; 
-      border-radius: 12px;
+      /* border-radius: 12px; */
       box-shadow: 1px 4px 4px rgba(128, 128, 128, 0.5);
   }
   .music-body-text {
@@ -18,7 +19,7 @@
         background-color: black;
         border-bottom-left-radius: 10px;
         border-bottom-right-radius: 10px;
-        min-height: 185px;
+        min-height: 160px;
         display: flex;
         flex-direction: column;
   }
@@ -38,7 +39,7 @@
                   <div class="music-body-text py-3 px-3 d-flex flex-column h-100">
                       <h5 class="caudex-bold"><%= music.date.strftime("%d %b %Y") %></h5>
                       <h5 class="caudex-bold"><%= music.name %></h5>
-                      <p class="caudex-normal" style="font-size: 17px;"><%= music.description.to_plain_text.split[0...8].join(' ') %>...</p>
+                      <!-- <p class="caudex-normal" style="font-size: 17px;"><%= music.description.to_plain_text.split[0...8].join(' ') %>...</p> -->
                       
                       <div class="mt-auto">
                           <a href="<%= music_path(music) %>" class="text-white view-details-btn caudex-normal">Know More</a>

@@ -1,97 +1,109 @@
 <style>
   @media (min-width: 768px) {
-    .upcoming-bg-image{
-    width: 100%;
-    height: 45rem;
-    object-fit: cover;
+    .upcoming-bg-image {
+      width: 100%;
+      height: 45rem;
+      object-fit: cover;
+    }
   }
-  }
+
   @media (max-width: 768px) {
-    .upcoming-bg-image{
-    width: 100%;
-    height: 22rem;
-    object-fit: fill;
+    .upcoming-bg-image {
+      width: 100%;
+      height: 22rem;
+      object-fit: fill;
+    }
   }
-  }
+
   .event-card {
-      background: transparent;
-      border-radius: 10px;
-      color: white;
-      transition: background 0.4s ease-in-out;
-      border: 2px solid grey;
+    background: white;
+    border-radius: 10px;
+    color: black;
+    transition: background 0.4s ease-in-out;
+    border: 2px solid #ccc;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    min-height: 320px;
   }
-  .event-card.first-card {
-      background: #2f2c2c;
+
+  .event-card:hover {
+    background: #f9f9f9;
   }
-  .event-card:not(.first-card):hover,
-  .event-card.active {
-      background: #2f2c2c;
-      transition: background 1s ease-in-out;
+
+  .event-details {
+    font-size: 18px;
+    color: black;
+  }
+
+  h3, h4, h5, p {
+    color: black !important;
+  }
+
+  a {
+    color: #c95f5f;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
 </style>
 
-  <div class="container-fluid">
 
-    <div class="container">
-       <h4 class="text-center text-white pt-md-5 pt-4  caudex-bold">UPCOMING EVENTS</h4>
+<div class="container-fluid">
+  <div class="container">
+    <h4 class="text-center text-white pt-md-5 pt-4 caudex-bold">UPCOMING EVENTS</h4>
 
-        <% @upcoming_events.each_with_index do |upcoming_event, index| %>
-          <div class="mt-5 bg-white rounded px-4 py-4">
-          <div class="row d-flex align-items-center py-4">
-            <div class="col-auto">
-             <h5 class="text-muted fst-italic"><%= upcoming_event.date.strftime("%B %Y") %></h5>
-
+    <div class="row mt-4">
+      <% @upcoming_events.each_with_index do |upcoming_event, index| %>
+        <div class="col-md-6">
+          <div class="event-card">
+            <div class="row d-flex align-items-center py-2">
+              <div class="col-auto">
+                <h5 class="fst-italic"><%= upcoming_event.date.strftime("%B %Y") %></h5>
+              </div>
+              <div class="col">
+                <hr>
+              </div>
             </div>
-            <div class="col">
-              <hr>
-            </div>
-    
-          </div>
-          
-          
-          
-          <div class="row align-items-start">
-            <div class="col-md-2 text-start d-flex align-items-start flex-column">
-                <p class="mb-0 text-uppercase fw-bold"><%= upcoming_event.date.strftime("%a") %><br></p>
+
+            <div class="row align-items-start">
+              <div class="col-md-3 text-start d-flex flex-column align-items-start">
+                <p class="mb-0 text-uppercase fw-bold"><%= upcoming_event.date.strftime("%a") %></p>
                 <h4 class="fw-bold"><%= upcoming_event.date.strftime("%-d") %></h4>
+              </div>
+              <div class="col-md-9">
+                <p class="mb-1"><%= upcoming_event.date.strftime("%B %-d, %Y") %></p>
+                <h4 class="fw-bold fst-italic mb-2"><%= upcoming_event.title %></h4>
+                <p class="event-details"><strong>Venue:</strong> <%= upcoming_event.venue %></p>
+                <p class="event-details"><strong>Ensemble:</strong> <%= upcoming_event.ensemble %></p>
+                <p class="event-details"><strong>City:</strong> <%= upcoming_event.city %></p>
+                <% if upcoming_event.link.present? %>
+                  <p class="event-details"><strong>Link:</strong>
+                    <%= link_to upcoming_event.link, upcoming_event.link, target: "_blank", rel: "noopener noreferrer" %>
+                  </p>
+                <% end %>
+              </div>
             </div>
-            <div class="col-md-6">
-                <p class="mb-1 text-muted"><%= upcoming_event.date.strftime("%B %-d, %Y") %></p>
-                <h3 class="fw-bold fst-italic"><%= upcoming_event.title %></strong></h3>
-                <p class="event-details m-md-0 mb-1" style="font-size: 18px;"><strong>Venue :</strong> <%= upcoming_event.venue %></p>
-                <p class="event-details m-md-0 mb-1 pt-2" style="font-size: 18px;"><strong>Ensemble :</strong> <%= upcoming_event.ensemble %></p>
-                <p class="event-details m-md-0 mb-1 pt-2" style="font-size: 18px;"><strong>City :</strong> <%= upcoming_event.city %></p>
-                <p class="event-details m-md-0 mb-1 pt-2" style="font-size: 18px;"><strong>Link :</strong>              <% if upcoming_event.link.present? %>
-                <%= link_to upcoming_event.link, upcoming_event.link, target: "_blank", rel: "noopener noreferrer", style: "color: rgb(201, 95, 95); word-wrap: break-word; overflow-wrap: break-word;" %><% end %></p>
-            </div>
+          </div>
         </div>
-        </div>
-        <% end %>
-        
-     
-
-      
+      <% end %>
     </div>
   </div>
+</div>
+
 
 <script>
-document.addEventListener("DOMContentLoaded", function () {
+  document.addEventListener("DOMContentLoaded", function () {
     let cards = document.querySelectorAll(".event-card:not(.first-card)");
 
     let observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add("active");
-            } else {
-                entry.target.classList.remove("active");
-            }
-        });
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("active");
+        } else {
+          entry.target.classList.remove("active");
+        }
+      });
     }, { threshold: 0.5 });
 
     cards.forEach(card => observer.observe(card));
-});
+  });
 </script>
-
-
-
-  

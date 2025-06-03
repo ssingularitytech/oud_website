@@ -2,17 +2,18 @@
   <style>
     @media (min-width: 768px) {
         .show-project-image {
-        height: 30rem;
-        width: 100%;
-        object-fit: fill;
+            height: 35rem;
+            width: 100%;
+            object-fit: fill;
+            border-radius: 12px;
         }
         }
 
         @media (max-width: 768px) {
         .show-project-image {
-        height: 15rem;
-        width: 100%;
-        object-fit: contain;
+            height: 21rem;
+            width: 100%;
+            object-fit: fill;
         }
         }
      @media (min-width: 1024px) {
@@ -31,7 +32,7 @@
     <div class="row text-white px-md-5 px-2 mt-4">
         
           <% @project.project_details.each do |detail| %>
-          <div class="col-lg-6 d-flex flex-column justify-content-center align-items-center pe-md-5">
+          <div class="col-lg-6 d-flex  pe-md-5">
             <% if detail.image.attached? %>
                 <img src="<%= url_for(detail.image) %>" class="img-fluid show-project-image mt-2">
             <% end %>

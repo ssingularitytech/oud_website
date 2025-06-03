@@ -1,16 +1,17 @@
 <style>
   .project-image {
-    aspect-ratio: 1/0.7;
+    aspect-ratio: 1/0.85; 
     width: 100%;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+    object-fit: fill;
+    /* border-top-left-radius: 10px;
+    border-top-right-radius: 10px; */
   }
   .view-details-btn {
     margin-top: auto; 
   }
   .comman-border {
     border: 2px solid grey; 
-    border-radius: 12px;
+    /* border-radius: 12px; */
     box-shadow: 1px 4px 4px rgba(128, 128, 128, 0.5);
   }
   .project-body-text {
@@ -18,7 +19,7 @@
     background-color: black;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
-    min-height: 185px;
+    min-height: 160px;
     display: flex;
     flex-direction: column;
   }
@@ -59,16 +60,16 @@
                 </h5>
               <% end %>
 
-              <% if first_detail && first_detail.description.present? %>
+              <!-- <% if first_detail && first_detail.description.present? %>
                 <% words = strip_tags(first_detail.description).split(" ") %>
                 <% short_description = words.first(12).join(" ") %>
                 <p class="caudex-normal m-0" style="font-size: 17px;">
                   <span class="short-desc"><%= short_description %>...</span>
                   <span class="full-desc d-none"><%= strip_tags(first_detail.description) %></span>
                 </p>
-              <% end %>
+              <% end %> -->
 
-              <span class="text-white view-details-btn caudex-normal">Know More</span>
+              <a href="" class="text-white view-details-btn caudex-normal">Know More</a>
             </div>
 
           <% end %>

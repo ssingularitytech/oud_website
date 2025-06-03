@@ -115,7 +115,7 @@
             <%= image_tag "logo.png", alt: "Company Logo", class: "img-fluid navbar-logo" %>
         </a>
         <div class="d-md-block d-none">
-            <ul class="list-unstyled d-flex justify-content-center gap-lg-5 gap-3 m-0 caudex-normal">
+            <ul class="list-unstyled d-flex justify-content-center gap-lg-4 gap-3 m-0 caudex-normal">
                 <li><a href="/">Home</a></li>
                 <li><a href="/about">About</a></li>
                 <li><a href="/upcoming_events">Events</a></li>
@@ -135,6 +135,15 @@
                     </ul>
                 </li>
                 <li><a href="/contacts">Contact</a></li>
+
+                <li>
+                    <div class="social-icons text-start d-flex justify-content-start gap-1">
+                    <a href=""><%= image_tag "facebook-icon.png", alt: "logo", class: "", style: "height: 32px; width: 100%; object-fit: contain;" %></a>
+                    <a href=""><%= image_tag "instagram-icon.png", alt: "logo", class: "", style: "height: 32px; width: 100%; object-fit: contain;" %></a>
+                    <a href=""><%= image_tag "youtube-icon.png", alt: "logo", class: "", style: "height: 32px; width: 100%; object-fit: contain;" %></a>
+                    </div>
+               </li>
+
             </ul>
         </div>
         
