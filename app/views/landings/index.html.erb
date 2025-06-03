@@ -15,7 +15,9 @@
     <% @landings.each do |home| %>
       <div class="position-relative p-0">
         <% if home.image.present? %>
-          <%= image_tag home.image, alt: "Landing image", class: "img-fluid" %>
+         
+          <%= image_tag home.image, loading: "eager", class: "img-fluid", alt: "Landing image" %>
+
         <% else %>
           <p class="text-muted">No image available</p>
         <% end %>

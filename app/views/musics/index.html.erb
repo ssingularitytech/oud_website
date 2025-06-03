@@ -3,15 +3,12 @@
         aspect-ratio: 1/0.85;
         width: 100%;
         object-fit: fill;
-        /* border-top-left-radius: 10px;
-        border-top-right-radius: 10px; */
   }
   .view-details-btn {
       margin-top: auto;
   }
   .common-border {
       border: 2px solid grey; 
-      /* border-radius: 12px; */
       box-shadow: 1px 4px 4px rgba(128, 128, 128, 0.5);
   }
   .music-body-text {
@@ -23,6 +20,19 @@
         display: flex;
         flex-direction: column;
   }
+
+
+     /* delay loading css */
+   .music-card-wrapper {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+   .music-card-wrapper.visible {
+    opacity: 1;
+    transform: translateY(0);
+    }
 </style>
 
 <div class="container">
@@ -51,3 +61,17 @@
       <% end %>
   </div>
 </div>
+
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const cards = document.querySelectorAll(".music-card-wrapper");
+
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.classList.add("visible");
+                }, index * 300); 
+            });
+        });
+    </script>

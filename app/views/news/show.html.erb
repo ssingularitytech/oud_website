@@ -2,10 +2,9 @@
         
         @media (min-width: 768px) {
             .show-news-image {
-            height: 35rem;
+            height: 30rem;
             width: 100%;
             object-fit: fill;
-            border-radius: 12px;
             }
             }
 
@@ -39,7 +38,7 @@
             <% end %>
           </div>
 
-          <div class="col-lg-6 d-flex flex-column justify-content-center align-items-center news-black-text-box">
+          <div class="col-lg-6 d-flex news-black-text-box">
             <div class="description mt-md-4 mt-2">
               <p><%= @news.news_description %></p>
               
