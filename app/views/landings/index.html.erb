@@ -12,13 +12,20 @@
 
 <div class="container-fluid p-0" style="overflow: hidden;">
   <div class="row">
-    <div class="position-relative p-0">
-      <%= image_tag "home-bg-image.jpg", alt: "Company Logo", class: "w-100 home-bg-image" %>
-      <h5 class="position-absolute bottom-0 start-50 translate-middle-x text-white mb-5 py-2">
-         OUD Player, Composer, Educator
-      </h5>
+    <% @landings.each do |home| %>
+      <div class="position-relative p-0">
+        <% if home.image.present? %>
+          <%= image_tag home.image, alt: "Landing image", class: "img-fluid" %>
+        <% else %>
+          <p class="text-muted">No image available</p>
+        <% end %>
+        
+        <h5 class="position-absolute bottom-0 start-50 translate-middle-x text-white mb-5 py-2">
+          <%= home.text %>
+        </h5>
+      </div>
+    <% end %>
 
-    </div>
 
 
     <%= render partial: 'layouts/newrelease' %>

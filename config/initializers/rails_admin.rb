@@ -82,7 +82,7 @@ RailsAdmin.config do |config|
         field :project
         field :description, :action_text
         field :image, :active_storage
-        field :youtube_url  # ✅ added here
+        field :youtube_url 
       end
 
       show do
@@ -102,7 +102,7 @@ RailsAdmin.config do |config|
             end
           end
         end
-        field :youtube_url  # ✅ added here
+        field :youtube_url 
       end
 
       list do
@@ -122,7 +122,7 @@ RailsAdmin.config do |config|
             end
           end
         end
-        field :youtube_url  # ✅ added here
+        field :youtube_url 
       end
     end
 
@@ -372,9 +372,80 @@ end
     end
 
 
-    
+    config.model 'Photo' do
+      edit do
+        field :image, :active_storage
+      end
+  
+      show do
+        field :image do
+          pretty_value do
+            if bindings[:object].image.attached?
+              bindings[:view].tag(:img, src: Rails.application.routes.url_helpers.rails_blob_path(bindings[:object].image, only_path: true), style: 'max-width: 200px; max-height: 200px;')
+            end
+          end
+        end
+      end
+  
+      list do
+        field :image do
+          pretty_value do
+            if bindings[:object].photo.attached?
+              bindings[:view].tag(:img, src: Rails.application.routes.url_helpers.rails_blob_path(bindings[:object].photo, only_path: true), style: 'max-width: 100px; max-height: 100px;')
+            end
+          end
+        end
+      end
+    end
 
-    
-    
+
+    config.model 'Landing' do
+      edit do
+        field :text
+        field :image, :active_storage
+      end
+
+      show do
+        field :text
+        field :image do
+          pretty_value do
+            if bindings[:object].image.attached?
+              bindings[:view].tag(
+                :img,
+                src: Rails.application.routes.url_helpers.rails_blob_path(
+                  bindings[:object].image, only_path: true
+                ),
+                style: 'max-width: 200px; max-height: 200px;'
+              )
+            end
+          end
+        end
+        field :created_at
+        field :updated_at
+      end
+
+      list do
+        field :text
+        field :image do
+          pretty_value do
+            if bindings[:object].image.attached?
+              bindings[:view].tag(
+                :img,
+                src: Rails.application.routes.url_helpers.rails_blob_path(
+                  bindings[:object].image, only_path: true
+                ),
+                style: 'max-width: 100px; max-height: 100px;'
+              )
+            end
+          end
+        end
+        field :created_at
+        field :updated_at
+      end
+    end
+
+
+   
+
   end
 end
