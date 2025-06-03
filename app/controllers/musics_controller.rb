@@ -21,7 +21,7 @@ class MusicsController < ApplicationController
   private
   
   def music_params
-    params.require(:music).permit(:name, :date, :description, :link, :image, audios: [])
+    params.require(:music).permit(:name, :date, :description, :link, :image, :audios, :preview,)
   end
   
 end

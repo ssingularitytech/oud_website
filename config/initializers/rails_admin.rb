@@ -215,6 +215,7 @@ end
         field :date
         field :description, :action_text
         field :link
+        field :preview
         field :image, :active_storage
       end
     
@@ -227,6 +228,7 @@ end
           end
         end
         field :link
+        field :preview
         field :image do
           pretty_value do
             if bindings[:object].image.attached?
@@ -250,6 +252,7 @@ end
           end
         end
         field :link
+        field :preview
         field :image do
           pretty_value do
             if bindings[:object].image.attached?

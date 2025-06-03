@@ -1,9 +1,24 @@
 <style>
-  .music-image {
+
+
+    @media (min-width: 768px) {
+     .show-music-image {
       height: 15rem;
       width: 50%;
       border-radius: 12px;
   }
+    }
+
+        @media (max-width: 768px) {
+     .show-music-image {
+      height: 10rem;
+      width: 50%;
+      border-radius: 12px;
+  }
+    }
+
+
+
   .first-row{
     border-top-left-radius: 12px;
     border-top-right-radius: 12px;
@@ -27,22 +42,25 @@
 
           <div>
           <!-- first row -->
-          <div class="row first-row mt-4 py-md-4 px-md-4" style="background-color: #305838;">
-            <div class="col-6 p-0 justify-content-start d-flex gap-4">
+          <div class="row first-row mt-4 p-md-4 p-2" style="background-color: #305838;">
+            <div class="col-md-6 col-11 p-0 justify-content-start d-flex gap-3">
               <% if @music.image.attached? %>
-              <img src="<%= url_for(@music.image) %>" class="img-fluid music-image">
+              <img src="<%= url_for(@music.image) %>" class="img-fluid show-music-image">
               <% end %>
               <div>
 
                 <h5><%= @music.name %></h5>
-                <div class="d-flex gap-2">
-                  <h4><i class="bi bi-plus-circle"></i></h4>
-                  <h5>Save on Spotify</h5>
+                <div class="gap-2">
+                  <p class="event-details  m-md-0 mb-1"><span>Preview</span> <%= @music.preview %></p>
+                  <div class="d-flex gap-2">
+                    <p><i class="bi bi-plus-circle"></i></p>
+                    <p>Save on Spotify</p>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <div class="col-6 py-2 mt-2 d-flex justify-content-end">
+            <div class="col-md-6 col-1  d-flex justify-content-end">
               <a target="_blank" href="https://open.spotify.com/album/52z0eL1svCLsmV7HxvTHgB?...">
                 <h3 class="mb-0"><i class="bi bi-spotify text-white"></i></h3>
               </a>
