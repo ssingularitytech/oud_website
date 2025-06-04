@@ -1,0 +1,107 @@
+<h1>Aboutus#index</h1>
+<p>Find me in app/views/aboutus/index.html.erb</p>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+  }
+
+  @media (min-width: 768px) {
+    .biography-first-image{
+    width: 100%;
+    height: 40rem;
+    object-fit: fill;
+    border-radius: 12px;
+  }
+  }
+
+  @media (max-width: 768px) {
+    .biography-first-image{
+    width: 100%;
+    height: 25rem;
+    object-fit: fill;
+    border-radius: 12px;
+  }
+  }
+
+
+  @media (min-width: 768px) {
+    .biography-second-image{
+        width: 27rem;
+        height: 20rem;
+        object-fit: cover;
+        border-radius: 12px;
+
+      }
+
+  }
+
+  @media (max-width: 768px) {
+    .biography-second-image{
+        width: 20rem;
+        height: 20rem;
+        object-fit: cover;
+        border-radius: 12px;
+
+      }
+
+  }
+
+      @media (min-width: 1024px) {
+      .biography-black-text-box{
+        background-color: #1b1b1b;
+        border: 2px solid grey;
+        border-radius: 12px;
+      }
+    }
+
+  </style>
+
+
+  <div class="container-fluid background-color">
+    <h4 class="text-center text-white caudex-bold">ABOUT</h4>
+
+    <% @aboutus.each do |about| %>
+      <div class="row px-md-5 pt-md-5 pt-3">
+        <div class="col-lg-6 d-flex">
+          <div class="biography-image-container">
+            <% if about.image&.attached? %>
+              <%= image_tag about.image, alt: "About Image", class: "img-fluid biography-first-image" %>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="col-lg-6 text-white caudex-normal d-flex align-items-center justify-content-center biography-black-text-box">
+          <div class="mt-lg-0 mt-4 py-2 px-2">
+            <%= about.text.body.to_s.html_safe %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+
+
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const elements = document.querySelectorAll(".fade-name-box ");
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("show");
+          // } else {
+          //   entry.target.classList.remove("show");
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    elements.forEach((el) => observer.observe(el));
+  });
+
+</script>

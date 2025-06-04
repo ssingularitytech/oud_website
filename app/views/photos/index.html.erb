@@ -2,6 +2,11 @@
   .photo-image {
     aspect-ratio: 1.7/1.6;
     object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+  }
+  .photo-image.loaded {
+    opacity: 1;
   }
 </style>
 
@@ -11,13 +16,12 @@
     <% @photos.each do |photo| %>
       <div class="col mt-4 text-center">
         <% if photo.photo.attached? %>
-          <img data-src="<%= url_for(photo.photo) %>" class="img-fluid news-image photo-image lazy-seq-img">
+          <img data-src="<%= url_for(photo.photo) %>" class="img-fluid news-image photo-image lazy-seq-img" alt="photo" />
         <% end %>
       </div>
     <% end %>
   </div>
 </div>
-
 
 <script>
   document.addEventListener("DOMContentLoaded", function () {
@@ -31,15 +35,16 @@
 
       if (src) {
         img.src = src;
-        img.onload = () => loadNextImage(index + 1);
-        img.onerror = () => loadNextImage(index + 1); // Skip failed image
+        img.onload = () => {
+          img.classList.add('loaded');
+          loadNextImage(index + 1);
+        };
+        img.onerror = () => loadNextImage(index + 1); // Continue on error
       } else {
-        loadNextImage(index + 1);
+        loadNextImage(index + 1); // Skip if no src
       }
     }
 
     loadNextImage(0);
   });
 </script>
-
-
