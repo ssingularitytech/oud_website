@@ -1,103 +1,103 @@
-<style>
-  .project-image {
-    aspect-ratio: 1/0.85;
-    width: 100%;
-    object-fit: fill;
-  }
-  .view-details-btn {
-    margin-top: auto; 
-  }
-  .comman-border {
-    border: 2px solid grey; 
-    box-shadow: 1px 4px 4px rgba(128, 128, 128, 0.5);
-  }
-  .project-body-text {
-    color: white;
-    background-color: black;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-    min-height: 160px;
-    display: flex;
-    flex-direction: column;
-  }
-  /* Remove link underline and set display block on full card link */
-  .project-card-link {
-    display: block;
-    color: inherit;
-    text-decoration: none;
-  }
+  <style>
+    .project-image {
+      aspect-ratio: 1/0.85;
+      width: 100%;
+      object-fit: fill;
+    }
+    .view-details-btn {
+      margin-top: auto; 
+    }
+    .comman-border {
+      border: 2px solid grey; 
+      box-shadow: 1px 4px 4px rgba(128, 128, 128, 0.5);
+    }
+    .project-body-text {
+      color: white;
+      background-color: black;
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
+      min-height: 160px;
+      display: flex;
+      flex-direction: column;
+    }
+    /* Remove link underline and set display block on full card link */
+    .project-card-link {
+      display: block;
+      color: inherit;
+      text-decoration: none;
+    }
 
 
- /* delay loading css */
-      .project-card-wrapper {
-        opacity: 0;
-        transform: translateY(30px);
-        transition: opacity 0.5s ease, transform 0.5s ease;
-        }
+  /* delay loading css */
+        .project-card-wrapper {
+          opacity: 0;
+          transform: translateY(30px);
+          transition: opacity 0.5s ease, transform 0.5s ease;
+          }
 
-    .project-card-wrapper.visible {
-        opacity: 1;
-        transform: translateY(0);
-        }
-</style>
+      .project-card-wrapper.visible {
+          opacity: 1;
+          transform: translateY(0);
+          }
+  </style>
+  <%= render partial: 'layouts/loader' %>
+  <div class="container">
+    <h4 class="text-center text-white pt-md-5 pt-3 caudex-bold">PROJECTS</h4>
+    <div class="row row-cols-xl-3 row-cols-md-2 row-cols-1 pt-md-5 pt-3">
+      <% @projects.each do |project| %>
+        <div class="col mt-4 d-flex justify-content-center">
+          <div class="project-card-wrapper comman-border" style="width: 95%;">
+            
+            <%= link_to project_path(project), target: "_blank", class: "project-card project-card-link", style: "width: 100%; display: block;" do %>
 
-<div class="container">
-  <h4 class="text-center text-white pt-md-5 pt-3 caudex-bold">PROJECTS</h4>
-  <div class="row row-cols-xl-3 row-cols-md-2 row-cols-1 pt-md-5 pt-3">
-    <% @projects.each do |project| %>
-      <div class="col mt-4 d-flex justify-content-center">
-        <div class="project-card-wrapper comman-border" style="width: 95%;">
-          
-          <%= link_to project_path(project), target: "_blank", class: "project-card project-card-link", style: "width: 100%; display: block;" do %>
-
-            <% first_detail = project.project_details.first %>
-            <% if first_detail && first_detail.image.attached? %>
-              <img src="<%= url_for(first_detail.image) %>" class="img-fluid project-image" loading="lazy" alt="<%= project.name %> image">
-            <% end %>
-
-            <div class="project-body-text py-3 px-3">
-              <h5 class="caudex-bold"><%= project.name %></h5>
-
-              <% if first_detail && first_detail.youtube_url.present? %>
-                <h5 class="caudex-bold">
-                  <a href="<%= first_detail.youtube_url %>" 
-                     target="_blank" 
-                     rel="noopener noreferrer" 
-                     class="text-white text-decoration-underline" 
-                     onclick="event.stopPropagation();">
-                    <%= first_detail.youtube_url %>
-                  </a>
-                </h5>
+              <% first_detail = project.project_details.first %>
+              <% if first_detail && first_detail.image.attached? %>
+                <img src="<%= url_for(first_detail.image) %>" class="img-fluid project-image" loading="lazy" alt="<%= project.name %> image">
               <% end %>
 
-              <!-- <% if first_detail && first_detail.description.present? %>
-                <% words = strip_tags(first_detail.description).split(" ") %>
-                <% short_description = words.first(12).join(" ") %>
-                <p class="caudex-normal m-0" style="font-size: 17px;">
-                  <span class="short-desc"><%= short_description %>...</span>
-                  <span class="full-desc d-none"><%= strip_tags(first_detail.description) %></span>
-                </p>
-              <% end %> -->
+              <div class="project-body-text py-3 px-3">
+                <h5 class="caudex-bold"><%= project.name %></h5>
 
-              <a href="" class="text-white view-details-btn caudex-normal">Know More</a>
-            </div>
+                <% if first_detail && first_detail.youtube_url.present? %>
+                  <h5 class="caudex-bold">
+                    <a href="<%= first_detail.youtube_url %>" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      class="text-white text-decoration-underline" 
+                      onclick="event.stopPropagation();">
+                      <%= first_detail.youtube_url %>
+                    </a>
+                  </h5>
+                <% end %>
 
-          <% end %>
+                <!-- <% if first_detail && first_detail.description.present? %>
+                  <% words = strip_tags(first_detail.description).split(" ") %>
+                  <% short_description = words.first(12).join(" ") %>
+                  <p class="caudex-normal m-0" style="font-size: 17px;">
+                    <span class="short-desc"><%= short_description %>...</span>
+                    <span class="full-desc d-none"><%= strip_tags(first_detail.description) %></span>
+                  </p>
+                <% end %> -->
+
+                <a href="" class="text-white view-details-btn caudex-normal">Know More</a>
+              </div>
+
+            <% end %>
+          </div>
         </div>
-      </div>
-    <% end %>
+      <% end %>
+    </div>
   </div>
-</div>
 
 
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const cards = document.querySelectorAll(".project-card-wrapper");
+      <script>
+          document.addEventListener("DOMContentLoaded", () => {
+              const cards = document.querySelectorAll(".project-card-wrapper");
 
-            cards.forEach((card, index) => {
-                setTimeout(() => {
-                    card.classList.add("visible");
-                }, index * 300); 
-            });
-        });
-    </script>
+              cards.forEach((card, index) => {
+                  setTimeout(() => {
+                      card.classList.add("visible");
+                  }, index * 300); 
+              });
+          });
+      </script>
