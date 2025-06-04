@@ -1,6 +1,6 @@
 <style>
-  .video-card {
-    aspect-ratio: 1/1;
+  .photo-image {
+    aspect-ratio: 1.7/1.6;
     object-fit: cover;
   }
 </style>
@@ -11,7 +11,7 @@
     <% @photos.each do |photo| %>
       <div class="col mt-4 text-center">
         <% if photo.photo.attached? %>
-          <img data-src="<%= url_for(photo.photo) %>" class="img-fluid news-image video-card rounded lazy-seq-img">
+          <img data-src="<%= url_for(photo.photo) %>" class="img-fluid news-image photo-image lazy-seq-img">
         <% end %>
       </div>
     <% end %>
