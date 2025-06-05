@@ -27,11 +27,11 @@
 
     </style>
 <div class="container-fluid footer-main-div">
-    <div class="row d-flex py-5 px-3">
+    <div class="row d-flex py-md-5 py-4 px-3">
         
         <!-- logo section -->
-        <div class="col-md-4 col-sm-6">
-                <div class="nair-logo mt-4">
+        <div class="col-md-4">
+                <div class="nair-logo mt-3">
                     <a href="/" class="logo">
                         <%= image_tag "logo.png", alt: "logo", class: "footer-nair-icon" %>
                     </a>
@@ -40,26 +40,35 @@
         
 
         <!-- Disclaimer -->
-        <div class="col-md-5 col-sm-6">
-                <div class="footer-links mt-4 pt-md-2" style="opacity: 0.8;">
+        <div class="col-md-5">
+                <div class="footer-links mt-md-3 mt-4" style="opacity: 0.8;">
                     <a href="/" class="text-white" style="text-decoration: none;">Home</a> | 
                     <a href="/aboutus" class="text-white" style="text-decoration: none;">About</a> | 
                     <a href="/upcoming_events" class="text-white" style="text-decoration: none;">Events</a> | 
                     <a href="/news" class="text-white" style="text-decoration: none;">News</a> |
                     <a href="/projects" class="text-white" style="text-decoration: none;">Projects</a> | <br> 
                     <a href="/musics" class="text-white" style="text-decoration: none;">Media</a> |
-                    <a href="/contacts" class="text-white" style="text-decoration: none;">Contact</a> |
+                    <a href="/contacts" class="text-white" style="text-decoration: none;">Contact</a>
                 </div>
         </div>
 
         <!-- Contact Info -->
-        <div class="col-md-3 col-sm-6 poppins-regular" style="font-size: 14px; letter-spacing: 2px; word-wrap: break-word; opacity: 0.8;">
-                <div class="social-icons mt-4 pt-md-1 text-start d-flex justify-content-start gap-3">
-                    <a href=""><%= image_tag "facebook-icon.png", alt: "logo", class: "", style: "height: 45px; width: 100%; object-fit: contain;" %></a>
-                    <!-- <a href=""><%= image_tag "whatsap-icon.png", alt: "logo", class: "", style: "height: 45px; width: 100%; object-fit: contain;" %></a> -->
-                    <a href=""><%= image_tag "instagram-icon.png", alt: "logo", class: "", style: "height: 45px; width: 100%; object-fit: contain;" %></a>
-                    <a href=""><%= image_tag "youtube-icon.png", alt: "logo", class: "", style: "height: 45px; width: 100%; object-fit: contain;" %></a>
-                    <a href=""><%= image_tag "spotify-icon.png", alt: "logo", class: "", style: "height: 45px; width: 100%; object-fit: contain;" %></a>
+        <div class="col-md-3 poppins-regular justify-space-between align-items-center" style="font-size: 14px; letter-spacing: 2px; word-wrap: break-word; opacity: 0.8;">
+                <div class="social-icons text-start d-flex justify-content-md-center gap-3 mt-md-2 mt-4">
+                    <a href="https://www.facebook.com/nizarrohana2" target="_blank" rel="noopener noreferrer">
+                        <%= image_tag "facebook-icon.png", alt: "Facebook Logo", style: "height: 45px; width: 100%; object-fit: contain;" %>
+                    </a>
+                    <a href="https://www.instagram.com/nizarrohana/" target="_blank" rel="noopener noreferrer">
+                        <%= image_tag "instagram-icon.png", alt: "Instagram Logo", style: "height: 45px; width: 100%; object-fit: contain;" %>
+                    </a>
+
+                    <a href="https://www.youtube.com/@nizarrohana" target="_blank" rel="noopener noreferrer">
+                        <%= image_tag "youtube-icon.png", alt: "YouTube Logo", style: "height: 45px; width: 100%; object-fit: contain;" %>
+                    </a>
+
+                    <a href="https://open.spotify.com/artist/44aAXFZFMN1SHkD3z8rQZ7" target="_blank" rel="noopener noreferrer">
+                        <%= image_tag "spotify-icon.png", alt: "Spotify Logo", style: "height: 45px; width: 100%; object-fit: contain;" %>
+                    </a>
                    
                 </div>
         </div>

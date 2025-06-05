@@ -110,19 +110,18 @@
    }
     </style>
 
+    <div class="container-fluid">
 
-    <nav class="navbar py-3 px-4">
-        <a href="/">
-            <%= image_tag "logo.png", alt: "Company Logo", class: "img-fluid navbar-logo" %>
-        </a>
-                <!-- <div class="py-2">
-         <a href="/">
-            <%= image_tag "logo.png", alt: "Company Logo", class: "img-fluid navbar-logo" %> 
-        </a>
-        <p class="text-white mt-2 caudex-normal" style="font-size: 20px;">OUD Player, Composer, Educator</p>
-        </div> -->
-        <div class="d-xl-block d-none">
-            <ul class="list-unstyled d-flex justify-content-center gap-lg-4 gap-3 m-0 caudex-normal">
+   
+    <div class="row py-3 px-4 justify-space-between align-items-center">
+        <div class="col-xl-2 col-6">
+            <a href="/">
+                <%= image_tag "logo.png", alt: "Company Logo", class: "img-fluid navbar-logo" %>
+            </a>
+        </div>
+        
+         <div class="col-8 d-xl-block d-none pe-5">
+            <ul class="list-unstyled d-flex justify-content-end gap-lg-4 gap-3 m-0 caudex-normal">
                 <li><a href="/">Home</a></li>
                 <li><a href="/aboutus">About</a></li>
                 <li><a href="/upcoming_events">Events</a></li>
@@ -143,25 +142,45 @@
                 </li>
                 <li><a href="/contacts">Contact</a></li>
 
-                <li>
-                    <div class="social-icons text-start d-flex justify-content-start gap-1">
-                    <a href=""><%= image_tag "facebook-icon.png", alt: "logo", class: "", style: "height: 32px; width: 100%; object-fit: contain;" %></a>
-                    <a href=""><%= image_tag "instagram-icon.png", alt: "logo", class: "", style: "height: 32px; width: 100%; object-fit: contain;" %></a>
-                    <a href=""><%= image_tag "youtube-icon.png", alt: "logo", class: "", style: "height: 32px; width: 100%; object-fit: contain;" %></a>
-                    <a href=""><%= image_tag "spotify-icon.png", alt: "logo", class: "", style: "height: 32px; width: 100%; object-fit: contain;" %></a>
-                    </div>
-               </li>
 
             </ul>
         </div>
         
-        <button class="menu-icon" id="toggleSidebar">
-            <i class="bi bi-list"></i>
-        </button>
-        <button class="close-icon" id="closeSidebarIcon">
-        <i class="bi bi-x-lg"></i>
-        </button>
-    </nav>
+
+        <div class="col-xl-2 col-6 justify-content-end d-flex align-items-center">
+            <div class="row d-flex align-items-center justify-content-between">
+            <div class="col-auto d-xl-block d-none">
+                <div class="social-icons d-flex gap-2">
+                    <a href="https://www.facebook.com/nizarrohana2" target="_blank" rel="noopener noreferrer">
+                        <%= image_tag "facebook-icon.png", alt: "Facebook Logo", style: "height: 32px; width: 32px; object-fit: contain;" %>
+                    </a>
+                    <a href="https://www.instagram.com/nizarrohana/" target="_blank" rel="noopener noreferrer">
+                        <%= image_tag "instagram-icon.png", alt: "Instagram Logo", style: "height: 32px; width: 32px; object-fit: contain;" %>
+                    </a>
+
+                    <a href="https://www.youtube.com/@nizarrohana" target="_blank" rel="noopener noreferrer">
+                        <%= image_tag "youtube-icon.png", alt: "YouTube Logo", style: "height: 32px; width: 32px; object-fit: contain;" %>
+                    </a>
+
+                    <a href="https://open.spotify.com/artist/44aAXFZFMN1SHkD3z8rQZ7" target="_blank" rel="noopener noreferrer">
+                        <%= image_tag "spotify-icon.png", alt: "Spotify Logo", style: "height: 32px; width: 32px; object-fit: contain;" %>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-auto d-flex gap-2">
+                <button class="menu-icon btn text-white" id="toggleSidebar">
+                   <i class="bi bi-list"></i>
+                </button>
+                <button class="close-icon btn text-white" id="closeSidebarIcon">
+                <i class="bi bi-x-lg"></i>
+                </button>
+            </div>
+            </div>
+
+        </div>
+        
+    </div>
 
     <!-- Sidebar -->
     <div class="sidebar" id="sidebar">
@@ -182,6 +201,8 @@
             <li><a href="/contacts" class="text-white d-block py-2">Contact</a></li>
         </ul>
     </div>
+
+     </div>
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {

@@ -377,21 +377,24 @@ end
 
     config.model 'Photo' do
       edit do
-        field :image, :active_storage
+        field :photo, :active_storage
+        field :name
       end
-  
+
       show do
-        field :image do
+        field :name
+        field :photo do
           pretty_value do
-            if bindings[:object].image.attached?
-              bindings[:view].tag(:img, src: Rails.application.routes.url_helpers.rails_blob_path(bindings[:object].image, only_path: true), style: 'max-width: 200px; max-height: 200px;')
+            if bindings[:object].photo.attached?
+              bindings[:view].tag(:img, src: Rails.application.routes.url_helpers.rails_blob_path(bindings[:object].photo, only_path: true), style: 'max-width: 200px; max-height: 200px;')
             end
           end
         end
       end
-  
+
       list do
-        field :image do
+        field :name
+        field :photo do
           pretty_value do
             if bindings[:object].photo.attached?
               bindings[:view].tag(:img, src: Rails.application.routes.url_helpers.rails_blob_path(bindings[:object].photo, only_path: true), style: 'max-width: 100px; max-height: 100px;')
@@ -400,6 +403,8 @@ end
         end
       end
     end
+
+
 
 
     config.model 'Landing' do
