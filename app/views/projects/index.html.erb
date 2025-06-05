@@ -48,7 +48,7 @@
         <div class="col mt-4 d-flex justify-content-center">
           <div class="project-card-wrapper comman-border" style="width: 95%;">
             
-            <%= link_to project_path(project), target: "_blank", class: "project-card project-card-link", style: "width: 100%; display: block;" do %>
+            <%= link_to project_path(project), class: "project-card project-card-link", style: "width: 100%; display: block;" do %>
 
               <% first_detail = project.project_details.first %>
               <% if first_detail && first_detail.image.attached? %>
@@ -63,7 +63,7 @@
                     <a href="<%= first_detail.youtube_url %>" 
                       target="_blank" 
                       rel="noopener noreferrer" 
-                      class="text-white text-decoration-underline" 
+                      class="text-decoration-underline" 
                       onclick="event.stopPropagation();">
                       <%= first_detail.youtube_url %>
                     </a>

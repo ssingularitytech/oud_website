@@ -43,7 +43,7 @@
             <div class="col mt-4 d-flex justify-content-center">
 
                 <div class="news-card-wrapper" style="position: relative; width: 95%;">
-                    <a href="<%= news_path(news) %>" target="_blank" class="news-card-link" style="position: absolute; inset: 0; z-index: 10;"></a>
+                    <a href="<%= news_path(news) %>" class="news-card-link" style="position: absolute; inset: 0; z-index: 10;"></a>
                     <div class="news-card comman-border" style="width: 100%; position: relative; z-index: 5;">
                         <% if news.news_image.attached? %>
                             <img src="<%= url_for(news.news_image) %>" class="img-fluid news-image" loading="lazy">

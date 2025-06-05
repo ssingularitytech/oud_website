@@ -3,7 +3,7 @@ class LandingsController < ApplicationController
   def index
    @landings = Landing.all
    @new_releases = NewRelease.all
-   @upcoming_events = UpcomingEvent.order(date: :asc).limit(5)
+   @upcoming_events = UpcomingEvent.where("date >= ?", Date.today).order(:date).limit(4)
    @videos = Video.order(created_at: :desc).limit(1)
   end
   

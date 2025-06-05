@@ -2,17 +2,19 @@
         
         @media (min-width: 768px) {
             .show-news-image {
-            height: 30rem;
-            width: 100%;
-            object-fit: contain;
+            aspect-ratio: 1/0.9;
+            object-fit: fill;
+            border : 2px solid grey;
+            border-radius: 12px;
             }
             }
 
             @media (max-width: 768px) {
             .show-news-image {
-            height: 15rem;
-            width: 100%;
-            object-fit: contain;
+              aspect-ratio: 1/0.9;
+              object-fit: fill;
+              border : 2px solid grey;
+              border-radius: 12px;
             }
             }
             
@@ -30,9 +32,9 @@
             <h5><%= @news.news_date.strftime("%d %b %Y") %></h5>
             <h5><%= @news.news_name %></h5>
         </div>
-        <div class="row text-white px-md-5 px-2 pt-md-5 pt-3">
+        <div class="row text-white px-md-5 px-2 mt-5">
             
-          <div class="col-lg-6 pe-md-4">
+         <div class="col-lg-6 d-flex flex-column pe-md-4">
             <% if @news.news_image.attached? %>
               <img src="<%= url_for(@news.news_image) %>" class="img-fluid show-news-image">
             <% end %>

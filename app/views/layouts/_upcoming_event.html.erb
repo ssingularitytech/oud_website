@@ -70,37 +70,26 @@
                 <h4 class="fw-bold"><%= upcoming_event.date.strftime("%-d") %></h4>
               </div>
               <div class="col-md-9">
-                <p class="mb-1"><%= upcoming_event.date.strftime("%B %-d, %Y") %></p>
-                <h4 class="fw-bold fst-italic mb-2"><%= upcoming_event.title %></h4>
-                <p class="event-details  m-md-0 mb-1"><strong>Venue :</strong> <%= upcoming_event.venue %></p>
-                <p class="event-details m-md-0 mb-1 pt-2"><strong>Ensemble :</strong> <%= upcoming_event.ensemble %></p>
-                <p class="event-details m-md-0 mb-1 pt-2"><strong>City :</strong> <%= upcoming_event.city %></p>
-                <p class="event-details m-md-0 mb-1 pt-2" style="font-size: 18px;"><strong>Link :</strong> <% if upcoming_event.link.present? %>
-                <%= link_to upcoming_event.link, upcoming_event.link, target: "_blank", rel: "noopener noreferrer", style: "color: rgb(201, 95, 95); word-wrap: break-word; overflow-wrap: break-word;" %><% end %></p>
+                <!-- <p class="mb-1 text-muted"><%= upcoming_event.date.strftime("%B %-d, %Y") %></p> -->
+                 <h3 class="fw-bold fst-italic m-md-0"><%= upcoming_event.title.capitalize %></h3>
+                 <p class="event-details m-md-0 pt-2" style="font-size: 18px;"><strong>Ensemble :</strong> <%= upcoming_event.ensemble %></p>
+                 <p class="event-details m-md-0 pt-2" style="font-size: 18px;"><strong>Venue :</strong> <%= upcoming_event.venue %></p>
+                 <p class="event-details m-md-0 pt-2" style="font-size: 18px;"><strong>City :</strong> <%= upcoming_event.city %></p>
+                 <p class="event-details m-md-0 pt-2" style="font-size: 18px;"><strong>Link :</strong> <% if upcoming_event.link.present? %>
+                 <%= link_to upcoming_event.link, upcoming_event.link, target: "_blank", rel: "noopener noreferrer", style: "color: rgb(201, 95, 95); word-wrap: break-word; overflow-wrap: break-word;" %><% end %></p>
               </div>
             </div>
           </div>
         </div>
       <% end %>
     </div>
+    <%= link_to upcoming_events_path, class: "text-white text-center d-block pt-2 caudex-bold text-decoration-underline" do %>
+      <h4 class="text-white">SHOW MORE</h4>
+    <% end %>
+
+
   </div>
 </div>
 
 
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    let cards = document.querySelectorAll(".event-card:not(.first-card)");
 
-    let observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("active");
-        } else {
-          entry.target.classList.remove("active");
-        }
-      });
-    }, { threshold: 0.5 });
-
-    cards.forEach(card => observer.observe(card));
-  });
-</script>
