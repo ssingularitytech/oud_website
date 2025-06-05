@@ -37,45 +37,85 @@
 
     <div class="container">
        <h4 class="text-center text-white pt-5 caudex-bold">UPCOMING EVENTS</h4>
+       <% if @upcoming_events.any? %>
+         <% @upcoming_events.each do |upcoming_event| %>
+           <div class="mt-5 bg-white rounded px-4 py-4">
+           <div class="row d-flex align-items-center py-4">
+             <div class="col-auto">
+              <h5 class="text-muted fst-italic"><%= upcoming_event.date.strftime("%B %Y") %></h5>
 
-        <% @upcoming_events.each_with_index do |upcoming_event, index| %>
-          <div class="mt-5 bg-white rounded px-4 py-4">
-          <div class="row d-flex align-items-center py-4">
-            <div class="col-auto">
-             <h5 class="text-muted fst-italic"><%= upcoming_event.date.strftime("%B %Y") %></h5>
-
-            </div>
-            <div class="col">
-              <hr>
-            </div>
-    
-          </div>
-          
-          
-          
-          <div class="row align-items-start">
-            <div class="col-md-2 text-start d-flex align-items-start flex-column">
-                <p class="mb-0 text-uppercase fw-bold"><%= upcoming_event.date.strftime("%a") %><br></p>
-                <h4 class="fw-bold"><%= upcoming_event.date.strftime("%-d") %></h4>
-            </div>
-            <div class="col-md-6">
-                <p class="mb-1 text-muted"><%= upcoming_event.date.strftime("%B %-d, %Y") %></p>
-                <h3 class="fw-bold fst-italic"><%= upcoming_event.title %></strong></h3>
-                <p class="event-details m-md-0 mb-1" style="font-size: 18px;"><strong>Venue :</strong> <%= upcoming_event.venue %></p>
-                <p class="event-details m-md-0 mb-1 pt-2" style="font-size: 18px;"><strong>Ensemble :</strong> <%= upcoming_event.ensemble %></p>
-                <p class="event-details m-md-0 mb-1 pt-2" style="font-size: 18px;"><strong>City :</strong> <%= upcoming_event.city %></p>
-                <p class="event-details m-md-0 mb-1 pt-2" style="font-size: 18px;"><strong>Link :</strong>              <% if upcoming_event.link.present? %>
-                <%= link_to upcoming_event.link, upcoming_event.link, target: "_blank", rel: "noopener noreferrer", style: "color: rgb(201, 95, 95); word-wrap: break-word; overflow-wrap: break-word;" %><% end %></p>
-            </div>
-        </div>
-        </div>
-        <% end %>
-        
+             </div>
+             <div class="col">
+               <hr>
+             </div>
      
+           </div>
+           
+           
+           
+           <div class="row align-items-start">
+             <div class="col-md-2 text-start d-flex align-items-start flex-column">
+                 <p class="mb-0 text-uppercase fw-bold"><%= upcoming_event.date.strftime("%a") %><br></p>
+                 <h4 class="fw-bold"><%= upcoming_event.date.strftime("%-d") %></h4>
+             </div>
+             <div class="col-md-6">
+                 <p class="mb-1 text-muted"><%= upcoming_event.date.strftime("%B %-d, %Y") %></p>
+                 <h3 class="fw-bold fst-italic"><%= upcoming_event.title %></strong></h3>
+                 <p class="event-details m-md-0 mb-1" style="font-size: 18px;"><strong>Venue :</strong> <%= upcoming_event.venue %></p>
+                 <p class="event-details m-md-0 mb-1 pt-2" style="font-size: 18px;"><strong>Ensemble :</strong> <%= upcoming_event.ensemble %></p>
+                 <p class="event-details m-md-0 mb-1 pt-2" style="font-size: 18px;"><strong>City :</strong> <%= upcoming_event.city %></p>
+                 <p class="event-details m-md-0 mb-1 pt-2" style="font-size: 18px;"><strong>Link :</strong> <% if upcoming_event.link.present? %>
+                 <%= link_to upcoming_event.link, upcoming_event.link, target: "_blank", rel: "noopener noreferrer", style: "color: rgb(201, 95, 95); word-wrap: break-word; overflow-wrap: break-word;" %><% end %></p>
+             </div>
+         </div>
+         </div>
+         <% end %>
+       <% else %>
+         <div class="mt-5 bg-white rounded px-4 py-4">
+           <p class="text-center">No upcoming events scheduled.</p>
+         </div>
+       <% end %>
 
        <h4 class="text-center text-white pt-5 caudex-bold">PAST EVENTS</h4>
+       <% if @past_events.any? %>
+         <% @past_events.each do |past_event| %>
+           <div class="mt-5 bg-white rounded px-4 py-4">
+             <div class="row d-flex align-items-center py-4">
+               <div class="col-auto">
+                 <h5 class="text-muted fst-italic"><%= past_event.date.strftime("%B %Y") %></h5>
+               </div>
+               <div class="col">
+                 <hr>
+               </div>
+             </div>
+             
+             <div class="row align-items-start">
+               <div class="col-md-2 text-start d-flex align-items-start flex-column">
+                 <p class="mb-0 text-uppercase fw-bold"><%= past_event.date.strftime("%a") %><br></p>
+                 <h4 class="fw-bold"><%= past_event.date.strftime("%-d") %></h4>
+               </div>
+               <div class="col-md-6">
+                 <p class="mb-1 text-muted"><%= past_event.date.strftime("%B %-d, %Y") %></p>
+                 <h3 class="fw-bold fst-italic"><%= past_event.title %></h3>
+                 <p class="event-details m-md-0 mb-1" style="font-size: 18px;"><strong>Venue :</strong> <%= past_event.venue %></p>
+                 <p class="event-details m-md-0 mb-1 pt-2" style="font-size: 18px;"><strong>Ensemble :</strong> <%= past_event.ensemble %></p>
+                 <p class="event-details m-md-0 mb-1 pt-2" style="font-size: 18px;"><strong>City :</strong> <%= past_event.city %></p>
+                 <p class="event-details m-md-0 mb-1 pt-2" style="font-size: 18px;"><strong>Link :</strong> 
+                   <% if past_event.link.present? %>
+                     <%= link_to past_event.link, past_event.link, target: "_blank", rel: "noopener noreferrer", style: "color: rgb(201, 95, 95); word-wrap: break-word; overflow-wrap: break-word;" %>
+                   <% end %>
+                 </p>
+               </div>
+             </div>
+           </div>
+         <% end %>
+       <% else %>
+         <div class="mt-5 bg-white rounded px-4 py-4">
+           <p class="text-center">No past events to display.</p>
+         </div>
+       <% end %>
     </div>
-  </div>
+    </div>
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
@@ -97,4 +137,3 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-   

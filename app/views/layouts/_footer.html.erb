@@ -3,10 +3,12 @@
       color: white;
       background-color: #141517;
     }
-    .footer-nair-icon{
-        height: 50%;
-        width: 50%;
+    @media (max-width: 768px) {
+    .navbar-logo {
+        height: 40px; 
+        width: 130px; 
     }
+   }
 
     @media (min-width: 768px) {
     .footer-links{
@@ -25,22 +27,15 @@
 
     </style>
 <div class="container-fluid footer-main-div">
-    <div class="row d-flex py-5 px-md-5 px-4">
+    <div class="row d-flex py-5 px-3">
         
         <!-- logo section -->
         <div class="col-md-4 col-sm-6">
                 <div class="nair-logo mt-4">
-                    <a href="/" class="logo p-0 m-0">
+                    <a href="/" class="logo">
                         <%= image_tag "logo.png", alt: "logo", class: "footer-nair-icon" %>
                     </a>
                 </div>
-
-                <!-- <div class="social-icons mt-4 pt-md-1 text-start d-flex justify-content-start gap-1">
-                    <a href=""><%= image_tag "facebook-icon.png", alt: "logo", class: "", style: "height: 45px; width: 100%; object-fit: contain;" %></a>
-                    <a href=""><%= image_tag "whatsap-icon.png", alt: "logo", class: "", style: "height: 45px; width: 100%; object-fit: contain;" %></a>
-                    <a href=""><%= image_tag "instagram-icon.png", alt: "logo", class: "", style: "height: 45px; width: 100%; object-fit: contain;" %></a>
-                    <a href=""><%= image_tag "youtube-icon.png", alt: "logo", class: "", style: "height: 45px; width: 100%; object-fit: contain;" %></a>
-                </div> -->
         </div>
         
 
