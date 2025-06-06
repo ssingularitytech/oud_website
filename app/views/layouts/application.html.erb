@@ -13,11 +13,66 @@
     <%= stylesheet_link_tag "style.css" %>
   </head>
 
+    <style>
+    .flash-message {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background-color: #4CAF50;
+      color: white;
+      padding: 15px 25px;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      animation: slideIn 0.5s ease-out;
+    }
+
+    .close-button {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 20px;
+      cursor: pointer;
+      padding: 0 5px;
+    }
+
+    @keyframes slideIn {
+      from {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+  </style>
+
   <body class="comman-bg-color">
       <%= render partial: 'layouts/navbar'%>
+      <% if notice %>
+        <div class="flash-message" id="notice">
+          <%= notice %>
+          <button onclick="this.parentElement.style.display='none'" class="close-button">&times;</button>
+        </div>
+      <% end %>
         <%= yield %>
         <p class="notice"><%= notice %></p>
         <p class="alert"><%= alert %></p>
        <%= render partial: 'layouts/footer'%>
   </body>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const notice = document.getElementById('notice');
+        if (notice) {
+          setTimeout(() => {
+            notice.style.display = 'none';
+          }, 5000);
+        }
+      });
+    </script>
 </html>
