@@ -33,14 +33,26 @@
       display: none;
     }
 
+    .audio-card .play-button {
+      display: none;
+    }
+
     .audio-card:hover .serial-number {
       display: none;
     }
 
     .audio-card:hover .play-button {
-      display: inline;
+      display: block;
     }
 
+    .audio-card {
+      cursor: pointer;
+      /* border: 2px solid #454545; */
+    }
+
+    .audio-card:hover {
+      background-color: #305838; !important;
+    }
 
 
 
@@ -84,17 +96,12 @@
           <!-- second row -->
           <div class="row second-row py-3" style="height: 15rem; overflow-y: auto; background-color: #203624;">
             <% @music.audios.each_with_index do |audio, index| %>
-              <div class="audio-card d-flex justify-content-between align-items-center text-white px-3 py-2 mb-2 rounded">
+              <div class="audio-card d-flex justify-content-between align-items-center text-white px-3 py-2 mb-2 rounded" 
+                   onclick="togglePlay(this, '<%= audio.id %>')">
                 <div class="d-flex align-items-center gap-3">
-                  <!-- Serial number & play button in same space -->
                   <div class="position-relative" style="width: 24px; height: 24px;">
-                    <!-- Serial number shown by default -->
-                    <span class="serial-number fw-bold position-absolute top-0 start-0"><%= index + 1 %></span>
-
-                    <!-- Play button shown on hover -->
-                    <button class="play-button bg-transparent border-0 text-white position-absolute top-0 start-0 p-0" onclick="togglePlay(this, '<%= audio.id %>')">
-                      <i class="bi bi-play-fill fs-5"></i>
-                    </button>
+                    <span class="serial-number position-absolute top-50 start-50 translate-middle"><%= index + 1 %></span>
+                    <i class="bi bi-play-fill play-button position-absolute top-50 start-50 translate-middle"></i>
                   </div>
 
                   <div>
@@ -150,26 +157,36 @@
 
 <!-- JavaScript to Stop Previous Audio -->
 <script>
-function togglePlay(button, audioId) {
+function togglePlay(card, audioId) {
   const audio = document.getElementById(`audio-${audioId}`);
-  const icon = button.querySelector('i');
+  const playButton = card.querySelector('.play-button');
+  const serialNumber = card.querySelector('.serial-number');
   
   // Stop all other audios
   document.querySelectorAll('audio').forEach(otherAudio => {
     if (otherAudio.id !== `audio-${audioId}`) {
       otherAudio.pause();
       otherAudio.currentTime = 0;
-      const otherButton = otherAudio.closest('.audio-card').querySelector('.play-button i');
-      if (otherButton) otherButton.classList.replace('bi-pause-fill', 'bi-play-fill');
+      const otherCard = otherAudio.closest('.audio-card');
+      const otherPlayButton = otherCard.querySelector('.play-button');
+      const otherSerialNumber = otherCard.querySelector('.serial-number');
+      
+      otherPlayButton.style.display = 'none';
+      otherSerialNumber.style.display = 'block';
+      otherPlayButton.classList.replace('bi-pause-fill', 'bi-play-fill');
     }
   });
 
   if (audio.paused) {
     audio.play();
-    icon.classList.replace('bi-play-fill', 'bi-pause-fill');
+    playButton.style.display = 'block';
+    serialNumber.style.display = 'none';
+    playButton.classList.replace('bi-play-fill', 'bi-pause-fill');
   } else {
     audio.pause();
-    icon.classList.replace('bi-pause-fill', 'bi-play-fill');
+    playButton.style.display = 'none';
+    serialNumber.style.display = 'block';
+    playButton.classList.replace('bi-pause-fill', 'bi-play-fill');
   }
 }
 
