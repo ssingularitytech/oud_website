@@ -16,7 +16,8 @@
       <% @photos.each do |photo| %>
         <div class="col mt-4 text-center">
           <% if photo.photo.attached? %>
-            <img data-src="<%= url_for(photo.photo) %>" class="img-fluid news-image photo-image lazy-seq-img" alt="photo" />
+            <img loading="lazy" data-src="<%= url_for(photo.photo) %>" class="img-fluid news-image photo-image lazy-seq-img" alt="photo" />
+
           <% end %>
           <h5 class="caudex-bold text-white pt-3"><%= photo.name %></h5>
         </div>
@@ -35,17 +36,26 @@
         const src = img.getAttribute('data-src');
 
         if (src) {
-          img.src = src;
-          img.onload = () => {
+          const preloadImg = new Image();
+          preloadImg.src = src;
+
+          preloadImg.onload = () => {
+            img.src = src;
             img.classList.add('loaded');
+            // Load next image immediately after current one starts fading
+            setTimeout(() => loadNextImage(index + 1), 100); // 100ms delay
+          };
+
+          preloadImg.onerror = () => {
             loadNextImage(index + 1);
           };
-          img.onerror = () => loadNextImage(index + 1); // Continue on error
         } else {
-          loadNextImage(index + 1); // Skip if no src
+          loadNextImage(index + 1);
         }
       }
 
       loadNextImage(0);
     });
   </script>
+
+
