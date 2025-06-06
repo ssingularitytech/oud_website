@@ -28,6 +28,20 @@
     border-bottom-left-radius: 12px;
     border-bottom-right-radius: 12px;
   }
+  
+.play-button {
+  display: none;
+}
+
+.audio-card:hover .serial-number {
+  display: none;
+}
+
+.audio-card:hover .play-button {
+  display: inline;
+}
+
+
 
 
 </style>
@@ -51,7 +65,7 @@
 
                 <h5><%= @music.name %></h5>
                 <div class="gap-2">
-                  <p class="event-details  m-md-0 mb-1"><span>Preview</span> <%= @music.preview %></p>
+                  <p class="event-details  m-md-0 mb-1"><span>Preview</span> <%= sanitize(@music.preview, tags: ['a'], attributes: ['href']) %></p>
                   <div class="d-flex gap-2">
                     <p><i class="bi bi-plus-circle"></i></p>
                     <p>Save on Spotify</p>
@@ -68,29 +82,41 @@
           </div>
 
           <!-- second row -->
-            <div class="row second-row py-3" style="height: 15rem; overflow-y: auto; background-color: #203624;">
-              <% @music.audios.each do |audio| %>
-                <div class="audio-card d-flex justify-content-between align-items-center text-white px-3 py-2 mb-2 rounded">
-                  <div class="d-flex align-items-center gap-3">
-                    <button class="play-button bg-transparent border-0 text-white" onclick="togglePlay(this, '<%= audio.id %>')">
-                      <i class="bi bi-play-fill fs-4"></i>
-                    </button>
-                    <div>
-                      <p class="m-0 fw-bold"><%= audio.title %></p>
-                    </div>
-                  </div>
+<div class="row second-row py-3" style="height: 15rem; overflow-y: auto; background-color: #203624;">
+  <% @music.audios.each_with_index do |audio, index| %>
+    <div class="audio-card d-flex justify-content-between align-items-center text-white px-3 py-2 mb-2 rounded">
+      <div class="d-flex align-items-center gap-3">
+        <!-- Serial number & play button in same space -->
+        <div class="position-relative" style="width: 24px; height: 24px;">
+          <!-- Serial number shown by default -->
+          <span class="serial-number fw-bold position-absolute top-0 start-0"><%= index + 1 %></span>
 
-                  <% if audio.audio.attached? %>
-                    <div class="d-flex align-items-center gap-2">
-                      <audio id="audio-<%= audio.id %>" src="<%= url_for(audio.audio) %>" preload="metadata"></audio>
-                      <span class="current-time">0:00</span>
-                      <span>/</span>
-                      <span id="duration-<%= audio.id %>">--:--</span>
-                    </div>
-                  <% end %>
-                </div>
-              <% end %>
-            </div>
+          <!-- Play button shown on hover -->
+          <button class="play-button bg-transparent border-0 text-white position-absolute top-0 start-0 p-0" onclick="togglePlay(this, '<%= audio.id %>')">
+            <i class="bi bi-play-fill fs-5"></i>
+          </button>
+        </div>
+
+        <div>
+          <p class="m-0 fw-bold"><%= audio.title %></p>
+        </div>
+      </div>
+
+      <% if audio.audio.attached? %>
+        <div class="d-flex align-items-center gap-2">
+          <audio id="audio-<%= audio.id %>" src="<%= url_for(audio.audio) %>" preload="metadata"></audio>
+          <span class="current-time">0:00</span>
+          <span>/</span>
+          <span id="duration-<%= audio.id %>">--:--</span>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+
+
+
           </div>
 
           

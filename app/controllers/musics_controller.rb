@@ -4,9 +4,10 @@ class MusicsController < ApplicationController
     @musics = Music.includes(:audios).all
   end
 
-  def show
-    @music = Music.find(params[:id])
-  end
+def show
+  @music = Music.find(params[:id])
+  @audios = @music.audios # or wherever your audio attachments are coming from
+end
   
 
   def create

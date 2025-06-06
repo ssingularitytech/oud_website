@@ -215,7 +215,7 @@ end
         field :date
         field :description, :action_text
         field :link
-        field :preview
+        field :preview, :action_text
         field :image, :active_storage
       end
     
