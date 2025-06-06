@@ -5,7 +5,7 @@
     <div class="row justify-content-center pt-md-5 pt-3 px-4">
       <% @new_releases.each do |release| %>
         <div class="col-xl-4 col-md-6 col-12 p-0 d-flex justify-content-center mb-4">
-          <a href="<%= release.youtube_url %>" target="_blank">
+          <a href="<%= release.youtube_url %>">
             <% if release.image.attached? %>
               <%= image_tag release.image, alt: release.name, class: "w-100 rounded" %>
             <% else %>
