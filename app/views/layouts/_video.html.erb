@@ -8,10 +8,10 @@
 </style>
 
 <div class="container px-md-5">
-  <h4 class="text-center text-white pt-md-5 pt-4 caudex-bold">VIDEO</h4>
-  <div class="row justify-content-center align-items-center px-md-0 px-4">
+  <h4 class="text-center text-white caudex-bold m-0 py-md-5 py-4">VIDEO</h4>
+  <div class="row justify-content-center align-items-center px-4">
     <% @videos.each do |video| %>
-      <div class="col-12 col-md-10 mt-4 text-center p-0 m-0">
+      <div class="col-12 col-md-10 text-center">
         <% if video.youtube_url.present? %>
           <% youtube_id = video.youtube_url[%r{(?:youtube\.com/watch\?v=|youtu\.be/)([\w\-]+)}, 1] %>
           <iframe
@@ -28,7 +28,7 @@
             Your browser does not support the video tag.
           </video>
         <% end %>
-        <h5 class="caudex-bold text-white mt-2"><%= video.name %></h5>
+        <h5 class="caudex-bold text-white m-0 pt-3"><%= video.name %></h5>
       </div>
     <% end %>
   </div>

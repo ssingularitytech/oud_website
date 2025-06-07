@@ -1,10 +1,10 @@
 <div class="container">
-  <h4 class="text-center text-white pt-md-5 pt-4 caudex-bold">NEW RELEASE</h4>
+  <h4 class="text-center text-white caudex-bold m-0 py-md-5 py-4">NEW RELEASE</h4>
 
   <% if @new_releases.present? %>
-    <div class="row justify-content-center pt-md-5 pt-3 px-4">
+    <div class="row justify-content-center px-4">
       <% @new_releases.each do |release| %>
-        <div class="col-xl-4 col-md-6 col-12 p-0 d-flex justify-content-center mb-4">
+        <div class="col-xl-4 col-md-6 col-12 d-flex justify-content-center">
           <a href="<%= release.youtube_url %>">
             <% if release.image.attached? %>
               <%= image_tag release.image, alt: release.name, class: "w-100 rounded" %>
