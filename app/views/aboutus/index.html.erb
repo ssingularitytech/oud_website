@@ -25,10 +25,12 @@
 
   <%= render partial: 'layouts/loader' %>
   <div class="container-fluid background-color">
-    <h4 class="text-center text-white caudex-bold mt-5">ABOUT</h4>
+    <div class="py-5">
+         <h4 class="text-center text-white caudex-bold p-0 m-0">ABOUT</h4>
+     </div>
 
     <% @aboutus.each do |about| %>
-      <div class="row px-md-5 pt-md-5 pt-3">
+      <div class="row px-md-5">
         <div class="col-lg-6 d-flex">
           <div class="biography-image-container">
             <% if about.image&.attached? %>
