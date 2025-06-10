@@ -23,10 +23,12 @@
 
   <%= render partial: 'layouts/loader' %>
   <div class="container px-md-5">
-    <h4 class="text-center text-white pt-md-5 pt-3 caudex-bold">VIDEOS</h4>
-    <div class="row row-cols-xl-3 row-cols-md-2 row-cols-1 pt-md-4 pt-3">
+    <div class="py-5">
+         <h4 class="text-center text-white caudex-bold p-0 m-0">VIDEOS</h4>
+     </div>
+    <div class="row row-cols-xl-3 row-cols-md-2 row-cols-1">
       <% @videos.each do |video| %>
-        <div class="col mt-4 text-center video-card-wrapper mt-5">
+        <div class="col mt-4 text-center video-card-wrapper">
           <% if video.youtube_url.present? %>
             <% youtube_id = video.youtube_url[%r{(?:youtube\.com/watch\?v=|youtu\.be/)([\w\-]+)}, 1] %>
 
