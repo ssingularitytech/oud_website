@@ -22,8 +22,7 @@
     transition: background 0.4s ease-in-out;
     border: 2px solid #ccc;
     padding: 1rem;
-    margin-bottom: 2rem;
-    min-height: 320px;
+    min-height: 350px;
   }
 
   .event-card:hover {
@@ -52,7 +51,7 @@
 
     <div class="row">
       <% @upcoming_events.each_with_index do |upcoming_event, index| %>
-        <div class="col-md-6">
+        <div class="col-md-6 p-md-2 p-0 mt-md-0 mt-4">
           <div class="event-card">
             <div class="row d-flex align-items-center py-2">
               <div class="col-auto">
@@ -82,8 +81,8 @@
         </div>
       <% end %>
     </div>
-    <%= link_to upcoming_events_path, class: "text-white text-center d-block caudex-bold text-decoration-underline" do %>
-      <h4 class="text-white mb-3">SHOW MORE</h4>
+    <%= link_to upcoming_events_path, class: "text-white text-center d-block caudex-bold text-decoration-underline py-4" do %>
+      <h4 class="text-white m-0">SHOW MORE</h4>
     <% end %>
 
 
