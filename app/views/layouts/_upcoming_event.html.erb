@@ -16,6 +16,7 @@
   }
 
 
+    @media (min-width: 768px) {
   .event-card {
     background: white;
     border-radius: 10px;
@@ -25,6 +26,20 @@
     margin-bottom: 2rem;
     padding: 1rem;
     min-height: 320px;
+  }
+  }
+
+      @media (min-width: 768px) {
+  .event-card {
+    background: white;
+    border-radius: 10px;
+    color: black;
+    transition: background 0.4s ease-in-out;
+    border: 2px solid #ccc;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    min-height: 336px;
+  }
   }
 
   .event-card:hover {
@@ -49,7 +64,9 @@
 
 <div class="container-fluid">
   <div class="container">
-    <h4 class="text-center text-white caudex-bold m-0 py-md-5 py-4">UPCOMING EVENTS</h4>
+  <div class="row py-5">
+    <h4 class="text-center text-white caudex-bold p-0 m-0">UPCOMING EVENTS</h4>
+  </div>
 
     <div class="row px-md-0 px-3">
       <% @upcoming_events.each_with_index do |upcoming_event, index| %>
@@ -83,11 +100,11 @@
         </div>
       <% end %>
     </div>
+  <div class="py-2">
     <%= link_to upcoming_events_path, class: "text-white text-center d-block caudex-bold text-decoration-underline" do %>
-      <h4 class="text-white m-3">SHOW MORE</h4>
+      <h4 class="text-white">SHOW MORE</h4>
     <% end %>
-
-
+  </div>
   </div>
 </div>
 
