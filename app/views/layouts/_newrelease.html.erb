@@ -2,7 +2,7 @@
   <h4 class="text-center text-white caudex-bold m-0 py-md-5 py-4">NEW RELEASE</h4>
 
   <% if @new_releases.present? %>
-    <div class="row justify-content-center">
+    <div class="row justify-content-center px-4">
       <% @new_releases.each do |release| %>
         <div class="col-xl-4 col-md-6 col-12 d-flex justify-content-center">
           <a href="<%= release.youtube_url %>">
