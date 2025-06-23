@@ -1,63 +1,92 @@
-  <style>
-    .photo-image {
-      aspect-ratio: 1.7/1.6;
-      object-fit: cover;
-      opacity: 0;
-      transition: opacity 0.5s ease-in-out;
-    }
-    .photo-image.loaded {
-      opacity: 1;
-    }
-  </style>
-  <%= render partial: 'layouts/loader' %>
-  <div class="container px-md-5">
-    <div class="py-md-5 py-4">
-         <h4 class="text-center text-white caudex-bold p-0 m-0">PHOTOS</h4>
-     </div>
-    <div class="row row-cols-xl-3 row-cols-md-2 row-cols-1">
-      <% @photos.each do |photo| %>
-        <div class="col mt-4 text-center">
-          <% if photo.photo.attached? %>
-            <img loading="lazy" data-src="<%= url_for(photo.photo) %>" class="img-fluid news-image photo-image lazy-seq-img" alt="photo" />
+<style>
+  .photo-image {
+    aspect-ratio: 1.7/1.6;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+  }
+  .photo-image.loaded {
+    opacity: 1;
+  }
+</style>
 
-          <% end %>
-          <h5 class="caudex-bold text-white pt-3"><%= photo.name %></h5>
-        </div>
-      <% end %>
-    </div>
+<%= render partial: 'layouts/loader' %>
+
+<div class="container px-md-5">
+  <div class="py-md-5 py-4">
+    <h4 class="text-center text-white caudex-bold p-0 m-0">PHOTOS</h4>
   </div>
 
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const images = Array.from(document.querySelectorAll('.lazy-seq-img'));
+  <div class="row row-cols-xl-3 row-cols-md-2 row-cols-1" id="photo-gallery">
+    <% @photos.each_with_index do |photo, index| %>
+      <div class="col mt-4 photo-item <%= 'd-none' if index >= 6 %>">
+        <div class="card h-100 bg-dark text-white">
+          <% if photo.photo.attached? %>
+            <img loading="lazy" data-src="<%= url_for(photo.photo) %>" class="card-img-top photo-image lazy-seq-img" alt="photo" />
+          <% end %>
+          <div class="card-body text-center">
+            <h5 class="card-title caudex-bold"><%= photo.name %></h5>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
 
-      function loadNextImage(index) {
-        if (index >= images.length) return;
+  <% if @photos.size > 6 %>
+    <div class="text-center mt-4">
+      <button id="show-more-btn" class="btn btn-outline-light">Show More</button>
+    </div>
+  <% end %>
+</div>
 
-        const img = images[index];
-        const src = img.getAttribute('data-src');
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Lazy load images sequentially with fade-in
+    const images = Array.from(document.querySelectorAll('.lazy-seq-img'));
 
-        if (src) {
-          const preloadImg = new Image();
-          preloadImg.src = src;
+    function loadNextImage(index) {
+      if (index >= images.length) return;
 
-          preloadImg.onload = () => {
-            img.src = src;
-            img.classList.add('loaded');
-            // Load next image immediately after current one starts fading
-            setTimeout(() => loadNextImage(index + 1), 100); // 100ms delay
-          };
+      const img = images[index];
+      const src = img.getAttribute('data-src');
 
-          preloadImg.onerror = () => {
-            loadNextImage(index + 1);
-          };
-        } else {
+      if (src) {
+        const preloadImg = new Image();
+        preloadImg.src = src;
+
+        preloadImg.onload = () => {
+          img.src = src;
+          img.classList.add('loaded');
+          setTimeout(() => loadNextImage(index + 1), 100);
+        };
+
+        preloadImg.onerror = () => {
           loadNextImage(index + 1);
-        }
+        };
+      } else {
+        loadNextImage(index + 1);
       }
+    }
 
-      loadNextImage(0);
-    });
-  </script>
+    loadNextImage(0);
 
+    // Show More functionality
+    const showMoreBtn = document.getElementById('show-more-btn');
+    const photoItems = Array.from(document.querySelectorAll('.photo-item'));
+    let visibleCount = 6;
 
+    if (showMoreBtn) {
+      showMoreBtn.addEventListener('click', function () {
+        const nextItems = photoItems.slice(visibleCount, visibleCount + 3);
+        nextItems.forEach(item => item.classList.remove('d-none'));
+        visibleCount += 3;
+
+        if (visibleCount >= photoItems.length) {
+          showMoreBtn.style.display = 'none';
+        }
+      });
+    }
+  });
+</script>

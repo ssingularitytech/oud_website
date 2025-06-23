@@ -5,4 +5,5 @@ class UpcomingEvent < ApplicationRecord
   scope :upcoming, -> { where('DATE(date) >= ?', Date.current).order(date: :asc) }
   scope :past, -> { where('DATE(date) < ?', Date.current).order(date: :desc) }
   default_scope { order(id: :desc) }
+  has_rich_text :link
 end

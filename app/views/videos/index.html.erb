@@ -1,67 +1,94 @@
+<style>
+  .video-card {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-top-left-radius: 0.75rem;
+    border-top-right-radius: 0.75rem;
+  }
 
-  <style>
-    .video-card {
-      width: 100%; 
-      max-width: 400px;
-      height: 250px;
-      object-fit: cover;
-    }
+  .video-card-wrapper {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
 
-    /* delay loading css */
-          .video-card-wrapper {
-          opacity: 0;
-          transform: translateY(30px);
-          transition: opacity 0.5s ease, transform 0.5s ease;
-          }
+  .video-card-wrapper.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
 
-      .video-card-wrapper.visible {
-          opacity: 1;
-          transform: translateY(0);
-          }
-  </style>
+  .video-container {
+    background-color: #1e1e1e;
+    border-radius: 0.75rem;
+    box-shadow: 0 0.5rem 1.25rem rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
 
+  .video-container:hover {
+    transform: translateY(-5px);
+  }
 
-  <%= render partial: 'layouts/loader' %>
-  <div class="container px-md-5">
-    <div class="py-md-5 py-4">
-         <h4 class="text-center text-white caudex-bold p-0 m-0">VIDEOS</h4>
-     </div>
-    <div class="row row-cols-xl-3 row-cols-md-2 row-cols-1 px-md-0 px-2">
-      <% @videos.each do |video| %>
-        <div class="col mt-4 text-center video-card-wrapper">
+  .video-title {
+    padding: 0.75rem 1rem;
+    font-size: 1.1rem;
+    background-color: #2c2c2c;
+    color: #fff;
+    border-bottom-left-radius: 0.75rem;
+    border-bottom-right-radius: 0.75rem;
+  }
+
+  iframe.video-card {
+    border: none;
+  }
+</style>
+
+<%= render partial: 'layouts/loader' %>
+
+<div class="container px-md-5">
+  <div class="py-md-5 py-4">
+    <h4 class="text-center text-white caudex-bold p-0 m-0">VIDEOS</h4>
+  </div>
+
+  <div class="row row-cols-xl-2 row-cols-md-2 row-cols-1 px-md-0 px-2">
+    <% @videos.each do |video| %>
+      <div class="col mt-4 video-card-wrapper">
+        <div class="video-container">
           <% if video.youtube_url.present? %>
             <% youtube_id = video.youtube_url[%r{(?:youtube\.com/watch\?v=|youtu\.be/)([\w\-]+)}, 1] %>
-
             <iframe
-              width="100%"
-              height="315"
               src="https://www.youtube.com/embed/<%= youtube_id %>"
               title="<%= video.name %>"
-              frameborder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowfullscreen
-              class="img-fluid video-card"
+              class="video-card"
             ></iframe>
           <% elsif video.video.attached? %>
-            <video class="img-fluid video-card" controls>
+            <video class="video-card" controls>
               <source src="<%= url_for(video.video) %>" type="video/mp4">
               Your browser does not support the video tag.
             </video>
           <% end %>
-          <h5 class="caudex-bold text-white mt-2"><%= video.name %></h5>
+          <div class="video-title caudex-bold text-center"><%= video.name %></div>
         </div>
-      <% end %>
-    </div>
+      </div>
+    <% end %>
   </div>
+</div>
 
-      <script>
-          document.addEventListener("DOMContentLoaded", () => {
-              const cards = document.querySelectorAll(".video-card-wrapper");
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const cards = document.querySelectorAll(".video-card-wrapper");
 
-              cards.forEach((card, index) => {
-                  setTimeout(() => {
-                      card.classList.add("visible");
-                  }, index * 300); 
-              });
-          });
-      </script>
+    cards.forEach((card, index) => {
+      setTimeout(() => {
+        card.classList.add("visible");
+      }, index * 300);
+    });
+  });
+</script>

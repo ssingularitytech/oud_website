@@ -493,6 +493,55 @@ end
     end
 
 
+    config.model 'UpcomingEvent' do
+      edit do
+        field :title
+        field :date
+        field :ensemble
+        field :venue
+        field :city
+        field :link, :action_text
+        field :is_upcoming
+      end
+
+      show do
+        field :title
+        field :date
+        field :ensemble
+        field :venue
+        field :city
+        field :link do
+          pretty_value do
+            if value.present?
+              bindings[:view].link_to value, value, target: "_blank", rel: "noopener noreferrer"
+            end
+          end
+        end
+        field :is_upcoming
+        field :created_at
+        field :updated_at
+      end
+
+      list do
+        field :title
+        field :date
+        field :ensemble
+        field :venue
+        field :city
+        field :is_upcoming
+        field :link do
+          pretty_value do
+            if value.present?
+              bindings[:view].link_to 'Tickets', value, target: "_blank", rel: "noopener noreferrer"
+            end
+          end
+        end
+        field :created_at
+      end
+    end
+
+
+
    
 
   end

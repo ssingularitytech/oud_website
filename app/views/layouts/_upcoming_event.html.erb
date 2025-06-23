@@ -79,8 +79,11 @@
                  <p class="event-details m-0 pt-2" style="font-size: 18px;"><strong>Ensemble :</strong> <%= upcoming_event.ensemble %></p>
                  <p class="event-details m-0 pt-2" style="font-size: 18px;"><strong>Venue :</strong> <%= upcoming_event.venue %></p>
                  <p class="event-details m-0 pt-2" style="font-size: 18px;"><strong>City :</strong> <%= upcoming_event.city %></p>
-                 <p class="event-details m-0 pt-2 text-blue" style="font-size: 18px;"><strong>Link :</strong> <% if upcoming_event.link.present? %>
-                 <%= link_to upcoming_event.link, upcoming_event.link, target: "_blank", rel: "noopener noreferrer", style: "word-wrap: break-word; overflow-wrap: break-word;" %><% end %></p>
+                  <% if upcoming_event.link.present? %>
+                    <div class="event-details m-0 pt-2" style="font-size: 18px;">
+                      <%= upcoming_event.link.body.to_s.html_safe %>
+                    </div>
+                  <% end %>
               </div>
             </div>
           </div>
