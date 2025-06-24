@@ -80,10 +80,16 @@
                  <p class="event-details m-0 pt-2" style="font-size: 18px;"><strong>Venue :</strong> <%= upcoming_event.venue %></p>
                  <p class="event-details m-0 pt-2" style="font-size: 18px;"><strong>City :</strong> <%= upcoming_event.city %></p>
                   <% if upcoming_event.link.present? %>
-                    <div class="event-details m-0 pt-2" style="font-size: 18px;">
-                      <button style="border: none;"><%= upcoming_event.link.body.to_s.html_safe %></button>
-                    </div>
+                  <% doc = Nokogiri::HTML.fragment(upcoming_event.link.body.to_s) %>
+                  <% anchor = doc.at_css("a") %>
+                  <% if anchor && anchor['href'].present? %>
+                    <p class="event-details m-0 fs-6">
+                      <a href="<%= anchor['href'] %>" target="_blank" rel="noopener noreferrer">
+                        <%= anchor.text.presence || "Click here" %>
+                      </a>
+                    </p>
                   <% end %>
+                <% end %>
               </div>
             </div>
           </div>
