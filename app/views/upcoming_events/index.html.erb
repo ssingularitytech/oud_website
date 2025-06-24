@@ -31,30 +31,6 @@
     transition: background 1s ease-in-out;
   }
 
-  .scroll-div {
-    height: 500px;
-    overflow-y: auto;
-    padding-right: 10px;
-    scroll-behavior: smooth;
-  }
-
-  .scroll-div::-webkit-scrollbar {
-    width: 8px;
-  }
-
-  .scroll-div::-webkit-scrollbar-track {
-    background: #e0e0e0;
-    border-radius: 10px;
-  }
-
-  .scroll-div::-webkit-scrollbar-thumb {
-    background: #888;
-    border-radius: 10px;
-  }
-
-  .scroll-div::-webkit-scrollbar-thumb:hover {
-    background: #555;
-  }
 </style>
 
 <div class="container-fluid">
@@ -64,53 +40,40 @@
 
   <div class="container">
     <div class="row">
+      
       <!-- Upcoming Events -->
-      <div class="col-md-6">
         <h4 class="text-center text-white pt-5 caudex-bold">UPCOMING EVENTS</h4>
-        <div class="scroll-div mt-5 px-2">
-          <% if @upcoming_events.any? %>
+        <div class="mt-5 px-2">
             <% @upcoming_events.each do |upcoming_event| %>
               <div class="mb-5 bg-white rounded px-4 py-4">
-                <div class="row d-flex align-items-center py-4">
-                  <div class="col-auto">
-                    <h5 class="text-muted fst-italic"><%= upcoming_event.date.strftime("%B %Y") %></h5>
+                  <div class="d-flex align-items-center gap-3 py-4">
+                      <h5 class="text-muted fst-italic mb-0"><%= upcoming_event.date.strftime("%B %Y") %></h5>
+                      <p class="mb-0 text-uppercase fw-bold"><%= upcoming_event.date.strftime("%a") %></p>
+                      <h4 class="fw-bold mb-0"><%= upcoming_event.date.strftime("%-d") %></h4>
                   </div>
-                  <div class="col">
-                    <hr>
-                  </div>
-                </div>
 
-                <div class="row align-items-start">
-                  <div class="col-md-2 text-start d-flex align-items-start flex-column">
-                    <p class="mb-0 text-uppercase fw-bold"><%= upcoming_event.date.strftime("%a") %><br></p>
-                    <h4 class="fw-bold"><%= upcoming_event.date.strftime("%-d") %></h4>
-                  </div>
-                  <div class="col-md-6">
-                    <h3 class="fw-bold fst-italic m-md-0"><%= upcoming_event.title.capitalize %></h3>
-                    <p class="event-details m-0 pt-2" style="font-size: 18px;"><strong>Ensemble :</strong> <%= upcoming_event.ensemble %></p>
-                    <p class="event-details m-0 pt-2" style="font-size: 18px;"><strong>Venue :</strong> <%= upcoming_event.venue %></p>
-                    <p class="event-details m-0 pt-2" style="font-size: 18px;"><strong>City :</strong> <%= upcoming_event.city %></p>
-                    <% if upcoming_event.link.present? %>
-                      <div class="event-details m-0 pt-2" style="font-size: 18px;">
-                        <button style="border: none;"><%= upcoming_event.link.body.to_s.html_safe %></button>
-                      </div>
-                    <% end %>
+                   <div class="d-flex align-items-center gap-3">
+                      <p class="event-details" style="font-size: 18px;"><strong><%= upcoming_event.title.capitalize %></strong></p>
+                      <p class="event-details" style="font-size: 18px;"><strong>Ensemble :</strong> <%= upcoming_event.ensemble %></p>
+                      <p class="event-details" style="font-size: 18px;"><strong>Venue :</strong> <%= upcoming_event.venue %></p>
+                      <p class="event-details" style="font-size: 18px;"><strong>City :</strong> <%= upcoming_event.city %></p>
+                      <% if upcoming_event.link.present? %>
+                        <div class="event-details" style="font-size: 18px;">
+                          <button style="border: none;"><%= upcoming_event.link.body.to_s.html_safe %></button>
+                        </div>
+                      <% end %>
                   </div>
                 </div>
-              </div>
-            <% end %>
-          <% else %>
-            <div class="mt-5 bg-white rounded px-4 py-4">
-              <p class="text-center">No upcoming events scheduled.</p>
-            </div>
-          <% end %>
-        </div>
-      </div>
+                <% end %>
+         </div>
+
+       
+     
 
       <!-- Past Events -->
-      <div class="col-md-6">
+     
         <h4 class="text-center text-white pt-md-5 caudex-bold">PAST EVENTS</h4>
-        <div class="scroll-div mt-5 px-2">
+        <div class="mt-5 px-2">
           <% if @past_events.any? %>
             <% @past_events.each do |past_event| %>
               <div class="mb-5 bg-white rounded px-4 py-4">
@@ -149,7 +112,7 @@
             </div>
           <% end %>
         </div>
-      </div>
+     
     </div>
   </div>
 </div>
