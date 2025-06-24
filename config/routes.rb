@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   resources :new_releases
   resources :photos
   resources :aboutus
+  resources :pressquoute
 
 
   get  '/contacts', to: 'contacts#new',    as: 'contacts'

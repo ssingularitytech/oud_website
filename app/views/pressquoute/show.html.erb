@@ -1,0 +1,58 @@
+<style>
+  @media (min-width: 768px) {
+    .show-news-image {
+      aspect-ratio: 1/0.9;
+      object-fit: fill;
+      border: 2px solid grey;
+      border-radius: 12px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .show-news-image {
+      aspect-ratio: 1/0.9;
+      object-fit: fill;
+      border: 2px solid grey;
+      border-radius: 12px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .news-black-text-box {
+      background-color: #1b1b1b;
+      border: 2px solid grey;
+      border-radius: 12px;
+    }
+  }
+</style>
+
+<div class="container">
+  <div class="text-center mt-2 gap-2 d-md-flex justify-content-center text-white mt-5">
+    
+  </div>
+
+  <div class="row text-white px-md-5 px-2 mt-5">
+    <div class="col-lg-6 d-flex flex-column pe-md-4">
+      <% if @pressquoute.image.attached? %>
+        <img src="<%= url_for(@pressquoute.image) %>" class="img-fluid show-news-image">
+      <% end %>
+    </div>
+
+    <div class="col-lg-6 d-flex news-black-text-box">
+      <div class="description py-2">
+        <p><%= @pressquoute.text %></p>
+      </div>
+    </div>
+
+    <div class="mt-md-5 mt-3">
+      <a href="/pressquoutes" style="text-decoration: none;">
+        <button class="back-button mt-3" style="border: 2px solid blue; border-radius: 12px; color: white;">
+          <div class="d-flex justify-content-center align-items-center gap-2 caudex-bold py-2 px-4">
+            <i style="font-size: 20px;" class="bi bi-chevron-left"></i>
+            <span style="font-size: 20px;">Go Back</span>
+          </div>
+        </button>
+      </a>
+    </div>
+  </div>
+</div>
