@@ -44,34 +44,38 @@
       <!-- Upcoming Events -->
         <h4 class="text-center text-white pt-5 caudex-bold">UPCOMING EVENTS</h4>
         <div class="mt-5 px-2">
-            <% @upcoming_events.each do |upcoming_event| %>
-              <div class="mb-5 bg-white rounded py-3 px-4">
-                  <div class="d-flex align-items-center gap-3">
-                      <h5 class="text-muted fst-italic mb-0"><%= upcoming_event.date.strftime("%B %Y") %></h5>
-                      <p class="mb-0 text-uppercase fw-bold"><%= upcoming_event.date.strftime("%a") %></p>
-                      <h4 class="fw-bold mb-0"><%= upcoming_event.date.strftime("%-d") %></h4>
-                  </div>
-
-                   <div class="d-flex align-items-center gap-3 pt-3">
-                      <p class="event-details m-0" style="font-size: 18px;"><strong><%= upcoming_event.title.capitalize %></strong></p>
-                      <p class="event-details m-0" style="font-size: 18px;"><strong>Ensemble :</strong> <%= upcoming_event.ensemble %></p>
-                      <p class="event-details m-0" style="font-size: 18px;"><strong>Venue :</strong> <%= upcoming_event.venue %></p>
-                      <p class="event-details m-0" style="font-size: 18px;"><strong>City :</strong> <%= upcoming_event.city %></p>
-                        <% if upcoming_event.link.present? %>
-                          <% doc = Nokogiri::HTML.fragment(upcoming_event.link.body.to_s) %>
-                          <% anchor = doc.at_css("a") %>
-                          <% if anchor && anchor['href'].present? %>
-                            <p class="event-details m-0" style="font-size: 18px;">
-                              <a href="<%= anchor['href'] %>" target="_blank" rel="noopener noreferrer">
-                                <%= anchor.text.presence || "Click here" %>
-                              </a>
-                            </p>
-                          <% end %>
-                        <% end %>
-                      </div>
+          <% @upcoming_events.each do |upcoming_event| %>
+            <div class="mb-5 bg-white rounded py-3 px-4">
+              <!-- Date Section -->
+              <div class="d-flex flex-column flex-md-row align-items-start align-items-md-center gap-2 gap-md-3 mb-3">
+                <h5 class="text-muted fst-italic mb-0"><%= upcoming_event.date.strftime("%B %Y") %></h5>
+                <p class="mb-0 text-uppercase fw-bold"><%= upcoming_event.date.strftime("%a") %></p>
+                <h4 class="fw-bold mb-0"><%= upcoming_event.date.strftime("%-d") %></h4>
               </div>
-            <% end %>
-         </div>
+
+              <!-- Event Details Section -->
+              <div class="d-flex flex-column flex-md-wrap flex-md-row align-items-start gap-2 gap-md-4">
+                <p class="event-details m-0 fs-6"><strong><%= upcoming_event.title.capitalize %></strong></p>
+                <p class="event-details m-0 fs-6"><strong>Ensemble:</strong> <%= upcoming_event.ensemble %></p>
+                <p class="event-details m-0 fs-6"><strong>Venue:</strong> <%= upcoming_event.venue %></p>
+                <p class="event-details m-0 fs-6"><strong>City:</strong> <%= upcoming_event.city %></p>
+
+                <% if upcoming_event.link.present? %>
+                  <% doc = Nokogiri::HTML.fragment(upcoming_event.link.body.to_s) %>
+                  <% anchor = doc.at_css("a") %>
+                  <% if anchor && anchor['href'].present? %>
+                    <p class="event-details m-0 fs-6">
+                      <a href="<%= anchor['href'] %>" target="_blank" rel="noopener noreferrer">
+                        <%= anchor.text.presence || "Click here" %>
+                      </a>
+                    </p>
+                  <% end %>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+
 
        
      
@@ -79,35 +83,39 @@
       <!-- Past Events -->
      
         <h4 class="text-center text-white pt-md-5 caudex-bold">PAST EVENTS</h4>
-       <div class="mt-5 rounded py-3 px-4">
-            <% @past_events.each do |past_event| %>
-               <div class="mb-5 bg-white rounded py-3 px-4">
-                  <div class="d-flex align-items-center gap-3">
-                      <h5 class="text-muted fst-italic mb-0"><%= past_event.date.strftime("%B %Y") %></h5>
-                      <p class="mb-0 text-uppercase fw-bold"><%= past_event.date.strftime("%a") %></p>
-                      <h4 class="fw-bold mb-0"><%= past_event.date.strftime("%-d") %></h4>
-                  </div>
-
-                   <div class="d-flex align-items-center gap-3 pt-3">
-                      <p class="event-details m-0" style="font-size: 18px;"><strong><%= past_event.title.capitalize %></strong></p>
-                      <p class="event-details m-0" style="font-size: 18px;"><strong>Ensemble :</strong> <%= past_event.ensemble %></p>
-                      <p class="event-details m-0" style="font-size: 18px;"><strong>Venue :</strong> <%= past_event.venue %></p>
-                      <p class="event-details m-0" style="font-size: 18px;"><strong>City :</strong> <%= past_event.city %></p>
-                        <% if past_event.link.present? %>
-                          <% doc = Nokogiri::HTML.fragment(past_event.link.body.to_s) %>
-                          <% anchor = doc.at_css("a") %>
-                          <% if anchor && anchor['href'].present? %>
-                            <p class="event-details m-0" style="font-size: 18px;">
-                              <a href="<%= anchor['href'] %>" target="_blank" rel="noopener noreferrer">
-                                <%= anchor.text.presence || "Click here" %>
-                              </a>
-                            </p>
-                          <% end %>
-                        <% end %>
-                      </div>
+        <div class="mt-5 rounded py-3 px-4">
+          <% @past_events.each do |past_event| %>
+            <div class="mb-5 bg-white rounded py-3 px-4">
+              <!-- Date Row -->
+              <div class="d-flex flex-column flex-md-row align-items-start align-items-md-center gap-2 gap-md-3">
+                <h5 class="text-muted fst-italic mb-0"><%= past_event.date.strftime("%B %Y") %></h5>
+                <p class="mb-0 text-uppercase fw-bold"><%= past_event.date.strftime("%a") %></p>
+                <h4 class="fw-bold mb-0"><%= past_event.date.strftime("%-d") %></h4>
               </div>
-            <% end %>
+
+              <!-- Event Details Row -->
+              <div class="d-flex flex-column flex-md-wrap flex-md-row align-items-start gap-2 gap-md-4 pt-3">
+                <p class="event-details m-0" style="font-size: 18px;"><strong><%= past_event.title.capitalize %></strong></p>
+                <p class="event-details m-0" style="font-size: 18px;"><strong>Ensemble :</strong> <%= past_event.ensemble %></p>
+                <p class="event-details m-0" style="font-size: 18px;"><strong>Venue :</strong> <%= past_event.venue %></p>
+                <p class="event-details m-0" style="font-size: 18px;"><strong>City :</strong> <%= past_event.city %></p>
+
+                <% if past_event.link.present? %>
+                  <% doc = Nokogiri::HTML.fragment(past_event.link.body.to_s) %>
+                  <% anchor = doc.at_css("a") %>
+                  <% if anchor && anchor['href'].present? %>
+                    <p class="event-details m-0" style="font-size: 18px;">
+                      <a href="<%= anchor['href'] %>" target="_blank" rel="noopener noreferrer">
+                        <%= anchor.text.presence || "Click here" %>
+                      </a>
+                    </p>
+                  <% end %>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
         </div>
+
      
     </div>
   </div>
