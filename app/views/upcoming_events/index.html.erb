@@ -130,9 +130,9 @@
                   </div>
                   <div class="col-md-6">
                     <p class="mb-1 text-muted"><%= past_event.date.strftime("%B %-d, %Y") %></p>
-                    <h3 class="fw-bold fst-italic"><%= past_event.title %></h3>
-                    <p class="event-details m-md-0 mb-1" style="font-size: 18px;"><strong>Venue :</strong> <%= past_event.venue %></p>
-                    <p class="event-details m-md-0 mb-1 pt-2" style="font-size: 18px;"><strong>Ensemble :</strong> <%= past_event.ensemble %></p>
+                    <h3 class="fw-bold fst-italic m-md-0"><%= past_event.title %></h3>
+                    <p class="event-details m-0 pt-2" style="font-size: 18px;"><strong>Ensemble :</strong> <%= past_event.ensemble %></p>
+                    <p class="event-details m-0 pt-2" style="font-size: 18px;"><strong>Venue :</strong> <%= past_event.venue %></p>
                     <p class="event-details m-md-0 mb-1 pt-2" style="font-size: 18px;"><strong>City :</strong> <%= past_event.city %></p>
                     <% if past_event.link.present? %>
                       <div class="event-details m-0 pt-2" style="font-size: 18px;">

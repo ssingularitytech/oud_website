@@ -81,7 +81,7 @@
                  <p class="event-details m-0 pt-2" style="font-size: 18px;"><strong>City :</strong> <%= upcoming_event.city %></p>
                   <% if upcoming_event.link.present? %>
                     <div class="event-details m-0 pt-2" style="font-size: 18px;">
-                      <%= upcoming_event.link.body.to_s.html_safe %>
+                      <button style="border: none;"><%= upcoming_event.link.body.to_s.html_safe %></button>
                     </div>
                   <% end %>
               </div>
