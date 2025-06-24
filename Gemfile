@@ -74,3 +74,6 @@ end
   gem "rails_admin"
   gem "sassc-rails"
   gem 'cancancan'
+
+  gem 'sendgrid-ruby'
+

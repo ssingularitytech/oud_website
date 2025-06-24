@@ -72,6 +72,13 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "website_template_production"
 
   config.action_mailer.perform_caching = false
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.delivery_method = :sendgrid_api
+
+  # Change delivery method to use SendGrid API
+  require_relative '../../lib/sendgrid_delivery'
+  ActionMailer::Base.add_delivery_method :sendgrid_api, SendgridDelivery
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
@@ -96,18 +103,18 @@ Rails.application.configure do
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
 
   # mailer code
-  config.action_mailer.delivery_method = :smtp
+  # config.action_mailer.delivery_method = :smtp
 
-  config.action_mailer.default_url_options = {
-    :host => "nizarrohana.com",
-    :protocol => "https",
-  }
-  config.action_mailer.smtp_settings = {
-    :address => "smtp.gmail.com",
-    :port => 587,
-    :user_name => Rails.application.credentials.dig(:mail, :email),
-    :password => Rails.application.credentials.dig(:mail, :password),
-    :authentication => "plain",
-    :enable_starttls_auto => true,
-  }
+  # config.action_mailer.default_url_options = {
+  #   :host => "nizarrohana.com",
+  #   :protocol => "https",
+  # }
+  # config.action_mailer.smtp_settings = {
+  #   :address => "smtp.gmail.com",
+  #   :port => 587,
+  #   :user_name => Rails.application.credentials.dig(:mail, :email),
+  #   :password => Rails.application.credentials.dig(:mail, :password),
+  #   :authentication => "plain",
+  #   :enable_starttls_auto => true,
+  # }
 end

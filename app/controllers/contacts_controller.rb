@@ -7,6 +7,7 @@ class ContactsController < ApplicationController
   def create
     @contact = Contact.new(contact_params)
     if @contact.save
+      ContactMailer.send_contact_mail(@contact).deliver_now
       redirect_to contacts_path, notice: 'Your message has been sent successfully!'
     else
       flash.now[:alert] = 'There was an error sending your message. Please try again.'
