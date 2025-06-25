@@ -1,21 +1,24 @@
 class UpcomingEventsController < ApplicationController
-def index
-  if params[:ensemble].present?
-    # Search only in past events
-    @past_events = UpcomingEvent.where("date < ? AND LOWER(ensemble) LIKE ?", Date.today, "%#{params[:ensemble].downcase}%")
-    
-    # Show all upcoming events regardless of search
-    @upcoming_events = UpcomingEvent.where("date >= ?", Date.today)
-  else
-    # No search: show all
-    @past_events = UpcomingEvent.where("date < ?", Date.today)
-    @upcoming_events = UpcomingEvent.where("date >= ?", Date.today)
+
+  def index
+    if params[:upcoming_ensemble].present?
+      # Search in upcoming events
+      @upcoming_events = UpcomingEvent.where("date >= ? AND LOWER(ensemble) LIKE ?", Date.today, "%#{params[:upcoming_ensemble].downcase}%")
+    else
+      @upcoming_events = UpcomingEvent.where("date >= ?", Date.today)
+    end
+
+    if params[:past_ensemble].present?
+      # Search in past events
+      @past_events = UpcomingEvent.where("date < ? AND LOWER(ensemble) LIKE ?", Date.today, "%#{params[:past_ensemble].downcase}%")
+    else
+      @past_events = UpcomingEvent.where("date < ?", Date.today)
+    end
+    Rails.logger.debug "Upcoming Events: #{@upcoming_events.map(&:date)}"
+    Rails.logger.debug "Past Events: #{@past_events.map(&:date)}"
   end
 
-  # (Optional) Debug logs
-  Rails.logger.debug "Upcoming Events: #{@upcoming_events.map(&:date)}"
-  Rails.logger.debug "Past Events: #{@past_events.map(&:date)}"
-end
+
 
 
   def create

@@ -45,12 +45,14 @@
       <!-- Upcoming Events -->
        <div class="col-md-10 mx-auto">
         <h4 class="text-center text-white caudex-bold m-0 py-5">UPCOMING EVENTS</h4>
+        
         <%= form_with url: upcoming_events_path, method: :get, local: true do |form| %>
           <div class="input-group text-black mb-5">
-            <%= form.text_field :ensemble, placeholder: "Search by Ensemble", class: "form-control py-3" %>
+            <%= form.text_field :upcoming_ensemble, placeholder: "Search by Ensemble", class: "form-control py-3" %>
             <button type="submit" class="btn btn-primary">Search</button>
           </div>
         <% end %>
+
 
           <% @upcoming_events.each do |upcoming_event| %>
             <div class="mb-5 bg-white rounded py-3 px-4">
@@ -93,12 +95,14 @@
       <div class="col-md-10 mx-auto">
         <h4 class="text-center text-white caudex-bold m-0">PAST EVENTS</h4>
 
-        <%= form_with url: @past_events_path, method: :get, local: true do |form| %>
+        <%= form_with url: upcoming_events_path, method: :get, local: true do |form| %>
           <div class="input-group text-black pt-5">
-            <%= form.text_field :ensemble, placeholder: "Search by Ensemble", class: "form-control py-3" %>
+            <%= form.text_field :past_ensemble, placeholder: "Search by Ensemble", class: "form-control py-3" %>
             <button type="submit" class="btn btn-primary">Search</button>
           </div>
         <% end %>
+
+
 
         <div class="pt-5">
           <% @past_events.each do |past_event| %>
