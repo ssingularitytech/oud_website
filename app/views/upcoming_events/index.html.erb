@@ -1,163 +1,115 @@
-<style>
-  @media (min-width: 768px) {
-    .upcoming-bg-image {
-      width: 100%;
-      object-fit: cover;
-    }
-  }
+    <style>
+      @media (min-width: 768px) {
+        .upcoming-bg-image {
+          width: 100%;
+          object-fit: cover;
+        }
+      }
 
-  @media (max-width: 768px) {
-    .upcoming-bg-image {
-      width: 100%;
-      object-fit: cover;
-    }
-  }
+      @media (max-width: 768px) {
+        .upcoming-bg-image {
+          width: 100%;
+          object-fit: cover;
+        }
+      }
 
-  .event-card {
-    background: transparent;
-    border-radius: 10px;
-    color: white;
-    transition: background 0.4s ease-in-out;
-    border: 2px solid grey;
-  }
 
-  .event-card.first-card {
-    background: #2f2c2c;
-  }
 
-  .event-card:not(.first-card):hover,
-  .event-card.active {
-    background: #2f2c2c;
-    transition: background 1s ease-in-out;
-  }
 
-</style>
+    </style>
 
-<div class="container-fluid">
-  <div class="row">
-    <%= image_tag "upcoming-bg-first-image.png", alt: "Company Logo", class: "img-fluid upcoming-bg-image p-0", loading: "lazy" %>
-  </div>
 
-  <div class="container">
+  <div class="container-fluid">
     <div class="row">
+      <%= image_tag "upcoming-bg-first-image.png", alt: "Company Logo", class: "img-fluid upcoming-bg-image p-0", loading: "lazy" %>
+    </div>
 
-      
-      <!-- Upcoming Events -->
-       <div class="col-md-10 mx-auto">
-        <h4 class="text-center text-white caudex-bold m-0 py-5">UPCOMING EVENTS</h4>
-        
-        <%= form_with url: upcoming_events_path, method: :get, local: true do |form| %>
-          <div class="input-group text-black mb-5">
-            <%= form.text_field :upcoming_ensemble, placeholder: "Search by Ensemble", class: "form-control py-3" %>
-            <button type="submit" class="btn btn-primary">Search</button>
-          </div>
-        <% end %>
+    <div class="container">
+      <div class="row">
 
+        <!-- Upcoming Events -->
+        <div class="col-md-8 mx-auto">
+          <h4 class="text-center text-white caudex-bold m-0 py-5">UPCOMING EVENTS</h4>
 
           <% @upcoming_events.each do |upcoming_event| %>
-            <div class="mb-5 bg-white rounded py-3 px-4">
-              <!-- Date Section -->
-          <div class="d-flex flex-row align-items-center flex-wrap gap-2 mb-3">
-            <h5 class="text-muted fst-italic mb-0"><%= upcoming_event.date.strftime("%B %Y") %></h5>
-            <h5 class="mb-0 text-uppercase"><%= upcoming_event.date.strftime("%a") %></h5>
-            <h5 class="mb-0"><%= upcoming_event.date.strftime("%-d") %></h5>
-          </div>
+            <div class="event-card mb-4 d-flex flex-column flex-md-row">
+              
+              <!-- Date + Description on left -->
+              <div class="flex-grow-1 text-start text-white">
+                <!-- Date on top -->
+                <div class="event-date text-nowrap mb-1">
+                  <strong><%= upcoming_event.date.strftime("%-d %B %Y") %></strong>
+                </div>
 
+                <!-- Description below date -->
+                <div class="event-details" style="font-size: 18px;">
+                  <%= upcoming_event.title.to_s.titleize %>,
+                  <%= upcoming_event.ensemble.to_s.titleize %>,
+                  <%= upcoming_event.venue.to_s.titleize %>,
+                  <%= upcoming_event.city.to_s.titleize %>
+                </div>
 
-              <!-- Event Details Section -->
-              <div class="d-flex flex-column flex-md-wrap flex-md-row align-items-start gap-2 gap-md-4">
-                <p class="event-details m-0" style="font-size: 18px;"><strong><%= upcoming_event.title.capitalize %></strong></p>
-                <p class="event-details m-0" style="font-size: 18px;"><strong>Ensemble:</strong> <%= upcoming_event.ensemble %></p>
-                <p class="event-details m-0" style="font-size: 18px;"><strong>Venue:</strong> <%= upcoming_event.venue %></p>
-                <p class="event-details m-0" style="font-size: 18px;"><strong>City:</strong> <%= upcoming_event.city %></p>
-
-                <% if upcoming_event.link.present? %>
-                  <% doc = Nokogiri::HTML.fragment(upcoming_event.link.body.to_s) %>
-                  <% anchor = doc.at_css("a") %>
-                  <% if anchor && anchor['href'].present? %>
-                    <p class="event-details m-0" style="font-size: 18px;">
-                      <a href="<%= anchor['href'] %>" target="_blank" rel="noopener noreferrer">
-                        <%= anchor.text.presence || "Click here" %>
-                      </a>
-                    </p>
-                  <% end %>
-                <% end %>
               </div>
+
+              <!-- Tickets Button -->
+              <% if upcoming_event.link.present? %>
+                <% doc = Nokogiri::HTML.fragment(upcoming_event.link.body.to_s) %>
+                <% anchor = doc.at_css("a") %>
+                <% if anchor && anchor['href'].present? %>
+                  <div>
+                    <a href="<%= anchor['href'] %>" class="btn btn-dark" target="_blank" rel="noopener noreferrer">
+                      <%= anchor.text.presence || "Tickets" %>
+                    </a>
+                  </div>
+                <% end %>
+              <% end %>
+
             </div>
           <% end %>
-      </div>
 
+        </div>
 
-       
-     
+        <!-- Past Events -->
+        <div class="col-md-8 mx-auto">
+          <h4 class="text-center text-white caudex-bold m-0 pt-5 pb-5">PAST EVENTS</h4>
 
-      <!-- Past Events -->
-      <div class="col-md-10 mx-auto">
-        <h4 class="text-center text-white caudex-bold m-0">PAST EVENTS</h4>
-
-        <%= form_with url: upcoming_events_path, method: :get, local: true do |form| %>
-          <div class="input-group text-black pt-5">
-            <%= form.text_field :past_ensemble, placeholder: "Search by Ensemble", class: "form-control py-3" %>
-            <button type="submit" class="btn btn-primary">Search</button>
-          </div>
-        <% end %>
-
-
-
-        <div class="pt-5">
           <% @past_events.each do |past_event| %>
-            <div class="mb-5 bg-white rounded py-3 px-4">
-              <!-- Date Row -->
-             <div class="d-flex flex-row align-items-center flex-wrap gap-2 mb-3">
-                <h5 class="text-muted fst-italic mb-0"><%= past_event.date.strftime("%B %Y") %></h5>
-                <h5 class="mb-0 text-uppercase"><%= past_event.date.strftime("%a") %></h5>
-                <h5 class="mb-0"><%= past_event.date.strftime("%-d") %></h5>
+          <div class="event-card mb-4 d-flex flex-column flex-md-row">
+
+              <!-- Date + Description on left -->
+            <div class="flex-grow-1 text-start text-white">
+                <!-- Date -->
+                <div class="event-date text-nowrap mb-1">
+                  <strong><%= past_event.date.strftime("%-d %B %Y") %></strong>
+                </div>
+
+                <!-- Details -->
+                <div class="event-details" style="font-size: 18px;">
+                  <%= past_event.title.to_s.titleize %>,
+                  <%= past_event.ensemble.to_s.titleize %>,
+                  <%= past_event.venue.to_s.titleize %>,
+                  <%= past_event.city.to_s.titleize %>
+                </div>
               </div>
 
-              <!-- Event Details Row -->
-              <div class="d-flex flex-column flex-md-wrap flex-md-row align-items-start gap-2 gap-md-4 pt-3">
-                <p class="event-details m-0" style="font-size: 18px;"><strong style="text-transform: capitalize;"><%= past_event.title %></strong></p>
-                <p class="event-details m-0" style="font-size: 18px;"><strong>Ensemble :</strong> <%= past_event.ensemble %></p>
-                <p class="event-details m-0" style="font-size: 18px;"><strong>Venue :</strong> <%= past_event.venue %></p>
-                <p class="event-details m-0" style="font-size: 18px;"><strong>City :</strong> <%= past_event.city %></p>
-
-                <% if past_event.link.present? %>
-                  <% doc = Nokogiri::HTML.fragment(past_event.link.body.to_s) %>
-                  <% anchor = doc.at_css("a") %>
-                  <% if anchor && anchor['href'].present? %>
-                    <p class="event-details m-0" style="font-size: 18px;">
-                      <a href="<%= anchor['href'] %>" target="_blank" rel="noopener noreferrer">
-                        <%= anchor.text.presence || "Click here" %>
-                      </a>
-                    </p>
-                  <% end %>
+              <!-- Link Button if present -->
+              <% if past_event.link.present? %>
+                <% doc = Nokogiri::HTML.fragment(past_event.link.body.to_s) %>
+                <% anchor = doc.at_css("a") %>
+                <% if anchor && anchor['href'].present? %>
+                  <div>
+                    <a href="<%= anchor['href'] %>" class="btn btn-dark" target="_blank" rel="noopener noreferrer">
+                      <%= anchor.text.presence || "View" %>
+                    </a>
+                  </div>
                 <% end %>
-              </div>
+              <% end %>
+
             </div>
           <% end %>
-       </div>    
-      </div>
+        </div>
 
-     
+
+      </div>
     </div>
   </div>
-</div>
-
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    let cards = document.querySelectorAll(".event-card:not(.first-card)");
-
-    let observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("active");
-        } else {
-          entry.target.classList.remove("active");
-        }
-      });
-    }, { threshold: 0.5 });
-
-    cards.forEach(card => observer.observe(card));
-  });
-  
-</script>
