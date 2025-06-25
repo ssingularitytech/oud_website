@@ -541,8 +541,35 @@ end
     end
 
 
+    config.model 'Pressquoute' do
+      edit do
+        field :image, :active_storage
+        field :text
+      end
 
-   
+      show do
+        field :text
+        field :image do
+          pretty_value do
+            if bindings[:object].image.attached?
+              bindings[:view].tag(:img, src: Rails.application.routes.url_helpers.rails_blob_path(bindings[:object].image, only_path: true), style: 'max-width: 200px; max-height: 200px;')
+            end
+          end
+        end
+      end
+
+      list do
+        field :image do
+          pretty_value do
+            if bindings[:object].image.attached?
+              bindings[:view].tag(:img, src: Rails.application.routes.url_helpers.rails_blob_path(bindings[:object].image, only_path: true), style: 'max-width: 100px; max-height: 100px;')
+            end
+          end
+        end
+        field :text
+      end
+    end
+
 
   end
 end
