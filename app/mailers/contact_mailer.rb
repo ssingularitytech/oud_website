@@ -1,13 +1,13 @@
 
 class ContactMailer < ApplicationMailer
-  default from: 'sandeep@ssingularity.co.in'
+  default from: 'deepak@ssingularity.co.in'
 
   def send_contact_mail(contact)
     @contact = contact
     mail(
-      from: @contact.email, 
-      to: 'sandeep@ssingularity.co.in', 
-      subject: 'New Contact Us Submission'
+      to: 'deepak@ssingularity.co.in',
+      subject: 'New Contact Us Submission',
+      reply_to: @contact.email  # Add this to allow replies to the contact
     )
   end
 end

@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: "sandeep@ssingularity.co.in"
+  default from: "deepak@ssingularity.co.in"
   layout "mailer"
 end
