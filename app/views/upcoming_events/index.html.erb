@@ -34,35 +34,38 @@
           <% @upcoming_events.each do |upcoming_event| %>
             <div class="event-card mb-4 d-flex flex-column flex-md-row">
               
-              <!-- Date + Description on left -->
               <div class="flex-grow-1 text-start text-white">
-                <!-- Date on top -->
+
                 <div class="event-date text-nowrap mb-1">
                   <strong><%= upcoming_event.date.strftime("%-d %B %Y") %></strong>
                 </div>
 
-                <!-- Description below date -->
-                <div class="event-details" style="font-size: 18px;">
-                  <%= upcoming_event.title.to_s.titleize %>,
-                  <%= upcoming_event.ensemble.to_s.titleize %>,
-                  <%= upcoming_event.venue.to_s.titleize %>,
-                  <%= upcoming_event.city.to_s.titleize %>
+                <div class="d-md-flex event-details" style="font-size: 18px;">
+                  <div class="col-10">
+
+                    <%= upcoming_event.title.to_s.titleize %>,
+                    <%= upcoming_event.ensemble.to_s.titleize %>,
+                    <%= upcoming_event.venue.to_s.titleize %>,
+                    <%= upcoming_event.city.to_s.titleize %>
+                  </div>
+
+                  <div class="col">
+                      <% if upcoming_event.link.present? %>
+                      <% doc = Nokogiri::HTML.fragment(upcoming_event.link.body.to_s) %>
+                      <% anchor = doc.at_css("a") %>
+                      <% if anchor && anchor['href'].present? %>
+                        
+                      <a href="<%= anchor['href'] %>" class="btn btn-dark" target="_blank" rel="noopener noreferrer">
+                        <%= anchor.text.presence || "Tickets" %>
+                      </a>
+                  
+                        <% end %>
+                      <% end %>
+                  </div>
+
                 </div>
 
               </div>
-
-              <!-- Tickets Button -->
-              <% if upcoming_event.link.present? %>
-                <% doc = Nokogiri::HTML.fragment(upcoming_event.link.body.to_s) %>
-                <% anchor = doc.at_css("a") %>
-                <% if anchor && anchor['href'].present? %>
-                  <div>
-                    <a href="<%= anchor['href'] %>" class="btn btn-dark" target="_blank" rel="noopener noreferrer">
-                      <%= anchor.text.presence || "Tickets" %>
-                    </a>
-                  </div>
-                <% end %>
-              <% end %>
 
             </div>
           <% end %>
@@ -76,34 +79,35 @@
           <% @past_events.each do |past_event| %>
           <div class="event-card mb-4 d-flex flex-column flex-md-row">
 
-              <!-- Date + Description on left -->
             <div class="flex-grow-1 text-start text-white">
-                <!-- Date -->
+             
                 <div class="event-date text-nowrap mb-1">
                   <strong><%= past_event.date.strftime("%-d %B %Y") %></strong>
                 </div>
 
-                <!-- Details -->
-                <div class="event-details" style="font-size: 18px;">
-                  <%= past_event.title.to_s.titleize %>,
-                  <%= past_event.ensemble.to_s.titleize %>,
-                  <%= past_event.venue.to_s.titleize %>,
-                  <%= past_event.city.to_s.titleize %>
+              <div class="d-md-flex event-details" style="font-size: 18px;">
+                 <div class="col-10">
+                    <%= past_event.title.to_s.titleize %>,
+                    <%= past_event.ensemble.to_s.titleize %>,
+                    <%= past_event.venue.to_s.titleize %>,
+                    <%= past_event.city.to_s.titleize %>
+                  </div>
+
+                  <div class="col">
+                    <% if past_event.link.present? %>
+                      <% doc = Nokogiri::HTML.fragment(past_event.link.body.to_s) %>
+                      <% anchor = doc.at_css("a") %>
+                      <% if anchor && anchor['href'].present? %>
+                        
+                          <a href="<%= anchor['href'] %>" class="btn btn-dark" target="_blank" rel="noopener noreferrer">
+                            <%= anchor.text.presence || "View" %>
+                          </a>
+                      
+                      <% end %>
+                    <% end %>
+                  </div>
                 </div>
               </div>
-
-              <!-- Link Button if present -->
-              <% if past_event.link.present? %>
-                <% doc = Nokogiri::HTML.fragment(past_event.link.body.to_s) %>
-                <% anchor = doc.at_css("a") %>
-                <% if anchor && anchor['href'].present? %>
-                  <div>
-                    <a href="<%= anchor['href'] %>" class="btn btn-dark" target="_blank" rel="noopener noreferrer">
-                      <%= anchor.text.presence || "View" %>
-                    </a>
-                  </div>
-                <% end %>
-              <% end %>
 
             </div>
           <% end %>
