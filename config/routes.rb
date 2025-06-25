@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   resources :photos
   resources :aboutus
   resources :pressquoute
+  resources :subscribe
 
 
   get  '/contacts', to: 'contacts#new',    as: 'contacts'
