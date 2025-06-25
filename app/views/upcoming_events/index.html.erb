@@ -31,30 +31,6 @@
     transition: background 1s ease-in-out;
   }
 
-  .scroll-div {
-    height: 500px;
-    overflow-y: auto;
-    padding-right: 10px;
-    scroll-behavior: smooth;
-  }
-
-  .scroll-div::-webkit-scrollbar {
-    width: 8px;
-  }
-
-  .scroll-div::-webkit-scrollbar-track {
-    background: #e0e0e0;
-    border-radius: 10px;
-  }
-
-  .scroll-div::-webkit-scrollbar-thumb {
-    background: #888;
-    border-radius: 10px;
-  }
-
-  .scroll-div::-webkit-scrollbar-thumb:hover {
-    background: #555;
-  }
 </style>
 
 <div class="container-fluid">
@@ -64,92 +40,101 @@
 
   <div class="container">
     <div class="row">
-      <!-- Upcoming Events -->
-      <div class="col-md-6">
-        <h4 class="text-center text-white pt-5 caudex-bold">UPCOMING EVENTS</h4>
-        <div class="scroll-div mt-5 px-2">
-          <% if @upcoming_events.any? %>
-            <% @upcoming_events.each do |upcoming_event| %>
-              <div class="mb-5 bg-white rounded px-4 py-4">
-                <div class="row d-flex align-items-center py-4">
-                  <div class="col-auto">
-                    <h5 class="text-muted fst-italic"><%= upcoming_event.date.strftime("%B %Y") %></h5>
-                  </div>
-                  <div class="col">
-                    <hr>
-                  </div>
-                </div>
 
-                <div class="row align-items-start">
-                  <div class="col-md-2 text-start d-flex align-items-start flex-column">
-                    <p class="mb-0 text-uppercase fw-bold"><%= upcoming_event.date.strftime("%a") %><br></p>
-                    <h4 class="fw-bold"><%= upcoming_event.date.strftime("%-d") %></h4>
-                  </div>
-                  <div class="col-md-6">
-                    <h3 class="fw-bold fst-italic m-md-0"><%= upcoming_event.title.capitalize %></h3>
-                    <p class="event-details m-0 pt-2" style="font-size: 18px;"><strong>Ensemble :</strong> <%= upcoming_event.ensemble %></p>
-                    <p class="event-details m-0 pt-2" style="font-size: 18px;"><strong>Venue :</strong> <%= upcoming_event.venue %></p>
-                    <p class="event-details m-0 pt-2" style="font-size: 18px;"><strong>City :</strong> <%= upcoming_event.city %></p>
-                    <% if upcoming_event.link.present? %>
-                      <div class="event-details m-0 pt-2" style="font-size: 18px;">
-                        <button style="border: none;"><%= upcoming_event.link.body.to_s.html_safe %></button>
-                      </div>
-                    <% end %>
-                  </div>
-                </div>
+      
+      <!-- Upcoming Events -->
+       <div class="col-md-10 mx-auto">
+        <h4 class="text-center text-white caudex-bold m-0 py-5">UPCOMING EVENTS</h4>
+        <%= form_with url: upcoming_events_path, method: :get, local: true do |form| %>
+          <div class="input-group text-black mb-5">
+            <%= form.text_field :ensemble, placeholder: "Search by Ensemble", class: "form-control py-3" %>
+            <button type="submit" class="btn btn-primary">Search</button>
+          </div>
+        <% end %>
+
+          <% @upcoming_events.each do |upcoming_event| %>
+            <div class="mb-5 bg-white rounded py-3 px-4">
+              <!-- Date Section -->
+          <div class="d-flex flex-row align-items-center flex-wrap gap-2 mb-3">
+            <h5 class="text-muted fst-italic mb-0"><%= upcoming_event.date.strftime("%B %Y") %></h5>
+            <h5 class="mb-0 text-uppercase"><%= upcoming_event.date.strftime("%a") %></h5>
+            <h5 class="mb-0"><%= upcoming_event.date.strftime("%-d") %></h5>
+          </div>
+
+
+              <!-- Event Details Section -->
+              <div class="d-flex flex-column flex-md-wrap flex-md-row align-items-start gap-2 gap-md-4">
+                <p class="event-details m-0" style="font-size: 18px;"><strong><%= upcoming_event.title.capitalize %></strong></p>
+                <p class="event-details m-0" style="font-size: 18px;"><strong>Ensemble:</strong> <%= upcoming_event.ensemble %></p>
+                <p class="event-details m-0" style="font-size: 18px;"><strong>Venue:</strong> <%= upcoming_event.venue %></p>
+                <p class="event-details m-0" style="font-size: 18px;"><strong>City:</strong> <%= upcoming_event.city %></p>
+
+                <% if upcoming_event.link.present? %>
+                  <% doc = Nokogiri::HTML.fragment(upcoming_event.link.body.to_s) %>
+                  <% anchor = doc.at_css("a") %>
+                  <% if anchor && anchor['href'].present? %>
+                    <p class="event-details m-0" style="font-size: 18px;">
+                      <a href="<%= anchor['href'] %>" target="_blank" rel="noopener noreferrer">
+                        <%= anchor.text.presence || "Click here" %>
+                      </a>
+                    </p>
+                  <% end %>
+                <% end %>
               </div>
-            <% end %>
-          <% else %>
-            <div class="mt-5 bg-white rounded px-4 py-4">
-              <p class="text-center">No upcoming events scheduled.</p>
             </div>
           <% end %>
-        </div>
       </div>
+
+
+       
+     
 
       <!-- Past Events -->
-      <div class="col-md-6">
-        <h4 class="text-center text-white pt-md-5 caudex-bold">PAST EVENTS</h4>
-        <div class="scroll-div mt-5 px-2">
-          <% if @past_events.any? %>
-            <% @past_events.each do |past_event| %>
-              <div class="mb-5 bg-white rounded px-4 py-4">
-                <div class="row d-flex align-items-center py-4">
-                  <div class="col-auto">
-                    <h5 class="text-muted fst-italic"><%= past_event.date.strftime("%B %Y") %></h5>
-                  </div>
-                  <div class="col">
-                    <hr>
-                  </div>
-                </div>
+      <div class="col-md-10 mx-auto">
+        <h4 class="text-center text-white caudex-bold m-0">PAST EVENTS</h4>
 
-                <div class="row align-items-start">
-                  <div class="col-md-2 text-start d-flex align-items-start flex-column">
-                    <p class="mb-0 text-uppercase fw-bold"><%= past_event.date.strftime("%a") %><br></p>
-                    <h4 class="fw-bold"><%= past_event.date.strftime("%-d") %></h4>
-                  </div>
-                  <div class="col-md-6">
-                    <p class="mb-1 text-muted"><%= past_event.date.strftime("%B %-d, %Y") %></p>
-                    <h3 class="fw-bold fst-italic m-md-0"><%= past_event.title %></h3>
-                    <p class="event-details m-0 pt-2" style="font-size: 18px;"><strong>Ensemble :</strong> <%= past_event.ensemble %></p>
-                    <p class="event-details m-0 pt-2" style="font-size: 18px;"><strong>Venue :</strong> <%= past_event.venue %></p>
-                    <p class="event-details m-md-0 mb-1 pt-2" style="font-size: 18px;"><strong>City :</strong> <%= past_event.city %></p>
-                    <% if past_event.link.present? %>
-                      <div class="event-details m-0 pt-2" style="font-size: 18px;">
-                        <button style="border: none;"><%= past_event.link.body.to_s.html_safe %></button>
-                      </div>
-                    <% end %>
-                  </div>
-                </div>
+        <%= form_with url: @past_events_path, method: :get, local: true do |form| %>
+          <div class="input-group text-black pt-5">
+            <%= form.text_field :ensemble, placeholder: "Search by Ensemble", class: "form-control py-3" %>
+            <button type="submit" class="btn btn-primary">Search</button>
+          </div>
+        <% end %>
+
+        <div class="pt-5">
+          <% @past_events.each do |past_event| %>
+            <div class="mb-5 bg-white rounded py-3 px-4">
+              <!-- Date Row -->
+             <div class="d-flex flex-row align-items-center flex-wrap gap-2 mb-3">
+                <h5 class="text-muted fst-italic mb-0"><%= past_event.date.strftime("%B %Y") %></h5>
+                <h5 class="mb-0 text-uppercase"><%= past_event.date.strftime("%a") %></h5>
+                <h5 class="mb-0"><%= past_event.date.strftime("%-d") %></h5>
               </div>
-            <% end %>
-          <% else %>
-            <div class="mt-5 bg-white rounded px-4 py-4">
-              <p class="text-center">No past events to display.</p>
+
+              <!-- Event Details Row -->
+              <div class="d-flex flex-column flex-md-wrap flex-md-row align-items-start gap-2 gap-md-4 pt-3">
+                <p class="event-details m-0" style="font-size: 18px;"><strong style="text-transform: capitalize;"><%= past_event.title %></strong></p>
+                <p class="event-details m-0" style="font-size: 18px;"><strong>Ensemble :</strong> <%= past_event.ensemble %></p>
+                <p class="event-details m-0" style="font-size: 18px;"><strong>Venue :</strong> <%= past_event.venue %></p>
+                <p class="event-details m-0" style="font-size: 18px;"><strong>City :</strong> <%= past_event.city %></p>
+
+                <% if past_event.link.present? %>
+                  <% doc = Nokogiri::HTML.fragment(past_event.link.body.to_s) %>
+                  <% anchor = doc.at_css("a") %>
+                  <% if anchor && anchor['href'].present? %>
+                    <p class="event-details m-0" style="font-size: 18px;">
+                      <a href="<%= anchor['href'] %>" target="_blank" rel="noopener noreferrer">
+                        <%= anchor.text.presence || "Click here" %>
+                      </a>
+                    </p>
+                  <% end %>
+                <% end %>
+              </div>
             </div>
           <% end %>
-        </div>
+       </div>    
       </div>
+
+     
     </div>
   </div>
 </div>
@@ -170,4 +155,5 @@
 
     cards.forEach(card => observer.observe(card));
   });
+  
 </script>
