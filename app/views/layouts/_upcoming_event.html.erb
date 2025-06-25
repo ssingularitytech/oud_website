@@ -1,22 +1,20 @@
 <style>
+
   @media (min-width: 768px) {
-    .upcoming-bg-image {
-      width: 100%;
-      height: 45rem;
-      object-fit: cover;
-    }
+   .event-card {
+    background: white;
+    border-radius: 10px;
+    color: black;
+    transition: background 0.4s ease-in-out;
+    border: 2px solid #ccc;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    min-height: 260px;
   }
+ }
 
-  @media (max-width: 768px) {
-    .upcoming-bg-image {
-      width: 100%;
-      height: 22rem;
-      object-fit: fill;
-    }
-  }
-
-
-  .event-card {
+   @media (max-width: 767px) {
+   .event-card {
     background: white;
     border-radius: 10px;
     color: black;
@@ -26,6 +24,8 @@
     padding: 1rem;
     min-height: 336px;
   }
+ }
+
 
 
 

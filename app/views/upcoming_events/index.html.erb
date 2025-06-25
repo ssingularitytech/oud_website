@@ -40,31 +40,40 @@
 
   <div class="container">
     <div class="row">
+
       
       <!-- Upcoming Events -->
-        <h4 class="text-center text-white pt-5 caudex-bold">UPCOMING EVENTS</h4>
-        <div class="mt-5 px-2">
+       <div class="col-md-10 mx-auto">
+        <h4 class="text-center text-white caudex-bold m-0 py-5">UPCOMING EVENTS</h4>
+        <%= form_with url: upcoming_events_path, method: :get, local: true do |form| %>
+          <div class="input-group text-black mb-5">
+            <%= form.text_field :ensemble, placeholder: "Search by Ensemble", class: "form-control py-3" %>
+            <button type="submit" class="btn btn-primary">Search</button>
+          </div>
+        <% end %>
+
           <% @upcoming_events.each do |upcoming_event| %>
             <div class="mb-5 bg-white rounded py-3 px-4">
               <!-- Date Section -->
-              <div class="d-flex flex-column flex-md-row align-items-start align-items-md-center gap-2 gap-md-3 mb-3">
-                <h5 class="text-muted fst-italic mb-0"><%= upcoming_event.date.strftime("%B %Y") %></h5>
-                <p class="mb-0 text-uppercase fw-bold"><%= upcoming_event.date.strftime("%a") %></p>
-                <h4 class="fw-bold mb-0"><%= upcoming_event.date.strftime("%-d") %></h4>
-              </div>
+          <div class="d-flex flex-row align-items-center flex-wrap gap-2 mb-3">
+            <h5 class="text-muted fst-italic mb-0"><%= upcoming_event.date.strftime("%B %Y") %></h5>
+            <h5 class="mb-0 text-uppercase"><%= upcoming_event.date.strftime("%a") %></h5>
+            <h5 class="mb-0"><%= upcoming_event.date.strftime("%-d") %></h5>
+          </div>
+
 
               <!-- Event Details Section -->
               <div class="d-flex flex-column flex-md-wrap flex-md-row align-items-start gap-2 gap-md-4">
-                <p class="event-details m-0 fs-6"><strong><%= upcoming_event.title.capitalize %></strong></p>
-                <p class="event-details m-0 fs-6"><strong>Ensemble:</strong> <%= upcoming_event.ensemble %></p>
-                <p class="event-details m-0 fs-6"><strong>Venue:</strong> <%= upcoming_event.venue %></p>
-                <p class="event-details m-0 fs-6"><strong>City:</strong> <%= upcoming_event.city %></p>
+                <p class="event-details m-0" style="font-size: 18px;"><strong><%= upcoming_event.title.capitalize %></strong></p>
+                <p class="event-details m-0" style="font-size: 18px;"><strong>Ensemble:</strong> <%= upcoming_event.ensemble %></p>
+                <p class="event-details m-0" style="font-size: 18px;"><strong>Venue:</strong> <%= upcoming_event.venue %></p>
+                <p class="event-details m-0" style="font-size: 18px;"><strong>City:</strong> <%= upcoming_event.city %></p>
 
                 <% if upcoming_event.link.present? %>
                   <% doc = Nokogiri::HTML.fragment(upcoming_event.link.body.to_s) %>
                   <% anchor = doc.at_css("a") %>
                   <% if anchor && anchor['href'].present? %>
-                    <p class="event-details m-0 fs-6">
+                    <p class="event-details m-0" style="font-size: 18px;">
                       <a href="<%= anchor['href'] %>" target="_blank" rel="noopener noreferrer">
                         <%= anchor.text.presence || "Click here" %>
                       </a>
@@ -74,28 +83,36 @@
               </div>
             </div>
           <% end %>
-        </div>
+      </div>
 
 
        
      
 
       <!-- Past Events -->
-     
-        <h4 class="text-center text-white pt-md-5 caudex-bold">PAST EVENTS</h4>
-        <div class="mt-5 rounded py-3 px-4">
+      <div class="col-md-10 mx-auto">
+        <h4 class="text-center text-white caudex-bold m-0">PAST EVENTS</h4>
+
+        <%= form_with url: @past_events_path, method: :get, local: true do |form| %>
+          <div class="input-group text-black pt-5">
+            <%= form.text_field :ensemble, placeholder: "Search by Ensemble", class: "form-control py-3" %>
+            <button type="submit" class="btn btn-primary">Search</button>
+          </div>
+        <% end %>
+
+        <div class="pt-5">
           <% @past_events.each do |past_event| %>
             <div class="mb-5 bg-white rounded py-3 px-4">
               <!-- Date Row -->
-              <div class="d-flex flex-column flex-md-row align-items-start align-items-md-center gap-2 gap-md-3">
+             <div class="d-flex flex-row align-items-center flex-wrap gap-2 mb-3">
                 <h5 class="text-muted fst-italic mb-0"><%= past_event.date.strftime("%B %Y") %></h5>
-                <p class="mb-0 text-uppercase fw-bold"><%= past_event.date.strftime("%a") %></p>
-                <h4 class="fw-bold mb-0"><%= past_event.date.strftime("%-d") %></h4>
+                <h5 class="mb-0 text-uppercase"><%= past_event.date.strftime("%a") %></h5>
+                <h5 class="mb-0"><%= past_event.date.strftime("%-d") %></h5>
               </div>
 
               <!-- Event Details Row -->
               <div class="d-flex flex-column flex-md-wrap flex-md-row align-items-start gap-2 gap-md-4 pt-3">
-                <p class="event-details m-0" style="font-size: 18px;"><strong><%= past_event.title.capitalize %></strong></p>
+                <p class="event-details m-0" style="font-size: 18px;"><strong style="text-transform: capitalize;"><%= past_event.title %></strong></p>
                 <p class="event-details m-0" style="font-size: 18px;"><strong>Ensemble :</strong> <%= past_event.ensemble %></p>
                 <p class="event-details m-0" style="font-size: 18px;"><strong>Venue :</strong> <%= past_event.venue %></p>
                 <p class="event-details m-0" style="font-size: 18px;"><strong>City :</strong> <%= past_event.city %></p>
@@ -114,7 +131,8 @@
               </div>
             </div>
           <% end %>
-        </div>
+       </div>    
+      </div>
 
      
     </div>
@@ -137,4 +155,5 @@
 
     cards.forEach(card => observer.observe(card));
   });
+  
 </script>
