@@ -28,20 +28,20 @@
       <div class="row">
 
         <!-- Upcoming Events -->
-        <div class="col-md-8 mx-auto">
-          <h4 class="text-center text-white caudex-bold m-0 py-5">UPCOMING EVENTS</h4>
+        <h4 class="text-center text-white caudex-bold m-0 py-5">UPCOMING EVENTS</h4>
+        <div class="col-md-8 mx-auto py-5 rounded" style="border: 2px solid grey;">
 
           <% @upcoming_events.each do |upcoming_event| %>
             <div class="event-card mb-4 d-flex flex-column flex-md-row">
               
-              <div class="flex-grow-1 text-start text-white">
+              <div class="flex-grow-1 text-start text-white pb-3" style="border-bottom: 2px solid grey;">
 
                 <div class="event-date text-nowrap mb-1">
                   <strong><%= upcoming_event.date.strftime("%-d %B %Y") %></strong>
                 </div>
 
                 <div class="d-md-flex event-details" style="font-size: 18px;">
-                  <div class="col-10">
+                  <div class="col-md-10">
 
                     <%= upcoming_event.title.to_s.titleize %>,
                     <%= upcoming_event.ensemble.to_s.titleize %>,
@@ -73,20 +73,20 @@
         </div>
 
         <!-- Past Events -->
-        <div class="col-md-8 mx-auto">
-          <h4 class="text-center text-white caudex-bold m-0 pt-5 pb-5">PAST EVENTS</h4>
+        <h4 class="text-center text-white caudex-bold m-0 pt-5 pb-5">PAST EVENTS</h4>
+        <div class="col-md-8 mx-auto py-5" style="border: 2px solid grey;">
 
           <% @past_events.each do |past_event| %>
           <div class="event-card mb-4 d-flex flex-column flex-md-row">
 
-            <div class="flex-grow-1 text-start text-white">
+             <div class="flex-grow-1 text-start text-white pb-3" style="border-bottom: 2px solid grey;">
              
                 <div class="event-date text-nowrap mb-1">
                   <strong><%= past_event.date.strftime("%-d %B %Y") %></strong>
                 </div>
 
               <div class="d-md-flex event-details" style="font-size: 18px;">
-                 <div class="col-10">
+                 <div class="col-md-10">
                     <%= past_event.title.to_s.titleize %>,
                     <%= past_event.ensemble.to_s.titleize %>,
                     <%= past_event.venue.to_s.titleize %>,
