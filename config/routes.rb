@@ -10,7 +10,6 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
   root "landings#index"
-  get 'about', to: 'landings#about'
   resources :news
   resources :upcoming_events
   resources :projects
@@ -21,10 +20,13 @@ Rails.application.routes.draw do
   resources :photos
   resources :aboutus
   resources :pressquoute
-  resources :subscribe
+  
+ 
+
+  get  '/subscribes', to: 'subscribes#new',    as: 'subscribes'
+  post '/subscribes', to: 'subscribes#create'
 
 
   get  '/contacts', to: 'contacts#new',    as: 'contacts'
   post '/contacts', to: 'contacts#create'
-  get 'event', to: 'upcoming_events#event'
 end
