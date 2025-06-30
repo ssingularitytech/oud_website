@@ -1,4 +1,4 @@
-    <style>
+<style>
       @media (min-width: 1024px) {
         .contact-bg-image{
         width: 70%;
@@ -44,15 +44,19 @@
           
           <% end %>
           
-          <div class="row text-white d-flex align-items-center mt-4 g-3">
-            <h5 class="text-md-start text-center">Join our newsletter</h5>
-            <div class="col-12 col-lg-8">
-                <input type="text" class="form-control py-3 fs-5 " placeholder="Your email" required>
+          <%= form_with(scope: :subscribe, url: subscribes_path, local: true) do |f| %>
+            <div class="row text-white d-flex align-items-center mt-4 g-3">
+              <h5 class="text-md-start text-center">Join our newsletter</h5>
+              
+              <div class="col-12 col-lg-8">
+                <%= f.email_field :email, class: "form-control py-3 fs-5", placeholder: "Your email", required: true %>
+              </div>
+
+              <div class="col-12 col-lg-4 text-md-end text-center mt-2 mt-lg-0">
+                <%= f.submit "Subscribe", class: "py-3 px-4 w-100 w-md-auto text-white fs-5 comman-bg-color", style: "border: 2px solid grey; border-radius: 12px; color: white; font-size: 20px;" %>
+              </div>
             </div>
-            <div class="col-12 col-lg-4 text-md-end text-center">
-                <button type="submit" class="py-3 px-4 w-100 w-md-auto text-white fs-5 comman-bg-color " style="border: 2px solid grey; border-radius: 12px; color: white; font-size: 20px;">Subscribe</button>
-            </div>
-        </div>
+          <% end %>
         </div>
     </div>
     </div>
@@ -60,4 +64,3 @@
 
 
 
-    
