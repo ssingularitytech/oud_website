@@ -92,16 +92,17 @@
 
               <div class="d-md-flex event-details" style="font-size: 18px;">
               <div class="col-md-10">
-                <%= upcoming_event.title.to_s %>
-                <%= upcoming_event.ensemble.to_s %>
-                <% if upcoming_event.venue.present? && upcoming_event.city.present? %>
-                  , <%= upcoming_event.venue %>, <%= upcoming_event.city %>
-                <% elsif upcoming_event.venue.present? %>
-                  , <%= upcoming_event.venue %>
-                <% elsif upcoming_event.city.present? %>
-                  , <%= upcoming_event.city %>
+                <%= past_event.title.to_s %>
+                <%= past_event.ensemble.to_s %>
+                <% if past_event.venue.present? && past_event.city.present? %>
+                  , <%= past_event.venue %>, <%= past_event.city %>
+                <% elsif past_event.venue.present? %>
+                  , <%= past_event.venue %>
+                <% elsif past_event.city.present? %>
+                  , <%= past_event.city %>
                 <% end %>
               </div>
+
 
                   <div class="col">
                     <% if past_event.link.present? %>
