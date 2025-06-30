@@ -50,9 +50,9 @@
                     <a href="/musics" class="text-white" style="text-decoration: none;">Media</a> |
                     <a href="/contacts" class="text-white" style="text-decoration: none;">Contact</a> -->
                <% if @landings.present? && @landings.last&.text.present? %>
-                <h5 class="text-center">
+                <p class="text-center" style="font-size: 20px;">
                     <%= @landings.last.text %>
-                </h5>
+                </p>
                 <% end %>
                 </div>
         </div>
