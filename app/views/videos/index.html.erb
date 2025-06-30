@@ -48,28 +48,26 @@
   }
 </style>
 
-
 <div class="container px-md-5">
   <div class="py-md-5 py-4">
     <h4 class="text-center text-white caudex-bold p-0 m-0">VIDEOS</h4>
   </div>
 
-  <div class="row row-cols-xl-2 row-cols-md-2 row-cols-1 px-md-0 px-2">
-    <% @videos.each do |video| %>
-      <div class="col mt-4 video-card-wrapper">
+  <div class="row row-cols-xl-2 row-cols-md-2 row-cols-1 px-md-0 px-2" id="video-gallery">
+    <% @videos.each_with_index do |video, index| %>
+      <div class="col mt-4 video-card-wrapper <%= 'd-none' if index >= 4 %>">
         <div class="video-container">
           <% if video.youtube_url.present? %>
             <% youtube_id = video.youtube_url[%r{(?:youtube\.com/watch\?v=|youtu\.be/)([\w\-]+)}, 1] %>
             <iframe
-              src="https://www.youtube.com/embed/<%= youtube_id %>"
+              data-src="https://www.youtube.com/embed/<%= youtube_id %>"
               title="<%= video.name %>"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowfullscreen
               class="video-card"
             ></iframe>
           <% elsif video.video.attached? %>
-            <video class="video-card" controls>
-              <source src="<%= url_for(video.video) %>" type="video/mp4">
+            <video class="video-card" controls data-src="<%= url_for(video.video) %>">
               Your browser does not support the video tag.
             </video>
           <% end %>
@@ -78,16 +76,64 @@
       </div>
     <% end %>
   </div>
+
+  <% if @videos.size > 4 %>
+    <div class="text-center mt-4">
+      <button id="show-more-videos-btn" class="btn btn-outline-light">Show More</button>
+    </div>
+  <% end %>
 </div>
 
 <script>
   document.addEventListener("DOMContentLoaded", () => {
     const cards = document.querySelectorAll(".video-card-wrapper");
 
+    function loadVideo(card) {
+      const iframe = card.querySelector("iframe");
+      if (iframe && iframe.dataset.src) {
+        iframe.src = iframe.dataset.src;
+      }
+      const video = card.querySelector("video");
+      if (video && video.dataset.src) {
+        const source = document.createElement("source");
+        source.src = video.dataset.src;
+        source.type = "video/mp4";
+        video.appendChild(source);
+        video.load();
+      }
+    }
+
+    // Fade-in animation + lazy-load for initially visible
     cards.forEach((card, index) => {
-      setTimeout(() => {
-        card.classList.add("visible");
-      }, index * 300);
+      if (!card.classList.contains('d-none')) {
+        setTimeout(() => {
+          card.classList.add("visible");
+          loadVideo(card);
+        }, index * 300);
+      }
     });
+
+    // Show More functionality
+    const showMoreBtn = document.getElementById('show-more-videos-btn');
+    const videoItems = Array.from(cards);
+    let visibleCount = 4;
+
+    if (showMoreBtn) {
+      showMoreBtn.addEventListener('click', function () {
+        const nextItems = videoItems.slice(visibleCount, visibleCount + 2);
+        nextItems.forEach((item, index) => {
+          item.classList.remove('d-none');
+          setTimeout(() => {
+            item.classList.add("visible");
+            loadVideo(item);
+          }, index * 300);
+        });
+        visibleCount += 2;
+
+        if (visibleCount >= videoItems.length) {
+          showMoreBtn.style.display = 'none';
+        }
+      });
+    }
   });
 </script>
