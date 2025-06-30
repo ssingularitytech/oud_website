@@ -1,77 +1,54 @@
-<style>
-    .pressquoute-image {
-        aspect-ratio: 1/0.85;
-        width: 100%;
-        object-fit: fill;
-    }
-    .view-details-btn {
-        margin-top: auto; 
-    }
-    
-    .comman-border {
-    border: 2px solid grey; 
-    box-shadow: 1px 4px 4px rgba(128, 128, 128, 0.5);
-    }
+    <style>
+        @media (min-width: 768px) {
+            .show-pressquoute-image {
+            aspect-ratio: 1/0.9;
+            object-fit: fill;
+            border : 2px solid grey;
+            border-radius: 12px;
+            }
+            }
 
-      .pressquoute-body-text{
-        color: white;
-        background-color: black;
-        border-bottom-left-radius: 10px;
-        border-bottom-right-radius: 10px;
-        min-height: 160px;
-        display: flex;
-        flex-direction: column;
-      }
-    
-     /* delay loading css */
-    .pressquoute-card-wrapper {
-        opacity: 0;
-        transform: translateY(30px);
-        transition: opacity 0.5s ease, transform 0.5s ease;
+            @media (max-width: 768px) {
+            .show-pressquoute-image {
+              aspect-ratio: 1/0.9;
+              object-fit: fill;
+              border : 2px solid grey;
+              border-radius: 12px;
+            }
+            }
+            
+            @media (min-width: 1024px) {
+            .pressquoute-black-text-box{
+                background-color: #1b1b1b;
+                border: 2px solid grey;
+                border-radius: 12px;
+            }
         }
+    </style>
 
-    .pressquoute-card-wrapper.visible {
-        opacity: 1;
-        transform: translateY(0);
-        }
-</style>
-    <%= render partial: 'layouts/loader' %>
     <div class="container">
-    <div class="py-md-5 py-4">
-         <h4 class="text-center text-white caudex-bold p-0 m-0">PRESS QUOTES</h4>
-     </div>
-        <div class="row row-cols-xl-3 row-cols-md-2 row-cols-1">
+        
+       <div class="text-center mt-2 gap-2 d-md-flex justify-content-center text-white mt-5">
+            <h4 class="text-center text-white caudex-bold p-0 m-0">PRESS QUOTES</h4>
+        </div>
             <% @pressquoutes.each do |pressquoute| %>
-            <div class="col mt-4 d-flex justify-content-center">
-
-                <div class="pressquoute-card-wrapper" style="position: relative; width: 95%;">
-                    <a href="<%= pressquoute_path(pressquoute) %>" class="pressquoute-card-link" style="position: absolute; inset: 0; z-index: 10;"></a>
-                    <div class="pressquoute-card comman-border" style="width: 100%; position: relative; z-index: 5;">
-                        <% if pressquoute.image.attached? %>
-                          <img src="<%= url_for(pressquoute.image) %>" class="img-fluid pressquoute-image" loading="lazy">
-                        <% end %>
-                        <div class="pressquoute-body-text py-3 px-3">
-                            <a href="<%= pressquoute_path(pressquoute) %>" class="text-white view-details-btn caudex-normal">Know More</a>
-                        </div>
+           <div class="row text-white px-md-5 px-2 mt-5">
+                 <div class="col-lg-6 d-flex flex-column pe-md-4">
+                    <% if pressquoute.image.attached? %>
+                        <img src="<%= url_for(pressquoute.image) %>" class="img-fluid show-pressquoute-image" loading="lazy">
+                    <% end %>
+                </div>
+                <div class="col-lg-6 d-flex pressquoute-black-text-box">
+                    <div class="description py-2">
+                    <p><%= pressquoute.text %></p>
                     </div>
                 </div>
-                
-            </div>
-           <% end %>
-        </div>
+            </div>    
+            <% end %>
+       
     </div>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const cards = document.querySelectorAll(".pressquoute-card-wrapper");
 
-            cards.forEach((card, index) => {
-                setTimeout(() => {
-                    card.classList.add("visible");
-                }, index * 300); 
-            });
-        });
-    </script>
 
 
 
