@@ -571,5 +571,33 @@ end
     end
 
 
+    config.model 'Newsletter' do
+      edit do
+        field :file, :active_storage
+      end
+
+      list do
+        field :id
+        field :file do
+          pretty_value do
+            if bindings[:object].file.attached?
+              bindings[:view].link_to(bindings[:object].file.filename.to_s, Rails.application.routes.url_helpers.rails_blob_path(bindings[:object].file, only_path: true))
+            end
+          end
+        end
+        field :created_at
+      end
+
+      show do
+        field :file do
+          pretty_value do
+            if bindings[:object].file.attached?
+              bindings[:view].link_to(bindings[:object].file.filename.to_s, Rails.application.routes.url_helpers.rails_blob_path(bindings[:object].file, only_path: true))
+            end
+          end
+        end
+      end
+    end
+
   end
 end
