@@ -5,7 +5,8 @@ class ContactMailer < ApplicationMailer
   def send_contact_mail(contact)
     @contact = contact
     mail(
-      to: 'info@nizarrohana.com',
+      # to: 'info@nizarrohana.com',
+      to: 'deepak@ssingularity.co.in',
       subject: 'New Contact Us Submission',
       reply_to: @contact.email  # Add this to allow replies to the contact
     )
