@@ -40,14 +40,14 @@
                 </div>
 
                 <div class="d-md-flex event-details" style="font-size: 18px;">
-                  <div class="col-md-10">
-                    <%= upcoming_event.title.to_s %>,
-                    <%= upcoming_event.ensemble.to_s %>,
-                    <%= upcoming_event.venue %><% if upcoming_event.city.present? %>, <%= upcoming_event.city %><% end %>
-                  </div>
-
-
-
+                <div class="col-md-10">
+                  <%= [
+                    upcoming_event.title.presence,
+                    upcoming_event.ensemble.presence,
+                    upcoming_event.venue.presence,
+                    upcoming_event.city.presence
+                  ].compact.join(", ") %>
+                </div>
 
                   <div class="col">
                       <% if upcoming_event.link.present? %>
@@ -86,11 +86,14 @@
                 </div>
 
               <div class="d-md-flex event-details" style="font-size: 18px;">
-                  <div class="col-md-10">
-                    <%= past_event.title.to_s %>,
-                    <%= past_event.ensemble.to_s %>,
-                    <%= past_event.venue %><% if past_event.city.present? %>, <%= past_event.city %><% end %>
-                  </div>
+                <div class="col-md-10">
+                  <%= [
+                    past_event.title.presence,
+                    past_event.ensemble.presence,
+                    past_event.venue.presence,
+                    past_event.city.presence
+                  ].compact.join(", ") %>
+                </div>
 
 
                   <div class="col">
