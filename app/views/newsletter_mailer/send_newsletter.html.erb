@@ -1,5 +1,21 @@
-<p>Hello,</p>
+<p>Hello,  <%= @subscriber_email %></p>
 
-<p>A new newsletter is available. Please check the attached file.</p>
+<p>A new newsletter is available.</p>
+
+<% if @newsletter.file.attached? %>
+  <% if @newsletter.file.image? %>
+    <p><strong>Embedded Image:</strong></p>
+    <p>
+      <img src="cid:<%= @newsletter.file.filename.to_s %>" alt="Newsletter Image" style="max-width: 100%;" />
+    </p>
+  <% else %>
+    <p><strong>Attached File:</strong></p>
+    <p>
+      <a href="<%= rails_blob_url(@newsletter.file, only_path: false) %>">
+        Click here to view the file: <%= @newsletter.file.filename.to_s %>
+      </a>
+    </p>
+  <% end %>
+<% end %>
 
 <p>Thank you,<br/>Singularity Team</p>
