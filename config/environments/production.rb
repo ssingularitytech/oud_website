@@ -75,6 +75,9 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.perform_deliveries = true
   config.action_mailer.delivery_method = :sendgrid_api
+  config.action_mailer.default_url_options = { host: 'nizarrohana.com', protocol: 'https' }
+  Rails.application.routes.default_url_options[:host] = 'nizarrohana.com'
+  Rails.application.config.active_storage.resolve_model_to_route = :rails_storage_proxy
 
   # Change delivery method to use SendGrid API
   require_relative '../../lib/sendgrid_delivery'
