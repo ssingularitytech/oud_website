@@ -40,11 +40,11 @@
 
     </style>
 <div class="container-fluid footer-main-div">
-    <div class="row d-flex py-4 px-3">
+    <div class="row d-flex py-3 px-4">
         
         <!-- logo section -->
         <div class="col-md-4 px-md-4 text-start">
-                <div class="nair-logo mt-3">
+                <div class="nair-logo">
                     <a href="/" class="logo">
                         <%= image_tag "logo.png", alt: "logo", class: "footer-nair-icon" %>
                     </a>
@@ -53,18 +53,19 @@
         
 
         <!-- Disclaimer -->
-            <div class="col-md-4 text-md-center">
-            <div class="mt-md-3 mt-4" style="opacity: 0.8;">
-                <% if @landings.present? && @landings.last&.text.present? %>
-                <p class="text-white copyright mb-0"><%= @landings.last.text %></p>
-                <% end %>
+            <div class="col-md-4 d-flex justify-content-md-center align-items-center" style="opacity: 0.8;">
+            <% if @landings.present? && @landings.last&.text.present? %>
+                <p class="text-white copyright mb-0 pt-md-0 pt-3">
+                <%= @landings.last.text %>
+                </p>
+            <% end %>
             </div>
-            </div>
+
 
 
         <!-- Contact Info -->
-            <div class="col-md-4 poppins-regular d-flex justify-content-md-center" style="font-size: 14px; letter-spacing: 2px; word-wrap: break-word; opacity: 0.8;">
-            <div class="social-icons d-flex justify-content-md-center gap-1 mt-md-2 mt-3">
+            <div class="col-md-4 poppins-regular d-flex justify-content-md-center align-items-md-center flex-column" style="font-size: 14px; letter-spacing: 2px; word-wrap: break-word; opacity: 0.8;">
+            <div class="social-icons d-flex justify-content-md-center align-items-md-center gap-2 mt-md-2 mt-3">
                 <a href="https://www.facebook.com/nizarrohana2" target="_blank" rel="noopener noreferrer">
                 <%= image_tag "facebook-icon.png", alt: "Facebook Logo", style: "height: 45px; object-fit: contain;" %>
                 </a>
@@ -79,6 +80,7 @@
                 </a>
             </div>
             </div>
+
 
 
     </div>

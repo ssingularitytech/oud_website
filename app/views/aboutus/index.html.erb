@@ -1,124 +1,89 @@
 
-
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
   }
-
-    .aboutus-image{
-      object-fit: contain;
-      border-radius: 12px;
+  .aboutus-image {
+    object-fit: contain;
+    border-radius: 12px;
+    width: 100%;
+    height: auto;
   }
+  .text-limited {
+    overflow: hidden;
+  }
+</style>
 
-
-      @media (min-width: 1024px) {
-      .biography-black-text-box{
-        background-color: #1b1b1b;
-        border: 2px solid grey;
-        border-radius: 12px;
-      }
-    }
-
-  </style>
-  <div class="container-fluid background-color">
-    <div class="py-md-5 py-4">
-         <h4 class="text-center text-white caudex-bold p-0 m-0">ABOUT</h4>
-     </div>
-
-    <% @aboutus.each do |about| %>
-      <div class="row px-md-5 mt-4">
-        <div class="col-lg-6 d-flex">
-          <div class="biography-image-container">
-            <% if about.image&.attached? %>
-              <%= image_tag about.image, alt: "About Image", class: "img-fluid aboutus-image" %>
-            <% end %>
-          </div>
-        </div>
-
-        <div class="col-lg-6 text-white d-flex align-items-center justify-content-center biography-black-text-box">
-          <div class="mt-lg-0 mt-4 py-2 px-2">
-            <%= about.text.body.to_s.html_safe %>
-          </div>
-        </div>
-      </div>
-    <% end %>
+<div class="container-fluid background-color">
+  <div class="py-md-5 py-4">
+    <h4 class="text-center text-white caudex-bold p-0 m-0">ABOUT</h4>
   </div>
 
+  <% @aboutus.each do |about| %>
+    <% 
+      plain_text = strip_tags(about.text.body.to_s)
+      words = plain_text.split(/\s+/)
+      # initially show ALL
+      first_words = words.join(" ")
+    %>
+    <div class="row px-md-5 mt-4 align-items-start">
+      <!-- IMAGE -->
+      <div class="col-lg-6 mb-4 mb-lg-0">
+        <% if about.image&.attached? %>
+          <%= image_tag about.image, alt: "About Image", class: "img-fluid aboutus-image", id: "about-image-#{about.id}" %>
+        <% end %>
+      </div>
 
+      <!-- TEXT limited to image height -->
+      <div class="col-lg-6 text-white d-flex align-items-start">
+        <div id="about-text-<%= about.id %>" class="text-limited">
+          <%= about.text.body.to_s.html_safe %>
+        </div>
+      </div>
+    </div>
 
-  <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const elements = document.querySelectorAll(".fade-name-box ");
+    <!-- extra block for showing overflow text -->
+    <div class="row px-md-5 mt-2">
+      <div class="col-12 text-white">
+        <div id="overflow-text-<%= about.id %>"></div>
+      </div>
+    </div>
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("show");
-          // } else {
-          //   entry.target.classList.remove("show");
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        const img = document.getElementById("about-image-<%= about.id %>");
+        const textBlock = document.getElementById("about-text-<%= about.id %>");
+        const overflowBlock = document.getElementById("overflow-text-<%= about.id %>");
+
+        function splitText() {
+          const imgHeight = img.clientHeight;
+          textBlock.style.maxHeight = imgHeight + "px";
+
+          // after forcing maxHeight, get hidden text
+          // clone for measurement
+          const clone = textBlock.cloneNode(true);
+          clone.style.position = "absolute";
+          clone.style.visibility = "hidden";
+          clone.style.maxHeight = "none";
+          document.body.appendChild(clone);
+
+          if (clone.scrollHeight > imgHeight) {
+            // get visible content
+            textBlock.style.overflow = "hidden";
+            // get hidden content (in theory)
+            overflowBlock.innerHTML = textBlock.innerHTML;
           }
-        });
-      },
-      { threshold: 0.2 }
-    );
+          document.body.removeChild(clone);
+        }
 
-    elements.forEach((el) => observer.observe(el));
-  });
-
-</script>
-
-
-  <!-- <style>
-    .about-image {
-      width: 100%;
-      height: auto;
-      border-radius: 4px;
-    }
-
-    .about-section {
-      background-color: #f8f9fa;
-      padding: 40px 0;
-    }
-
-    .about-text {
-      color: #333;
-    }
-
-    .headline {
-      letter-spacing: 1px;
-      color: #888;
-      text-transform: uppercase;
-    }
-
-    .description-box {
-      background-color: #f0f0f0;
-      padding: 30px;
-      margin-top: 30px;
-    }
-  </style>
-
-
-
-  <div class="container about-section">
-    <div class="row align-items-center">
-      <div class="col-lg-4 mb-4 mb-lg-0">
-        <img src="https://via.placeholder.com/300x400" alt="About Image" class="about-image">
-      </div>
-      <div class="col-lg-8 about-text">
-        <h2 class="fw-bold">About Us</h2>
-        <h6 class="headline">Sample Headline</h6>
-        <p>
-          Article evident arrived express highest men did boy. Mistress sensible entirely am so. Quick can manor smart money hopes worth too. Comfort produce husband boy her had hearing. Law others theirs passed but wishes. You day real less till dear read. Considered use dispatched melancholy sympathize discretion led. Oh feel if up to till like.
-        </p>
-      </div>
-    </div>
-
-    <div class="description-box mt-4">
-      <p>
-        He an thing rapid these after going drawn or. Timed she his law the spoil round defer. In surprise concerns informed betrayed he learning is ye. Ignorant formerly so ye blessing. He as spoke avoid given downs money on we. Of properly carriage shutters ye as wandered up repeated moreover.
-      </p>
-    </div>
-  </div> -->
+        if (img.complete) {
+          splitText();
+        } else {
+          img.addEventListener("load", splitText);
+        }
+      });
+    </script>
+  <% end %>
+</div>
