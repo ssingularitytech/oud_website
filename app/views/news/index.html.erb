@@ -50,7 +50,7 @@
                             <img src="<%= url_for(news.news_image) %>" class="img-fluid news-image" loading="lazy">
                         <% end %>
                         <div class="news-body-text py-3 px-3">
-                            <h5 class="caudex-bold"><%= news.news_date.strftime("%d %b %Y") %></h5>
+                            <h5 class="caudex-bold"><%= news.news_date.strftime("%d %B %Y") %></h5>
                             <h5 class="caudex-bold"><%= news.news_name %></h5>
                             <!-- <p class="caudex-normal" style="font-size: 17px;"><%= news.news_description.to_plain_text.split[0...6].join(' ') %>...</p> -->
                             <a href="<%= news_path(news) %>" class="text-white view-details-btn caudex-normal">Know More</a>

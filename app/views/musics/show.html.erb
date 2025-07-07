@@ -60,7 +60,7 @@
 
   <div class="container">
       <div class="row text-white px-md-5 px-2">
-          <div class="text-center mt-5 justify-content-center d-flex gap-2">
+          <div class="text-center mt-5 justify-content-center d-flex gap-2 caudex-bold text-white">
               <h5><%= @music.name %></h5>
               <h5><%= @music.date.strftime("%Y") %></h5>
           </div>
@@ -75,10 +75,10 @@
               <% end %>
               <div>
 
-                <h5><%= @music.name %></h5>
+                <h5 class="caudex-bold text-white"><%= @music.name %></h5>
                 <div class="gap-2">
-                  <p class="event-details  m-md-0 mb-1"><span>Preview</span> <%= sanitize(@music.preview, tags: ['a'], attributes: ['href']) %></p>
-                  <div class="d-flex gap-2 pt-2">
+                  <p class="event-details  m-md-0 mb-1 caudex-bold text-white"><span>Preview</span> <%= sanitize(@music.preview, tags: ['a'], attributes: ['href']) %></p>
+                  <div class="d-flex gap-2 pt-2 caudex-bold text-white">
                     <p><i class="bi bi-plus-circle"></i></p>
                     <p>Save on Spotify</p>
                   </div>

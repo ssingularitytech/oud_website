@@ -48,7 +48,7 @@
                         <img src="<%= url_for(music.image) %>" class="img-fluid music-image" loading="lazy">
                     <% end %>
                     <div class="music-body-text py-3 px-3 d-flex flex-column h-100">
-                        <h5 class="caudex-bold"><%= music.date.strftime("%d %b %Y") %></h5>
+                        <h5 class="caudex-bold"><%= music.date.strftime("%d %B %Y") %></h5>
                         <h5 class="caudex-bold"><%= music.name %></h5>
                         <!-- <p class="caudex-normal" style="font-size: 17px;"><%= music.description.to_plain_text.split[0...8].join(' ') %>...</p> -->
                         
