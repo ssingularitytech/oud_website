@@ -522,24 +522,28 @@ end
         field :updated_at
       end
 
-list do
-  scopes [:all, :upcoming, :past]
+      list do
+        scopes [:all, :upcoming, :past]
+        
+        sort_by :date      
+        sort_reverse true  
 
-  field :title
-  field :date
-  field :ensemble
-  field :venue
-  field :city
-  field :is_upcoming
-  field :link do
-    pretty_value do
-      if value.present?
-        bindings[:view].link_to 'Tickets', value, target: "_blank", rel: "noopener noreferrer"
+        field :title
+        field :date
+        field :ensemble
+        field :venue
+        field :city
+        field :is_upcoming
+        field :link do
+          pretty_value do
+            if value.present?
+              bindings[:view].link_to 'Tickets', value, target: "_blank", rel: "noopener noreferrer"
+            end
+          end
+        end
+        field :created_at
       end
-    end
-  end
-  field :created_at
-end
+
 
     end
 
