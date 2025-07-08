@@ -47,7 +47,7 @@
   <div class="row row-cols-xl-3 row-cols-md-2 row-cols-1">
     <% @press.each_with_index do |press, index| %>
       <div class="col mt-4 d-flex justify-content-center press-card-wrapper <%= 'd-none' if index >= 6 %>">
-        <div style="position: relative; width: 95%;">
+        <div class="press-card-wrapper" style="position: relative; width: 95%;">
           <a href="<%= press.link %>" target="_blank" class="news-card-link" style="position: absolute; inset: 0; z-index: 10;"></a>
           <div class="project-card comman-border" style="width: 100%; position: relative; z-index: 5;">
             <% if press.image.attached? %>

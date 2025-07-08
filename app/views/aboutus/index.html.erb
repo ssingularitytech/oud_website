@@ -1,108 +1,74 @@
-<style>
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  .aboutus-image {
-    object-fit: contain;
-    border-radius: 12px;
-    width: 100%;
-    height: auto;
-  }
-  .text-limited {
-    overflow: hidden;
-  }
-</style>
 
-<div class="container-fluid background-color">
-  <div class="py-md-5 py-4">
-    <h4 class="text-center text-white caudex-bold p-0 m-0">ABOUT</h4>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+  }
+
+    .aboutus-image{
+      object-fit: contain;
+      border-radius: 12px;
+  }
+
+
+      @media (min-width: 1024px) {
+      .biography-black-text-box{
+        background-color: #1b1b1b;
+        border: 2px solid grey;
+        border-radius: 12px;
+      }
+    }
+
+  </style>
+  <div class="container-fluid background-color">
+    <div class="py-md-5 py-4">
+         <h4 class="text-center text-white caudex-bold p-0 m-0">ABOUT</h4>
+     </div>
+
+    <% @aboutus.each do |about| %>
+      <div class="row px-md-5">
+        <div class="col-lg-6 d-flex mx-auto">
+          <div class="biography-image-container">
+            <% if about.image&.attached? %>
+              <%= image_tag about.image, alt: "About Image", class: "img-fluid aboutus-image" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-10 text-white d-flex align-items-center justify-content-center mx-auto pt-md-5">
+          <div class="mt-lg-0 mt-4 py-2 px-2">
+            <%= about.text.body.to_s.html_safe %>
+          </div>
+      </div>
+    <% end %>
   </div>
 
-  <% @aboutus.each do |about| %>
-    <% html_text = about.text.body.to_s %>
 
-    <div class="row px-md-5 mt-4 align-items-start">
-      <!-- IMAGE -->
-      <div class="col-lg-6 mb-4 mb-lg-0">
-        <% if about.image&.attached? %>
-          <%= image_tag about.image, alt: "About Image", class: "img-fluid aboutus-image", id: "about-image-#{about.id}" %>
-        <% end %>
-      </div>
 
-      <!-- TEXT next to IMAGE -->
-      
-    </div>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const elements = document.querySelectorAll(".fade-name-box ");
 
-    <!-- hidden text will appear here -->
-    <div class="row px-md-5 pt-4">
-      <div class="col-12 text-white">
-        <div id="overflow-text-<%= about.id %>"></div>
-      </div>
-    </div>
-
-    <script>
-      document.addEventListener("DOMContentLoaded", function() {
-        const img = document.getElementById("about-image-<%= about.id %>");
-        const textBlock = document.getElementById("about-text-<%= about.id %>");
-        const overflowBlock = document.getElementById("overflow-text-<%= about.id %>");
-
-        function splitText() {
-          const imgHeight = img.clientHeight;
-          textBlock.style.maxHeight = imgHeight + "px";
-          textBlock.style.overflow = "hidden";
-
-          // clone with original content
-          const clone = textBlock.cloneNode(true);
-          clone.style.position = "absolute";
-          clone.style.visibility = "hidden";
-          clone.style.height = "auto";
-          clone.style.maxHeight = "none";
-          document.body.appendChild(clone);
-
-          // find the difference between visible and hidden
-          if (clone.scrollHeight > imgHeight) {
-            // measure how much is hidden
-            const visibleHeight = imgHeight;
-            const totalHeight = clone.scrollHeight;
-
-            // create a range to get text after visibleHeight
-            let hiddenHTML = "";
-            let walker = document.createTreeWalker(clone, NodeFilter.SHOW_TEXT, null, false);
-            let charCount = 0;
-            let limitReached = false;
-
-            while (walker.nextNode()) {
-              const node = walker.currentNode;
-              const range = document.createRange();
-              range.selectNodeContents(clone);
-              range.setEnd(node, node.length);
-              const rect = range.getBoundingClientRect();
-              if (rect.height > visibleHeight && !limitReached) {
-                hiddenHTML += node.textContent;
-                limitReached = true;
-              } else if (limitReached) {
-                hiddenHTML += node.textContent;
-              }
-            }
-
-            // fallback if walker fails
-            if (!hiddenHTML) {
-              hiddenHTML = clone.innerHTML;
-            }
-
-            overflowBlock.innerHTML = hiddenHTML;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("show");
+          // } else {
+          //   entry.target.classList.remove("show");
           }
-          document.body.removeChild(clone);
-        }
+        });
+      },
+      { threshold: 0.2 }
+    );
 
-        if (img.complete) {
-          splitText();
-        } else {
-          img.addEventListener("load", splitText);
-        }
-      });
-    </script>
-  <% end %>
-</div>
+    elements.forEach((el) => observer.observe(el));
+  });
+
+</script>
+
+
+ 
