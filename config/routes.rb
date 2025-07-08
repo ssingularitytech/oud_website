@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   resources :musics
   resources :new_releases
   resources :photos
-  resources :aboutus
+  resources :aboutus, path: 'about'
   resources :pressquoute
   
  
