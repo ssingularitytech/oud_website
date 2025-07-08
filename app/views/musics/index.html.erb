@@ -1,134 +1,136 @@
-<style>
-  .music-image {
-    aspect-ratio: 1/0.85;
-    width: 100%;
-    object-fit: fill;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-  }
+  <style>
+    .music-image {
+      aspect-ratio: 1/0.85;
+      width: 100%;
+      object-fit: fill;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+    }
 
-  .view-details-btn {
-    margin-top: auto;
-  }
+    .view-details-btn {
+      margin-top: auto;
+    }
 
-  .common-border {
-    border: 2px solid grey;
-    box-shadow: 1px 4px 4px rgba(128, 128, 128, 0.5);
-    border-radius: 10px;
-  }
+    .common-border {
+      border: 2px solid grey;
+      box-shadow: 1px 4px 4px rgba(128, 128, 128, 0.5);
+      border-radius: 10px;
+    }
 
-  .music-body-text {
-    color: white;
-    background-color: black;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-    min-height: 160px;
-    display: flex;
-    flex-direction: column;
-  }
+    .music-body-text {
+      color: white;
+      background-color: black;
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
+      min-height: 160px;
+      display: flex;
+      flex-direction: column;
+    }
 
-  /* delay loading css */
-  .music-card-wrapper {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
-  }
+    /* delay loading css */
+    .music-card-wrapper {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
 
-  .music-card-wrapper.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-</style>
+    .music-card-wrapper.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
 
-<div class="container" id="music-section">
-  <div class="py-md-5 py-4">
-    <h4 class="text-center text-white caudex-bold p-0 m-0">MUSIC</h4>
-  </div>
+  <div class="container" id="music-section">
+    <div class="py-md-5 py-4">
+      <h4 class="text-center text-white caudex-bold p-0 m-0">MUSIC</h4>
+    </div>
 
-  <div class="row row-cols-xl-3 row-cols-md-2 row-cols-1">
-    <% @musics.each_with_index do |music, index| %>
-      <div class="col mt-4 d-flex justify-content-center music-col-wrapper <%= 'd-none' if index >= 6 %>">
-        <div class="music-card-wrapper" style="position: relative; width: 95%;">
-          <a href="<%= music_path(music) %>" class="music-card-link" style="position: absolute; inset: 0; z-index: 10;"></a>
-          <div class="music-card common-border" style="width: 100%; position: relative; z-index: 5;">
-            <% if music.image.attached? %>
-              <img src="<%= url_for(music.image) %>" class="img-fluid music-image" loading="lazy">
-            <% end %>
-            <div class="music-body-text py-3 px-3 d-flex flex-column h-100">
-              <h5 class="caudex-bold"><%= music.date.strftime("%-d %B %Y") %></h5>
-              <h5 class="caudex-bold"><%= music.name %></h5>
+    <div class="row row-cols-xl-3 row-cols-md-2 row-cols-1">
+      <% @musics.each_with_index do |music, index| %>
+        <div class="col mt-4 d-flex justify-content-center music-col-wrapper <%= 'd-none' if index >= 6 %>">
+          <div class="music-card-wrapper" style="position: relative; width: 95%;">
+            <a href="<%= music_path(music) %>" class="music-card-link" style="position: absolute; inset: 0; z-index: 10;"></a>
+            <div class="music-card common-border" style="width: 100%; position: relative; z-index: 5;">
+              <% if music.image.attached? %>
+                <img src="<%= url_for(music.image) %>" class="img-fluid music-image" loading="lazy">
+              <% end %>
+              <div class="music-body-text py-3 px-3 d-flex flex-column h-100">
+                <h5 class="caudex-bold"><%= music.date.strftime("%-d %B %Y") %></h5>
+                <h5 class="caudex-bold"><%= music.name %></h5>
 
-              <div class="mt-auto">
-                <a href="<%= music_path(music) %>" class="text-white view-details-btn caudex-normal">Know More</a>
+                <div class="mt-auto">
+                  <a href="<%= music_path(music) %>" class="text-white view-details-btn caudex-normal">Know More</a>
+                </div>
               </div>
             </div>
           </div>
         </div>
+      <% end %>
+    </div>
+
+    <% if @musics.size > 6 %>
+      <div class="text-center my-4">
+        <button id="MusicShowMoreBtn" class="caudex-bold py-2 px-4 rounded fs-5 back-button text-white"
+          style="border: 2px solid blue; border-radius: 12px;">
+          Show More
+        </button>
+        <button id="MusicShowLessBtn"
+          class="caudex-bold py-2 px-4 rounded fs-5 back-button text-white d-none"
+          style="border: 2px solid blue; border-radius: 12px;">
+          Show Less
+        </button>
       </div>
     <% end %>
   </div>
 
-  <% if @musics.size > 6 %>
-    <div class="text-center my-4">
-      <button id="MusicShowMoreBtn" class="caudex-bold py-2 px-4 rounded fs-5 back-button text-white"
-        style="border: 2px solid blue; border-radius: 12px;">
-        Show More
-      </button>
-      <button id="MusicShowLessBtn"
-        class="caudex-bold py-2 px-4 rounded fs-5 back-button text-white d-none"
-        style="border: 2px solid blue; border-radius: 12px;">
-        Show Less
-      </button>
-    </div>
-  <% end %>
-</div>
 
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const cards = document.querySelectorAll(".music-col-wrapper");
-    const showMoreBtn = document.getElementById("MusicShowMoreBtn");
-    const showLessBtn = document.getElementById("MusicShowLessBtn");
+  <!-- show-more show-less js -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const cards = document.querySelectorAll(".music-col-wrapper");
+      const showMoreBtn = document.getElementById("MusicShowMoreBtn");
+      const showLessBtn = document.getElementById("MusicShowLessBtn");
 
-    let visibleCount = 6;
+      let visibleCount = 6;
 
-    function updateVisibleCards() {
-      cards.forEach((card, index) => {
-        if (index < visibleCount) {
-          card.classList.remove("d-none");
-          setTimeout(() => {
+      function updateVisibleCards() {
+        cards.forEach((card, index) => {
+          if (index < visibleCount) {
+            card.classList.remove("d-none");
+            setTimeout(() => {
+              const inner = card.querySelector('.music-card-wrapper');
+              inner && inner.classList.add("visible");
+            }, index * 100);
+          } else {
+            card.classList.add("d-none");
             const inner = card.querySelector('.music-card-wrapper');
-            inner && inner.classList.add("visible");
-          }, index * 100);
+            inner && inner.classList.remove("visible");
+          }
+        });
+
+        if (visibleCount >= cards.length) {
+          showMoreBtn.classList.add("d-none");
+          showLessBtn.classList.remove("d-none");
         } else {
-          card.classList.add("d-none");
-          const inner = card.querySelector('.music-card-wrapper');
-          inner && inner.classList.remove("visible");
+          showMoreBtn.classList.remove("d-none");
+          showLessBtn.classList.add("d-none");
         }
-      });
-
-      if (visibleCount >= cards.length) {
-        showMoreBtn.classList.add("d-none");
-        showLessBtn.classList.remove("d-none");
-      } else {
-        showMoreBtn.classList.remove("d-none");
-        showLessBtn.classList.add("d-none");
       }
-    }
 
-    updateVisibleCards();
-
-    showMoreBtn.addEventListener("click", () => {
-      visibleCount += 3;
       updateVisibleCards();
-    });
 
-    showLessBtn.addEventListener("click", () => {
-      visibleCount = 6;
-      updateVisibleCards();
-      window.scrollTo({
-        top: document.getElementById("music-section").offsetTop - 100,
-        behavior: "smooth"
+      showMoreBtn.addEventListener("click", () => {
+        visibleCount += 3;
+        updateVisibleCards();
+      });
+
+      showLessBtn.addEventListener("click", () => {
+        visibleCount = 6;
+        updateVisibleCards();
+        window.scrollTo({
+          top: document.getElementById("music-section").offsetTop - 100,
+          behavior: "smooth"
+        });
       });
     });
-  });
-</script>
+  </script>

@@ -1,62 +1,59 @@
-<style>
+  <style>
 
+      @media (min-width: 768px) {
+      .show-music-image {
+        height: 15rem;
+        width: 50%;
+        border-radius: 12px;
+    }
+      }
 
-    @media (min-width: 768px) {
-     .show-music-image {
-      height: 15rem;
-      width: 50%;
-      border-radius: 12px;
-  }
+          @media (max-width: 768px) {
+      .show-music-image {
+        height: 10rem;
+        width: 50%;
+        border-radius: 12px;
+    }
+      }
+
+    .first-row{
+      border-top-left-radius: 12px;
+      border-top-right-radius: 12px;
     }
 
-        @media (max-width: 768px) {
-     .show-music-image {
-      height: 10rem;
-      width: 50%;
-      border-radius: 12px;
-  }
+      .second-row{
+      border-bottom-left-radius: 12px;
+      border-bottom-right-radius: 12px;
     }
+        
+      .play-button {
+        display: none;
+      }
+
+      .audio-card .play-button {
+        display: none;
+      }
+
+      .audio-card:hover .serial-number {
+        display: none;
+      }
+
+      .audio-card:hover .play-button {
+        display: block;
+      }
+
+      .audio-card {
+        cursor: pointer;
+        /* border: 2px solid #454545; */
+      }
+
+      .audio-card:hover {
+        background-color: #305838; !important;
+      }
 
 
 
-  .first-row{
-    border-top-left-radius: 12px;
-    border-top-right-radius: 12px;
-  }
-
-    .second-row{
-    border-bottom-left-radius: 12px;
-    border-bottom-right-radius: 12px;
-  }
-      
-    .play-button {
-      display: none;
-    }
-
-    .audio-card .play-button {
-      display: none;
-    }
-
-    .audio-card:hover .serial-number {
-      display: none;
-    }
-
-    .audio-card:hover .play-button {
-      display: block;
-    }
-
-    .audio-card {
-      cursor: pointer;
-      /* border: 2px solid #454545; */
-    }
-
-    .audio-card:hover {
-      background-color: #305838; !important;
-    }
-
-
-
-</style>
+  </style>
 
   <div class="container">
       <div class="row text-white px-md-5 px-2">
@@ -65,66 +62,15 @@
               <h5  class="pt-1"><%= @music.date.strftime("%-d %B %Y") %></h5>
           </div>
 
-
-          <div class="main-row">
-          <!-- first row -->
-          <div class="row first-row mt-4 p-md-4 p-2" style="background-color: #305838;">
-            <div class="col-md-6 col-11 p-0 justify-content-start d-flex gap-3">
-              <% if @music.image.attached? %>
-              <img src="<%= url_for(@music.image) %>" class="img-fluid show-music-image">
-              <% end %>
-              <div>
-
-                <h5 class="caudex-bold text-white"><%= @music.name %></h5>
-                <div class="gap-2">
-                  <p class="event-details  m-md-0 mb-1 caudex-bold text-white"><span>Preview</span> <%= sanitize(@music.preview, tags: ['a'], attributes: ['href']) %></p>
-                  <div class="d-flex gap-2 pt-2 caudex-bold text-white">
-                    <p><i class="bi bi-plus-circle"></i></p>
-                    <p>Save on Spotify</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-6 col-1  d-flex justify-content-end">
-              <a target="_blank" href="https://open.spotify.com/album/52z0eL1svCLsmV7HxvTHgB?...">
-                <h3 class="mb-0"><i class="bi bi-spotify text-white"></i></h3>
-              </a>
-            </div>
-          </div>
-
-          <!-- second row -->
-          <div class="row second-row py-3" style="height: 15rem; overflow-y: auto; background-color: #203624;">
-            <% @music.audios.each_with_index do |audio, index| %>
-              <div class="audio-card d-flex justify-content-between align-items-center text-white px-3 py-2 mb-2 rounded" 
-                   onclick="togglePlay(this, '<%= audio.id %>')">
-                <div class="d-flex align-items-center gap-3">
-                  <div class="position-relative" style="width: 24px; height: 24px;">
-                    <span class="serial-number position-absolute top-50 start-50 translate-middle"><%= index + 1 %></span>
-                    <i class="bi bi-play-fill play-button position-absolute top-50 start-50 translate-middle"></i>
-                  </div>
-
-                  <div>
-                    <p class="m-0 fw-bold"><%= audio.title %></p>
-                  </div>
-                </div>
-
-                <% if audio.audio.attached? %>
-                  <div class="d-flex align-items-center gap-2">
-                    <audio id="audio-<%= audio.id %>" src="<%= url_for(audio.audio) %>" preload="metadata"></audio>
-                    <span class="current-time">0:00</span>
-                    <span>/</span>
-                    <span id="duration-<%= audio.id %>">--:--</span>
-                  </div>
-                <% end %>
+          <div class="main-row pt-5">
+           
+            <% if @music.embed_code.present? %>
+              <div class="spotify-embed">
+               <%= @music.embed_code.html_safe if @music.embed_code.present? %>
               </div>
             <% end %>
-          </div>
 
           </div>
-
-          
-
 
           <div class="description mt-md-4 mt-2">
               <p><%= @music.description %></p>
@@ -139,6 +85,7 @@
                 <% end %>
               <% end %>
           </div>
+          
 
           <div class="">
               <a href="/musics" style="text-decoration: none;">
@@ -153,72 +100,11 @@
       </div>
   </div>
 
-
-
-<!-- JavaScript to Stop Previous Audio -->
-<script>
-function togglePlay(card, audioId) {
-  const audio = document.getElementById(`audio-${audioId}`);
-  const playButton = card.querySelector('.play-button');
-  const serialNumber = card.querySelector('.serial-number');
-  
-  // Stop all other audios
-  document.querySelectorAll('audio').forEach(otherAudio => {
-    if (otherAudio.id !== `audio-${audioId}`) {
-      otherAudio.pause();
-      otherAudio.currentTime = 0;
-      const otherCard = otherAudio.closest('.audio-card');
-      const otherPlayButton = otherCard.querySelector('.play-button');
-      const otherSerialNumber = otherCard.querySelector('.serial-number');
-      
-      otherPlayButton.style.display = 'none';
-      otherSerialNumber.style.display = 'block';
-      otherPlayButton.classList.replace('bi-pause-fill', 'bi-play-fill');
-    }
-  });
-
-  if (audio.paused) {
-    audio.play();
-    playButton.style.display = 'block';
-    serialNumber.style.display = 'none';
-    playButton.classList.replace('bi-play-fill', 'bi-pause-fill');
-  } else {
-    audio.pause();
-    playButton.style.display = 'none';
-    serialNumber.style.display = 'block';
-    playButton.classList.replace('bi-pause-fill', 'bi-play-fill');
-  }
-}
-
-document.addEventListener("DOMContentLoaded", function() {
-  document.querySelectorAll("audio").forEach(audio => {
-    // Load duration
-    audio.addEventListener("loadedmetadata", function() {
-      const duration = audio.duration;
-      const minutes = Math.floor(duration / 60);
-      const seconds = Math.floor(duration % 60).toString().padStart(2, "0");
-      const durationDisplay = document.getElementById("duration-" + audio.id.split("-")[1]);
-      if (durationDisplay) {
-        durationDisplay.textContent = `${minutes}:${seconds}`;
-      }
-    });
-
-    // Update current time
-    audio.addEventListener("timeupdate", function() {
-      const currentTime = audio.currentTime;
-      const minutes = Math.floor(currentTime / 60);
-      const seconds = Math.floor(currentTime % 60).toString().padStart(2, "0");
-      const timeDisplay = audio.closest('.audio-card').querySelector('.current-time');
-      if (timeDisplay) {
-        timeDisplay.textContent = `${minutes}:${seconds}`;
-      }
-    });
-
-    // Reset play button when audio ends
-    audio.addEventListener("ended", function() {
-      const button = this.closest('.audio-card').querySelector('.play-button i');
-      if (button) button.classList.replace('bi-pause-fill', 'bi-play-fill');
-    });
-  });
-});
-</script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+          document.querySelectorAll(".description a").forEach(function(link) {
+            link.setAttribute("target", "_blank");
+            link.setAttribute("rel", "noopener");
+          });
+        });
+    </script>
