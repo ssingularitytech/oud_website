@@ -8,6 +8,7 @@
   }
 
   .video-card-wrapper {
+    display: none;
     opacity: 0;
     transform: translateY(30px);
     transition: opacity 0.5s ease, transform 0.5s ease;
@@ -55,7 +56,7 @@
 
   <div class="row row-cols-xl-2 row-cols-md-2 row-cols-1 px-md-0 px-2" id="video-gallery">
     <% @videos.each_with_index do |video, index| %>
-      <div class="col mt-4 video-card-wrapper <%= 'd-none' if index >= 4 %>">
+      <div class="col mt-4 video-card-wrapper">
         <div class="video-container">
           <% if video.youtube_url.present? %>
             <% youtube_id = video.youtube_url[%r{(?:youtube\.com/watch\?v=|youtu\.be/)([\w\-]+)}, 1] %>
@@ -78,8 +79,9 @@
   </div>
 
   <% if @videos.size > 4 %>
-    <div class="text-center mt-4 caudex-bold text-white">
-      <button id="show-more-videos-btn caudex-bold text-white" class="btn btn-outline-light">Show More</button>
+      <div class="text-center my-4">
+        <button id="show-more-videos-btn" class="caudex-bold text-black py-2 px-4 rounded fs-5 back-button text-white" style="border: 2px solid blue; border-radius: 12px; color: white;">Show More</button>
+        <button id="show-less-videos-btn" class="caudex-bold text-black py-2 px-4 rounded fs-5 back-button text-white" style="border: 2px solid blue; border-radius: 12px; color: white;">Show Less</button>
     </div>
   <% end %>
 </div>
@@ -87,14 +89,20 @@
 <script>
   document.addEventListener("DOMContentLoaded", () => {
     const cards = document.querySelectorAll(".video-card-wrapper");
+    const showMoreBtn = document.getElementById("show-more-videos-btn");
+    const showLessBtn = document.getElementById("show-less-videos-btn");
+
+    const videoItems = Array.from(cards);
+    let visibleCount = 4;
 
     function loadVideo(card) {
       const iframe = card.querySelector("iframe");
-      if (iframe && iframe.dataset.src) {
+      if (iframe && iframe.dataset.src && !iframe.src) {
         iframe.src = iframe.dataset.src;
       }
+
       const video = card.querySelector("video");
-      if (video && video.dataset.src) {
+      if (video && video.dataset.src && video.children.length === 0) {
         const source = document.createElement("source");
         source.src = video.dataset.src;
         source.type = "video/mp4";
@@ -103,36 +111,46 @@
       }
     }
 
-    // Fade-in animation + lazy-load for initially visible
-    cards.forEach((card, index) => {
-      if (!card.classList.contains('d-none')) {
-        setTimeout(() => {
-          card.classList.add("visible");
-          loadVideo(card);
-        }, index * 300);
-      }
-    });
+    function updateVisibleVideos() {
+      videoItems.forEach((card, index) => {
+        if (index < visibleCount) {
+          card.style.display = "block";
+          setTimeout(() => {
+            card.classList.add("visible");
+            loadVideo(card);
+          }, index * 100);
+        } else {
+          card.style.display = "none";
+          card.classList.remove("visible");
+        }
+      });
 
-    // Show More functionality
-    const showMoreBtn = document.getElementById('show-more-videos-btn');
-    const videoItems = Array.from(cards);
-    let visibleCount = 4;
+      if (visibleCount >= videoItems.length) {
+        showMoreBtn.classList.add("d-none");
+        showLessBtn.classList.remove("d-none");
+      } else {
+        showMoreBtn.classList.remove("d-none");
+        showLessBtn.classList.add("d-none");
+      }
+    }
+
+    updateVisibleVideos();
 
     if (showMoreBtn) {
-      showMoreBtn.addEventListener('click', function () {
-        const nextItems = videoItems.slice(visibleCount, visibleCount + 2);
-        nextItems.forEach((item, index) => {
-          item.classList.remove('d-none');
-          setTimeout(() => {
-            item.classList.add("visible");
-            loadVideo(item);
-          }, index * 300);
-        });
+      showMoreBtn.addEventListener("click", () => {
         visibleCount += 2;
+        updateVisibleVideos();
+      });
+    }
 
-        if (visibleCount >= videoItems.length) {
-          showMoreBtn.style.display = 'none';
-        }
+    if (showLessBtn) {
+      showLessBtn.addEventListener("click", () => {
+        visibleCount = 4;
+        updateVisibleVideos();
+        window.scrollTo({
+          top: document.getElementById("video-gallery").offsetTop - 100,
+          behavior: "smooth"
+        });
       });
     }
   });

@@ -1,78 +1,123 @@
-    <style>
-    .music-image {
-        aspect-ratio: 1/0.85;
-        width: 100%;
-        object-fit: fill;
-    }
-    .view-details-btn {
-        margin-top: auto;
-    }
-    .common-border {
-        border: 2px solid grey; 
-        box-shadow: 1px 4px 4px rgba(128, 128, 128, 0.5);
-    }
-    .music-body-text {
-        color: white;
-            background-color: black;
-            border-bottom-left-radius: 10px;
-            border-bottom-right-radius: 10px;
-            min-height: 160px;
-            display: flex;
-            flex-direction: column;
-    }
+<style>
+.music-image {
+    aspect-ratio: 1/0.85;
+    width: 100%;
+    object-fit: fill;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
 
+.view-details-btn {
+    margin-top: auto;
+}
 
-        /* delay loading css */
-    .music-card-wrapper {
-        opacity: 0;
-        transform: translateY(30px);
-        transition: opacity 0.5s ease, transform 0.5s ease;
-        }
+.common-border {
+    border: 2px solid grey;
+    box-shadow: 1px 4px 4px rgba(128, 128, 128, 0.5);
+    border-radius: 10px;
+}
 
-    .music-card-wrapper.visible {
-        opacity: 1;
-        transform: translateY(0);
-        }
-    </style>
-    <div class="container">
-     <div class="py-md-5 py-4">
-         <h4 class="text-center text-white caudex-bold p-0 m-0">MUSIC</h4>
-     </div>
-    <div class="row row-cols-xl-3 row-cols-md-2 row-cols-1">
-        <% @musics.each do |music| %>
-        <div class="col mt-4 d-flex justify-content-center">
-            <div class="music-card-wrapper" style="position: relative; width: 95%;">
-                <a href="<%= music_path(music) %>" class="music-card-link" style="position: absolute; inset: 0; z-index: 10;"></a>
-                <div class="music-card common-border" style="width: 100%; position: relative; z-index: 5;">
-                    <% if music.image.attached? %>
-                        <img src="<%= url_for(music.image) %>" class="img-fluid music-image" loading="lazy">
-                    <% end %>
-                    <div class="music-body-text py-3 px-3 d-flex flex-column h-100">
-                        <h5 class="caudex-bold"><%= music.date.strftime("%d %B %Y") %></h5>
-                        <h5 class="caudex-bold"><%= music.name %></h5>
-                        <!-- <p class="caudex-normal" style="font-size: 17px;"><%= music.description.to_plain_text.split[0...8].join(' ') %>...</p> -->
-                        
-                        <div class="mt-auto">
-                            <a href="<%= music_path(music) %>" class="text-white view-details-btn caudex-normal">Know More</a>
-                        </div>
-                    </div>
-                </div>
+.music-body-text {
+    color: white;
+    background-color: black;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    min-height: 160px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Hide all by default for JS control */
+.music-card-wrapper {
+    display: none;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.music-card-wrapper.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+</style>
+
+<div class="container">
+  <div class="py-md-5 py-4">
+    <h4 class="text-center text-white caudex-bold p-0 m-0">MUSIC</h4>
+  </div>
+
+  <div class="row row-cols-xl-3 row-cols-md-2 row-cols-1" id="musicContainer">
+    <% @musics.each do |music| %>
+      <div class="col mt-4 d-flex justify-content-center">
+        <div class="music-card-wrapper" style="position: relative; width: 95%;">
+          <a href="<%= music_path(music) %>" class="music-card-link" style="position: absolute; inset: 0; z-index: 10;"></a>
+          <div class="music-card common-border" style="width: 100%; position: relative; z-index: 5;">
+            <% if music.image.attached? %>
+              <img src="<%= url_for(music.image) %>" class="img-fluid music-image" loading="lazy">
+            <% end %>
+            <div class="music-body-text py-3 px-3 d-flex flex-column h-100">
+              <h5 class="caudex-bold"><%= music.date.strftime("%d %B %Y") %></h5>
+              <h5 class="caudex-bold"><%= music.name %></h5>
+              <div class="mt-auto">
+                <a href="<%= music_path(music) %>" class="text-white view-details-btn caudex-normal">Know More</a>
+              </div>
             </div>
+          </div>
         </div>
-        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- Show More / Show Less Buttons -->
+
+    <div class="text-center my-4">
+        <button id="musicShowMoreBtn" class="caudex-bold text-black py-2 px-4 rounded fs-5 back-button text-white" style="border: 2px solid blue; border-radius: 12px; color: white;">Show More</button>
+        <button id="musicShowLessBtn" class="caudex-bold text-black py-2 px-4 rounded fs-5 back-button text-white" style="border: 2px solid blue; border-radius: 12px; color: white;">Show Less</button>
     </div>
-    </div>
+</div>
 
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+    const cards = document.querySelectorAll(".music-card-wrapper");
+    const showMoreBtn = document.getElementById("musicShowMoreBtn");
+    const showLessBtn = document.getElementById("musicShowLessBtn");
 
+    let visibleCount = 6;
 
-        <script>
-            document.addEventListener("DOMContentLoaded", () => {
-                const cards = document.querySelectorAll(".music-card-wrapper");
+    function updateVisibleCards() {
+        cards.forEach((card, index) => {
+        if (index < visibleCount) {
+            card.style.display = "block";
+            setTimeout(() => card.classList.add("visible"), 100);
+        } else {
+            card.style.display = "none";
+            card.classList.remove("visible");
+        }
+        });
 
-                cards.forEach((card, index) => {
-                    setTimeout(() => {
-                        card.classList.add("visible");
-                    }, index * 300); 
-                });
-            });
-        </script>
+        if (visibleCount >= cards.length) {
+        showMoreBtn.classList.add("d-none");
+        showLessBtn.classList.remove("d-none");
+        } else {
+        showMoreBtn.classList.remove("d-none");
+        showLessBtn.classList.add("d-none");
+        }
+    }
+
+    updateVisibleCards();
+
+    showMoreBtn.addEventListener("click", () => {
+        visibleCount += 3;
+        updateVisibleCards();
+    });
+
+    showLessBtn.addEventListener("click", () => {
+        visibleCount = 6;
+        updateVisibleCards();
+        window.scrollTo({
+        top: document.getElementById("musicContainer").offsetTop - 100,
+        behavior: "smooth"
+        });
+    });
+    });
+    </script>

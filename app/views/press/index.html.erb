@@ -3,6 +3,8 @@
         aspect-ratio: 1/0.85;
         width: 100%;
         object-fit: fill;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
       }
       .view-details-btn {
             margin-top: auto; 
@@ -10,6 +12,7 @@
       .comman-border {
         border: 2px solid grey; 
         box-shadow: 1px 4px 4px rgba(128, 128, 128, 0.5);
+         border-radius: 10px;
       }
         .press-body-text{
           color: white;
@@ -60,17 +63,58 @@
           </div>
         <% end %>
       </div>
+
+        <!-- Show More / Show Less Buttons -->
+
+    <div class="text-center my-4">
+        <button id="PressShowMoreBtn" class="caudex-bold text-black py-2 px-4 rounded fs-5 back-button text-white" style="border: 2px solid blue; border-radius: 12px; color: white;">Show More</button>
+        <button id="PressShowLessBtn" class="caudex-bold text-black py-2 px-4 rounded fs-5 back-button text-white" style="border: 2px solid blue; border-radius: 12px; color: white;">Show Less</button>
+    </div>
   </div>
 
 
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const cards = document.querySelectorAll(".press-card-wrapper");
+    document.addEventListener("DOMContentLoaded", () => {
+    const cards = document.querySelectorAll(".press-card-wrapper");
+    const showMoreBtn = document.getElementById("PressShowMoreBtn");
+    const showLessBtn = document.getElementById("PressShowLessBtn");
 
-            cards.forEach((card, index) => {
-                setTimeout(() => {
-                    card.classList.add("visible");
-                }, index * 300); 
-            });
+    let visibleCount = 6;
+
+    function updateVisibleCards() {
+        cards.forEach((card, index) => {
+        if (index < visibleCount) {
+            card.style.display = "block";
+            setTimeout(() => card.classList.add("visible"), 100);
+        } else {
+            card.style.display = "none";
+            card.classList.remove("visible");
+        }
         });
+
+        if (visibleCount >= cards.length) {
+        showMoreBtn.classList.add("d-none");
+        showLessBtn.classList.remove("d-none");
+        } else {
+        showMoreBtn.classList.remove("d-none");
+        showLessBtn.classList.add("d-none");
+        }
+    }
+
+    updateVisibleCards();
+
+    showMoreBtn.addEventListener("click", () => {
+        visibleCount += 3;
+        updateVisibleCards();
+    });
+
+    showLessBtn.addEventListener("click", () => {
+        visibleCount = 6;
+        updateVisibleCards();
+        window.scrollTo({
+        top: document.getElementById("musicContainer").offsetTop - 100,
+        behavior: "smooth"
+        });
+    });
+    });
     </script>
