@@ -2,9 +2,13 @@
 
 
   .home-bg-image {
-      width: 100%;
+      /* width: 100%;
       height: auto; 
       max-height: 800px; 
+      object-fit: cover; */
+      width: 100%;
+      height: auto; 
+      max-height: 450px; 
       object-fit: cover;
   }
 
@@ -16,7 +20,7 @@
         <div class="position-relative p-0">
           <% if home.image.present? %>
           
-            <%= image_tag home.image, loading: "eager", class: "img-fluid", alt: "Landing image" %>
+            <%= image_tag home.image, loading: "eager", class: "img-fluid home-bg-image", alt: "Landing image" %>
 
           <% else %>
             <p class="text-muted">No image available</p>

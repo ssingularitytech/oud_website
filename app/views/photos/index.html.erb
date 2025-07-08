@@ -1,6 +1,6 @@
 <style>
   .photo-image {
-    aspect-ratio: 1/0.85;
+    aspect-ratio: 1/1;
     object-fit: cover;
     opacity: 0;
     transition: opacity 0.5s ease-in-out;
@@ -34,9 +34,9 @@
           <% if photo.photo.attached? %>
             <img loading="lazy" data-src="<%= url_for(photo.photo) %>" class="card-img-top photo-image lazy-seq-img" alt="photo" />
           <% end %>
-          <div class="card-body text-center">
+          <!-- <div class="card-body text-center">
             <h5 class="card-title caudex-bold"><%= photo.name %></h5>
-          </div>
+          </div> -->
         </div>
       </div>
     <% end %>

@@ -2,14 +2,16 @@
       @media (min-width: 768px) {
         .upcoming-bg-image {
           width: 100%;
-          object-fit: cover;
+          height: 500px;
+          object-fit: contain;
         }
       }
 
       @media (max-width: 768px) {
         .upcoming-bg-image {
           width: 100%;
-          object-fit: cover;
+          height: 200px;
+          object-fit: contain;
         }
       }
 
@@ -20,7 +22,7 @@
 
 
   <div class="container-fluid">
-    <div class="row">
+    <div class="row d-flex justify-content-center pt-5">
       <%= image_tag "upcoming-bg-first-image.png", alt: "Company Logo", class: "img-fluid upcoming-bg-image p-0", loading: "lazy" %>
     </div>
 
