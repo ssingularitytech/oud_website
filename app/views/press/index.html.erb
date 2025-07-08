@@ -46,7 +46,7 @@
 
   <div class="row row-cols-xl-3 row-cols-md-2 row-cols-1">
     <% @press.each_with_index do |press, index| %>
-      <div class="col mt-4 d-flex justify-content-center press-card-wrapper <%= 'd-none' if index >= 6 %>">
+      <div class="col mt-4 d-flex justify-content-center press-col-wrapper <%= 'd-none' if index >= 6 %>">
         <div class="press-card-wrapper" style="position: relative; width: 95%;">
           <a href="<%= press.link %>" target="_blank" class="news-card-link" style="position: absolute; inset: 0; z-index: 10;"></a>
           <div class="project-card comman-border" style="width: 100%; position: relative; z-index: 5;">
@@ -82,7 +82,7 @@
 
 <script>
   document.addEventListener("DOMContentLoaded", () => {
-    const cards = document.querySelectorAll(".press-card-wrapper");
+    const cards = document.querySelectorAll(".press-col-wrapper");
     const showMoreBtn = document.getElementById("PressShowMoreBtn");
     const showLessBtn = document.getElementById("PressShowLessBtn");
 
@@ -90,12 +90,13 @@
 
     function updateVisibleCards() {
       cards.forEach((card, index) => {
+        const innerCard = card.querySelector(".press-card-wrapper");
         if (index < visibleCount) {
           card.classList.remove("d-none");
-          setTimeout(() => card.classList.add("visible"), index * 100);
+          setTimeout(() => innerCard.classList.add("visible"), index * 100);
         } else {
           card.classList.add("d-none");
-          card.classList.remove("visible");
+          innerCard.classList.remove("visible");
         }
       });
 

@@ -39,14 +39,14 @@
   }
 </style>
 
-<div class="container">
+<div class="container" id="news-section">
   <div class="py-md-5 py-4">
     <h4 class="text-center text-white caudex-bold p-0 m-0">NEWS</h4>
   </div>
 
   <div class="row row-cols-xl-3 row-cols-md-2 row-cols-1">
     <% @news.each_with_index do |news, index| %>
-      <div class="col mt-4 d-flex justify-content-center news-card-wrapper <%= 'd-none' if index >= 6 %>">
+      <div class="col mt-4 d-flex justify-content-center news-col-wrapper <%= 'd-none' if index >= 6 %>">
         <div class="news-card-wrapper" style="position: relative; width: 95%;">
           <a href="<%= news_path(news) %>" class="news-card-link" style="position: absolute; inset: 0; z-index: 10;"></a>
           <div class="news-card comman-border" style="width: 100%; position: relative; z-index: 5;">
@@ -81,7 +81,7 @@
 
 <script>
   document.addEventListener("DOMContentLoaded", () => {
-    const cards = document.querySelectorAll(".news-card-wrapper");
+    const cards = document.querySelectorAll(".news-col-wrapper");
     const showMoreBtn = document.getElementById("NewsShowMoreBtn");
     const showLessBtn = document.getElementById("NewsShowLessBtn");
 
@@ -91,14 +91,13 @@
       cards.forEach((card, index) => {
         if (index < visibleCount) {
           card.classList.remove("d-none");
-          setTimeout(() => card.classList.add("visible"), index * 100);
+          setTimeout(() => card.querySelector('.news-card-wrapper').classList.add("visible"), index * 100);
         } else {
           card.classList.add("d-none");
-          card.classList.remove("visible");
+          card.querySelector('.news-card-wrapper').classList.remove("visible");
         }
       });
 
-      // Toggle buttons
       if (visibleCount >= cards.length) {
         showMoreBtn.classList.add("d-none");
         showLessBtn.classList.remove("d-none");
