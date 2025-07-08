@@ -12,22 +12,34 @@
       object-fit: cover;
   }
 
+  .progressive-image {
+  filter: blur(20px);
+  transition: filter 0.5s ease;
+  }
+
+  .progressive-image.loaded {
+    filter: blur(0);
+  }
+
+
   </style>
   
   <div class="container-fluid p-0" style="overflow: hidden;">
     <div class="row">
-      <% @landings.each do |home| %>
-        <div class="position-relative p-0">
-          <% if home.image.present? %>
-          
-            <%= image_tag home.image, loading: "eager", class: "img-fluid home-bg-image", alt: "Landing image" %>
+    <% @landings.each do |home| %>
+      <div class="position-relative p-0">
+        <% if home.image.present? %>
+          <%= image_tag home.image, 
+                loading: "lazy", 
+                class: "img-fluid home-bg-image progressive-image", 
+                alt: "Landing image",
+                data: { src: url_for(home.image) } %>
+        <% else %>
+          <p class="text-muted">No image available</p>
+        <% end %>
+      </div>
+    <% end %>
 
-          <% else %>
-            <p class="text-muted">No image available</p>
-          <% end %>
-    
-        </div>
-      <% end %>
 
 
 
@@ -37,6 +49,23 @@
     </div>
 
 
-
   </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+  const images = document.querySelectorAll(".progressive-image");
+
+  images.forEach((img) => {
+    img.addEventListener("load", () => {
+      img.classList.add("loaded");
+    });
+
+    // For browsers that don't automatically trigger load on cached images
+    if (img.complete) {
+      img.classList.add("loaded");
+    }
+  });
+});
+
+  </script>
 
