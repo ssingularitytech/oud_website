@@ -7,10 +7,21 @@
       box-sizing: border-box;
   }
 
+   @media (min-width: 768px) {
     .aboutus-image{
       object-fit: contain;
       border-radius: 12px;
+      height: 400px;
   }
+   }
+
+      @media (max-width: 767px) {
+    .aboutus-image{
+      object-fit: contain;
+      border-radius: 12px;
+      height: 280px;
+  }
+   }
 
 
       @media (min-width: 1024px) {
@@ -30,7 +41,7 @@
     <% @aboutus.each do |about| %>
       <div class="row px-md-5">
         <div class="col-lg-6 d-flex mx-auto">
-          <div class="biography-image-container">
+          <div class="biography-image-container mx-auto">
             <% if about.image&.attached? %>
               <%= image_tag about.image, alt: "About Image", class: "img-fluid aboutus-image" %>
             <% end %>
@@ -38,8 +49,8 @@
         </div>
       </div>
 
-      <div class="col-lg-10 text-white d-flex align-items-center justify-content-center mx-auto pt-md-5">
-          <div class="mt-lg-0 mt-4 py-2 px-2">
+      <div class="col-lg-10 text-white d-flex align-items-center justify-content-center mx-auto">
+          <div class="py-2 px-2 pt-4">
             <%= about.text.body.to_s.html_safe %>
           </div>
       </div>
