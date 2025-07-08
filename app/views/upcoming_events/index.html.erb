@@ -2,7 +2,7 @@
       @media (min-width: 768px) {
         .upcoming-bg-image {
           width: 100%;
-          height: 500px;
+          height: 400px;
           object-fit: contain;
         }
       }
@@ -22,7 +22,7 @@
 
 
   <div class="container-fluid">
-    <div class="row d-flex justify-content-center pt-5">
+    <div class="row d-flex justify-content-center pt-4">
       <%= image_tag "upcoming-bg-first-image.png", alt: "Company Logo", class: "img-fluid upcoming-bg-image p-0", loading: "lazy" %>
     </div>
 
@@ -30,8 +30,8 @@
       <div class="row">
 
         <!-- Upcoming Events -->
-        <h4 class="text-center text-white caudex-bold pt-5">UPCOMING EVENTS</h4>
-        <div class="col-md-8 mx-auto py-5 rounded">
+        <h4 class="text-center text-white caudex-bold pt-3">UPCOMING EVENTS</h4>
+        <div class="col-md-8 mx-auto py-2 rounded">
           <% @upcoming_events.each do |upcoming_event| %>
             <div class="event-card mb-4 d-flex flex-column flex-md-row">
               
@@ -71,7 +71,7 @@
 
         <!-- Past Events -->
         <h4 class="text-center text-white caudex-bold">PAST EVENTS</h4>
-        <div class="col-md-8 mx-auto py-5">
+        <div class="col-md-8 mx-auto py-2">
 
           <% @past_events.each do |past_event| %>
           <div class="event-card mb-4 d-flex flex-column flex-md-row">
