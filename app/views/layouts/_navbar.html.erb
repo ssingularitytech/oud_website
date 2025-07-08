@@ -102,12 +102,11 @@
         color: white !important;
     }
 
-    @media (max-width: 768px) {
-    .navbar-logo {
-        height: 40px; 
-        width: 130px; 
+    .navbar-nair-icon {
+        height: 50px;
+        width: 150px;
+        object-fit: contain;
     }
-   }
     </style>
 
     <div class="container-fluid">
@@ -116,7 +115,7 @@
     <div class="row py-3 px-4 justify-space-between align-items-center">
         <div class="col-xl-2 col-6">
             <a href="/">
-                <%= image_tag "logo.png", alt: "Company Logo", class: "img-fluid navbar-logo" %>
+                <%= image_tag "logo.png", alt: "Company Logo", class: "img-fluid navbar-nair-icon" %>
             </a>
         </div>
         

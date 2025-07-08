@@ -60,9 +60,9 @@
 
   <div class="container">
       <div class="row text-white px-md-5 px-2">
-          <div class="text-center mt-5 justify-content-center d-flex gap-2 caudex-bold text-white">
+          <div class="text-center mt-5 justify-content-center gap-2 caudex-bold text-white">
               <h5><%= @music.name %></h5>
-              <h5><%= @music.date.strftime("%Y") %></h5>
+              <h5  class="pt-1"><%= @music.date.strftime("%-d %B %Y") %></h5>
           </div>
 
 
