@@ -498,7 +498,6 @@ end
 
     config.model 'UpcomingEvent' do
       edit do
-        field :image, :active_storage
         field :title
         field :date
         field :ensemble
@@ -509,13 +508,6 @@ end
       end
 
       show do
-        field :image do
-        pretty_value do
-            if bindings[:object].image.attached?
-              bindings[:view].tag(:img, src: Rails.application.routes.url_helpers.rails_blob_path(bindings[:object].image, only_path: true), style: 'max-width: 200px; max-height: 200px;')
-            end
-          end
-        end
         field :title
         field :date
         field :ensemble
@@ -535,16 +527,10 @@ end
 
       list do
         scopes [:all, :upcoming, :past]
-
+        
         sort_by :date      
         sort_reverse true  
-        field :image do
-          pretty_value do
-            if bindings[:object].image.attached?
-              bindings[:view].tag(:img, src: Rails.application.routes.url_helpers.rails_blob_path(bindings[:object].image, only_path: true), style: 'max-width: 100px; max-height: 100px;')
-            end
-          end
-        end
+
         field :title
         field :date
         field :ensemble

@@ -21,13 +21,10 @@
 
     </style>
 
+
   <div class="container-fluid">
-    <div class="row d-flex justify-content-center pt-4 px-2">
-            <% @upcoming_events.each do |upcoming_event| %>
-              <% if upcoming_event.image&.attached? %>
-                <%= image_tag upcoming_event.image, alt: "About Image", class: "img-fluid upcoming-bg-image px-2" %>
-              <% end %>
-            <% end %>
+    <div class="row d-flex justify-content-center pt-4">
+      <%= image_tag "upcoming-bg-first-image.png", alt: "Company Logo", class: "img-fluid upcoming-bg-image p-0", loading: "lazy" %>
     </div>
 
     <div class="container">
