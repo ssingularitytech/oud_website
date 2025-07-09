@@ -14,7 +14,7 @@
       float: left;
       width: 500px;
       height: 300px;
-      border-radius: 20px;
+      border-radius: 30px;
         }
       }
 
@@ -31,31 +31,32 @@
   </style>
 
   <div class="container">
-    <div class="py-md-5 py-4">
-         <h4 class="text-center text-white caudex-bold p-0 m-0">ABOUT</h4>
-     </div>
-      <div class="row">
-          <div class="box">
-            <% @aboutus.each do |about| %>
+    <div class="row">
 
-              <% if about.image.present? %>
-                <%= image_tag about.image,
-                loading: "lazy", 
-                class: "img-fluid aboutus-image progressive-image px-md-3 px-2 pb-2", 
-                alt: "Landing image",
-                data: { src: url_for(about.image) } %>
-              
-              <% else %>
-                <p class="text-muted">No image available</p>
-              <% end %>
-
-            <div class="text text-white px-2">
-                <%= about.text.body.to_s.html_safe %>
-            </div>
-         <% end %>
-
-        </div>
+      <div class="py-md-5 py-4 text-white">
+          <h4 class="text-center text-white caudex-bold p-0 m-0">ABOUT</h4>
       </div>
+
+        <div class="row">
+            <div class="box">
+            
+              <% @aboutus.each do |about| %>
+                <% if about.image.present? %>
+                  <%= image_tag about.image,
+                    loading: "lazy", 
+                    class: "img-fluid aboutus-image progressive-image px-md-3 px-2 pb-2", 
+                    alt: "About image",
+                    data: { src: url_for(about.image) } %>
+                <% end %>
+
+                <div class="text text-white px-2">
+                    <%= about.text.body.to_s.html_safe %>
+                </div>
+
+            <% end %>
+          </div>
+        </div>
+    </div>
   </div>
 
 

@@ -1,14 +1,4 @@
-<style>
-    /* progressive css */
-    .progressive-image {
-      filter: blur(20px);
-      transition: filter 0.5s ease;
-    }
 
-    .progressive-image.loaded {
-      filter: blur(0);
-    }
-</style>
 
 
 <div class="container">
@@ -22,7 +12,7 @@
         <div class="col-xl-4 col-md-6 col-12 d-flex justify-content-center">
           <a href="<%= release.youtube_url %>">
             <% if release.image.attached? %>
-              <%= image_tag release.image, alt: release.name, class: "w-100 rounded progressive-image" %>
+              <%= image_tag release.image, alt: release.name, class: "w-100 rounded" %>
             <% else %>
               <p class="text-white">No image</p>
             <% end %>
@@ -34,21 +24,3 @@
     <p class="text-center text-white pt-3">No new releases available.</p>
   <% end %>
 </div>
-
-
-  <script>
-    // progressive image js
-    document.addEventListener("DOMContentLoaded", function () {
-    const images = document.querySelectorAll(".progressive-image");
-
-      images.forEach((img) => {
-        img.addEventListener("load", () => {
-          img.classList.add("loaded");
-        });
-        if (img.complete) {
-          img.classList.add("loaded");
-        }
-      });
-    });
-
-  </script>
