@@ -1,85 +1,42 @@
 
-
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-  }
 
-   @media (min-width: 768px) {
-    .aboutus-image{
-      object-fit: contain;
-      border-radius: 12px;
+      @media (min-width: 768px) {
+    .box img {
+      float: left;
+      width: 500px;
       height: 400px;
-  }
-   }
-
-      @media (max-width: 767px) {
-    .aboutus-image{
-      object-fit: contain;
-      border-radius: 12px;
-      height: 280px;
-  }
-   }
-
-
-      @media (min-width: 1024px) {
-      .biography-black-text-box{
-        background-color: #1b1b1b;
-        border: 2px solid grey;
-        border-radius: 12px;
+      border-radius: 20px;
+       }
       }
-    }
 
+      @media (max-width: 768px) {
+      .box img {
+      float: left;
+      width: 500px;
+      height: 300px;
+      border-radius: 20px;
+        }
+      }
   </style>
-  <div class="container-fluid background-color">
+
+  <div class="container">
     <div class="py-md-5 py-4">
          <h4 class="text-center text-white caudex-bold p-0 m-0">ABOUT</h4>
      </div>
-
-    <% @aboutus.each do |about| %>
-      <div class="row px-md-5">
-        <div class="col-lg-6 d-flex mx-auto">
-          <div class="biography-image-container mx-auto">
+      <div class="row">
+          <div class="box">
+            <% @aboutus.each do |about| %>
+            
             <% if about.image&.attached? %>
-              <%= image_tag about.image, alt: "About Image", class: "img-fluid aboutus-image" %>
+              <%= image_tag about.image, alt: "About Image", class: "img-fluid aboutus-image px-2 pb-2" %>
             <% end %>
-          </div>
+
+            <div class="text text-white px-2">
+                <%= about.text.body.to_s.html_safe %>
+            </div>
+         <% end %>
+
         </div>
       </div>
-
-      <div class="col-lg-10 text-white d-flex align-items-center justify-content-center mx-auto">
-          <div class="py-2 px-2 pt-4">
-            <%= about.text.body.to_s.html_safe %>
-          </div>
-      </div>
-    <% end %>
   </div>
-
-
-
-  <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const elements = document.querySelectorAll(".fade-name-box ");
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("show");
-          // } else {
-          //   entry.target.classList.remove("show");
-          }
-        });
-      },
-      { threshold: 0.2 }
-    );
-
-    elements.forEach((el) => observer.observe(el));
-  });
-
-</script>
-
-
- 
