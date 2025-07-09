@@ -4,8 +4,7 @@
     object-fit: cover;
     opacity: 0;
     transition: opacity 0.5s ease-in-out;
-    border-top-left-radius: 0.5rem;
-    border-top-right-radius: 0.5rem;
+    border-radius: 12px;
   }
 
   .photo-image.loaded {
@@ -30,13 +29,10 @@
   <div class="row row-cols-xl-3 row-cols-md-2 row-cols-1" id="photo-gallery">
     <% @photos.each_with_index do |photo, index| %>
       <div class="col mt-4 photo-item photo-container">
-        <div class="card h-100 bg-dark text-white">
+        <div class=" h-100 text-white">
           <% if photo.photo.attached? %>
             <img loading="lazy" data-src="<%= url_for(photo.photo) %>" class="card-img-top photo-image lazy-seq-img" alt="photo" />
           <% end %>
-          <!-- <div class="card-body text-center">
-            <h5 class="card-title caudex-bold"><%= photo.name %></h5>
-          </div> -->
         </div>
       </div>
     <% end %>
