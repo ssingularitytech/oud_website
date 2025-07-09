@@ -25,7 +25,7 @@
             }
         }
 
-              /* progressive css */
+  /* progressive css */
     .progressive-image {
       filter: blur(20px);
       transition: filter 0.5s ease;
@@ -58,21 +58,21 @@
        
     </div>
 
-<script>
-        // progressive image js
+  <script>
     document.addEventListener("DOMContentLoaded", function () {
-    const images = document.querySelectorAll(".progressive-image");
+      const images = document.querySelectorAll(".progressive-image");
 
       images.forEach((img) => {
-        img.addEventListener("load", () => {
-          img.classList.add("loaded");
-        });
         if (img.complete) {
           img.classList.add("loaded");
+        } else {
+          img.addEventListener("load", () => {
+            img.classList.add("loaded");
+          });
         }
       });
     });
-</script>    
+  </script>   
 
 
 

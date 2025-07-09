@@ -145,17 +145,19 @@
     });
 
 
-          // progressive image js
+
     document.addEventListener("DOMContentLoaded", function () {
-    const images = document.querySelectorAll(".progressive-image");
+      const images = document.querySelectorAll(".progressive-image");
 
       images.forEach((img) => {
-        img.addEventListener("load", () => {
-          img.classList.add("loaded");
-        });
         if (img.complete) {
           img.classList.add("loaded");
+        } else {
+          img.addEventListener("load", () => {
+            img.classList.add("loaded");
+          });
         }
       });
     });
+  
   </script>

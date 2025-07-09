@@ -211,7 +211,7 @@ end
 
     config.model 'Music' do
       edit do
-        # field :name
+        field :name
         field :date
         field :embed_code, :text
         field :description, :action_text
@@ -221,7 +221,7 @@ end
       end
     
       show do
-        # field :name
+        field :name
         field :date
         field :embed_code, :text
         field :description do
@@ -246,7 +246,7 @@ end
       end
     
       list do
-        # field :name
+        field :name
         field :date
         field :embed_code, :text
         field :description do
