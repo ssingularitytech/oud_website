@@ -1,5 +1,4 @@
-
-  <style>
+ <style>
 
   @media (min-width: 768px) {
     .box .aboutus-image {
@@ -18,6 +17,15 @@
       border-radius: 20px;
         }
       }
+
+    .progressive-image {
+      filter: blur(20px);
+      transition: filter 0.5s ease;
+    }
+
+    .progressive-image.loaded {
+      filter: blur(0);
+    }
   </style>
 
   <div class="container">
@@ -27,10 +35,17 @@
       <div class="row">
           <div class="box">
             <% @aboutus.each do |about| %>
-            
-            <% if about.image&.attached? %>
-              <%= image_tag about.image, alt: "About Image", class: "img-fluid aboutus-image px-2 pb-2" %>
-            <% end %>
+
+              <% if about.image.present? %>
+                <%= image_tag about.image,
+                loading: "lazy", 
+                class: "img-fluid aboutus-image progressive-image px-2 pb-2", 
+                alt: "Landing image",
+                data: { src: url_for(about.image) } %>
+              
+              <% else %>
+                <p class="text-muted">No image available</p>
+              <% end %>
 
             <div class="text text-white px-2">
                 <%= about.text.body.to_s.html_safe %>
@@ -40,3 +55,23 @@
         </div>
       </div>
   </div>
+
+
+  <script>
+    
+    document.addEventListener("DOMContentLoaded", function () {
+    const images = document.querySelectorAll(".progressive-image");
+
+      images.forEach((img) => {
+        img.addEventListener("load", () => {
+          img.classList.add("loaded");
+        });
+
+        // For browsers that don't automatically trigger load on cached images
+        if (img.complete) {
+          img.classList.add("loaded");
+        }
+      });
+    });
+
+  </script>
