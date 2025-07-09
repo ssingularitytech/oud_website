@@ -38,6 +38,16 @@
       opacity: 1;
       transform: translateY(0);
     }
+
+   /* progressive css */
+    .progressive-image {
+      filter: blur(20px);
+      transition: filter 0.5s ease;
+    }
+
+    .progressive-image.loaded {
+      filter: blur(0);
+    }
   </style>
 
   <div class="container" id="music-section">
@@ -52,7 +62,7 @@
             <a href="<%= music_path(music) %>" class="music-card-link" style="position: absolute; inset: 0; z-index: 10;"></a>
             <div class="music-card common-border" style="width: 100%; position: relative; z-index: 5;">
               <% if music.image.attached? %>
-                <img src="<%= url_for(music.image) %>" class="img-fluid music-image" loading="lazy">
+                <img src="<%= url_for(music.image) %>" class="img-fluid music-image progressive-image" loading="lazy">
               <% end %>
               <div class="music-body-text py-3 px-3 d-flex flex-column h-100">
                 <h5 class="caudex-bold"><%= music.date.strftime("%-d %B %Y") %></h5>
@@ -131,6 +141,21 @@
           top: document.getElementById("music-section").offsetTop - 100,
           behavior: "smooth"
         });
+      });
+    });
+
+
+          // progressive image js
+    document.addEventListener("DOMContentLoaded", function () {
+    const images = document.querySelectorAll(".progressive-image");
+
+      images.forEach((img) => {
+        img.addEventListener("load", () => {
+          img.classList.add("loaded");
+        });
+        if (img.complete) {
+          img.classList.add("loaded");
+        }
       });
     });
   </script>

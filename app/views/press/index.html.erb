@@ -37,6 +37,16 @@
     opacity: 1;
     transform: translateY(0);
   }
+
+        /* progressive css */
+    .progressive-image {
+      filter: blur(20px);
+      transition: filter 0.5s ease;
+    }
+
+    .progressive-image.loaded {
+      filter: blur(0);
+    }
 </style>
 
 <div class="container" id="press-section">
@@ -51,7 +61,7 @@
           <a href="<%= press.link %>" target="_blank" class="news-card-link" style="position: absolute; inset: 0; z-index: 10;"></a>
           <div class="project-card comman-border" style="width: 100%; position: relative; z-index: 5;">
             <% if press.image.attached? %>
-              <img src="<%= url_for(press.image) %>" class="img-fluid press-image" loading="lazy">
+              <img src="<%= url_for(press.image) %>" class="img-fluid press-image progressive-image" loading="lazy">
             <% end %>
             <div class="press-body-text py-3 px-3">
               <h5 class="caudex-bold m-0 text-white"><%= press.date.strftime("%-d %B %Y") %></h5>
@@ -125,4 +135,18 @@
       });
     });
   });
+
+      // progressive image js
+    document.addEventListener("DOMContentLoaded", function () {
+    const images = document.querySelectorAll(".progressive-image");
+
+      images.forEach((img) => {
+        img.addEventListener("load", () => {
+          img.classList.add("loaded");
+        });
+        if (img.complete) {
+          img.classList.add("loaded");
+        }
+      });
+    });
 </script>

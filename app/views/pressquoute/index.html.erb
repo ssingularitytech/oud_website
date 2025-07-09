@@ -24,6 +24,16 @@
                 border-radius: 12px;
             }
         }
+
+              /* progressive css */
+    .progressive-image {
+      filter: blur(20px);
+      transition: filter 0.5s ease;
+    }
+
+    .progressive-image.loaded {
+      filter: blur(0);
+    }
     </style>
 
     <div class="container">
@@ -35,7 +45,7 @@
            <div class="row text-white px-md-5 px-2 mt-5">
                  <div class="col-lg-6 d-flex flex-column pe-md-4">
                     <% if pressquoute.image.attached? %>
-                        <img src="<%= url_for(pressquoute.image) %>" class="img-fluid show-pressquoute-image" loading="lazy">
+                        <img src="<%= url_for(pressquoute.image) %>" class="img-fluid show-pressquoute-image progressive-image" loading="lazy">
                     <% end %>
                 </div>
                 <div class="col-lg-6 d-flex pressquoute-black-text-box">
@@ -47,6 +57,22 @@
             <% end %>
        
     </div>
+
+<script>
+        // progressive image js
+    document.addEventListener("DOMContentLoaded", function () {
+    const images = document.querySelectorAll(".progressive-image");
+
+      images.forEach((img) => {
+        img.addEventListener("load", () => {
+          img.classList.add("loaded");
+        });
+        if (img.complete) {
+          img.classList.add("loaded");
+        }
+      });
+    });
+</script>    
 
 
 

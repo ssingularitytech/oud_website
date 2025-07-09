@@ -37,6 +37,16 @@
     opacity: 1;
     transform: translateY(0);
   }
+
+  /* progressive css */
+    .progressive-image {
+      filter: blur(20px);
+      transition: filter 0.5s ease;
+    }
+
+    .progressive-image.loaded {
+      filter: blur(0);
+    }
 </style>
 
 <div class="container" id="news-section">
@@ -51,7 +61,7 @@
           <a href="<%= news_path(news) %>" class="news-card-link" style="position: absolute; inset: 0; z-index: 10;"></a>
           <div class="news-card comman-border" style="width: 100%; position: relative; z-index: 5;">
             <% if news.news_image.attached? %>
-              <img src="<%= url_for(news.news_image) %>" class="img-fluid news-image" loading="lazy">
+              <img src="<%= url_for(news.news_image) %>" class="img-fluid news-image progressive-image" loading="lazy">
             <% end %>
             <div class="news-body-text py-3 px-3">
               <h5 class="caudex-bold"><%= news.news_date.strftime("%-d %B %Y") %></h5>
@@ -123,4 +133,19 @@
       });
     });
   });
+
+
+      // progressive image js
+    document.addEventListener("DOMContentLoaded", function () {
+    const images = document.querySelectorAll(".progressive-image");
+
+      images.forEach((img) => {
+        img.addEventListener("load", () => {
+          img.classList.add("loaded");
+        });
+        if (img.complete) {
+          img.classList.add("loaded");
+        }
+      });
+    });
 </script>

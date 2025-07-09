@@ -19,12 +19,22 @@
         }
       }
 
+  /* progressive css */
+    .progressive-image {
+      filter: blur(20px);
+      transition: filter 0.5s ease;
+    }
+
+    .progressive-image.loaded {
+      filter: blur(0);
+    }
+
     </style>
 
 
   <div class="container-fluid">
     <div class="row d-flex justify-content-center pt-4">
-      <%= image_tag "upcoming-bg-first-image.png", alt: "Company Logo", class: "img-fluid upcoming-bg-image p-0", loading: "lazy" %>
+      <%= image_tag "upcoming-bg-first-image.png", alt: "Company Logo", class: "img-fluid upcoming-bg-image p-0 progressive-image", loading: "lazy" %>
     </div>
 
     <div class="container">
@@ -113,3 +123,21 @@
       </div>
     </div>
   </div>
+
+
+  <script>
+    // progressive image js
+    document.addEventListener("DOMContentLoaded", function () {
+    const images = document.querySelectorAll(".progressive-image");
+
+      images.forEach((img) => {
+        img.addEventListener("load", () => {
+          img.classList.add("loaded");
+        });
+        if (img.complete) {
+          img.classList.add("loaded");
+        }
+      });
+    });
+    
+  </script>

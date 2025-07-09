@@ -58,7 +58,7 @@
 
 
   <script>
-    
+    // progressive image js
     document.addEventListener("DOMContentLoaded", function () {
     const images = document.querySelectorAll(".progressive-image");
 
@@ -66,12 +66,10 @@
         img.addEventListener("load", () => {
           img.classList.add("loaded");
         });
-
-        // For browsers that don't automatically trigger load on cached images
         if (img.complete) {
           img.classList.add("loaded");
         }
       });
     });
-
+    
   </script>

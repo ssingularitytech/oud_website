@@ -20,6 +20,16 @@
   .photo-item {
     display: none;
   }
+
+  /* progressive css */
+    .progressive-image {
+      filter: blur(20px);
+      transition: filter 0.5s ease;
+    }
+
+    .progressive-image.loaded {
+      filter: blur(0);
+    }
 </style>
 
 <div class="container px-md-5">
@@ -32,11 +42,8 @@
       <div class="col mt-4 photo-item photo-container">
         <div class="card h-100 bg-dark text-white">
           <% if photo.photo.attached? %>
-            <img loading="lazy" data-src="<%= url_for(photo.photo) %>" class="card-img-top photo-image lazy-seq-img" alt="photo" />
+            <img loading="lazy" data-src="<%= url_for(photo.photo) %>" class="card-img-top photo-image lazy-seq-img progressive-image" alt="photo" />
           <% end %>
-          <!-- <div class="card-body text-center">
-            <h5 class="card-title caudex-bold"><%= photo.name %></h5>
-          </div> -->
         </div>
       </div>
     <% end %>
@@ -125,4 +132,18 @@
       });
     }
   });
+
+      // progressive image js
+    document.addEventListener("DOMContentLoaded", function () {
+    const images = document.querySelectorAll(".progressive-image");
+
+      images.forEach((img) => {
+        img.addEventListener("load", () => {
+          img.classList.add("loaded");
+        });
+        if (img.complete) {
+          img.classList.add("loaded");
+        }
+      });
+    });
 </script>
