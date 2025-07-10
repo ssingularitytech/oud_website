@@ -1,8 +1,10 @@
   <style>
     .project-image {
-      aspect-ratio: 1/0.75;
+      aspect-ratio: 1/0.85;
       width: 100%;
       object-fit: fill;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
     }
     .view-details-btn {
       margin-top: auto; 
@@ -10,6 +12,7 @@
     .comman-border {
       border: 2px solid grey; 
       box-shadow: 1px 4px 4px rgba(128, 128, 128, 0.5);
+      border-radius: 10px;
     }
     .project-body-text {
       color: white;
@@ -39,13 +42,36 @@
           opacity: 1;
           transform: translateY(0);
           }
+
+      /* progressive css */
+    .progressive-image {
+      filter: blur(20px);
+      transition: filter 0.5s ease;
+    }
+
+    .progressive-image.loaded {
+      filter: blur(0);
+    }
+
+      @media (min-width: 768px) {
+    .project-row {
+        width: 70%;
+       }
+      }
+
+  @media (max-width: 768px) {
+      .project-row {
+         width: 100%;
+        }
+      }
+
   </style>
-  <%= render partial: 'layouts/loader' %>
+
   <div class="container mx-auto">
      <div class="py-md-5 py-4">
          <h4 class="text-center text-white caudex-bold p-0 m-0">PROJECTS</h4>
      </div>
-    <div class="row row-cols-xl-2 row-cols-md-2 row-cols-1 mx-auto" style="width: 70%;">
+    <div class="row row-cols-xl-2 row-cols-md-2 row-cols-1 mx-auto project-row">
       <% @projects.each do |project| %>
         <div class="col mt-4 d-flex justify-content-center">
           <div class="project-card-wrapper comman-border" style="width: 95%;">
@@ -54,7 +80,7 @@
 
               <% first_detail = project.project_details.first %>
               <% if first_detail && first_detail.image.attached? %>
-                <img src="<%= url_for(first_detail.image) %>" class="img-fluid project-image" loading="lazy" alt="<%= project.name %> image">
+                <img src="<%= url_for(first_detail.image) %>" class="img-fluid project-image progressive-image" loading="lazy" alt="<%= project.name %> image">
               <% end %>
 
               <div class="project-body-text py-3 px-3">
@@ -84,14 +110,30 @@
   </div>
 
 
-      <script>
-          document.addEventListener("DOMContentLoaded", () => {
-              const cards = document.querySelectorAll(".project-card-wrapper");
+  <script>
+      document.addEventListener("DOMContentLoaded", () => {
+          const cards = document.querySelectorAll(".project-card-wrapper");
 
-              cards.forEach((card, index) => {
-                  setTimeout(() => {
-                      card.classList.add("visible");
-                  }, index * 300); 
-              });
+          cards.forEach((card, index) => {
+              setTimeout(() => {
+                  card.classList.add("visible");
+              }, index * 300); 
           });
-      </script>
+      });
+
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const images = document.querySelectorAll(".progressive-image");
+
+      images.forEach((img) => {
+        if (img.complete) {
+          img.classList.add("loaded");
+        } else {
+          img.addEventListener("load", () => {
+            img.classList.add("loaded");
+          });
+        }
+      });
+    });
+
+  </script>

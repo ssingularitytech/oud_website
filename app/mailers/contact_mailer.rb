@@ -7,7 +7,7 @@ class ContactMailer < ApplicationMailer
     mail(
       to: 'info@nizarrohana.com',
       subject: 'New Contact Us Submission',
-      reply_to: @contact.email  # Add this to allow replies to the contact
+      reply_to: @contact.email
     )
   end
 end

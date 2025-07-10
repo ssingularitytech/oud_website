@@ -1,108 +1,57 @@
-<style>
-
-  @media (min-width: 768px) {
-   .event-card {
-    background: white;
-    border-radius: 10px;
-    color: black;
-    transition: background 0.4s ease-in-out;
-    border: 2px solid #ccc;
-    margin-bottom: 2rem;
-    padding: 1rem;
-    min-height: 260px;
-  }
- }
-
-   @media (max-width: 767px) {
-   .event-card {
-    background: white;
-    border-radius: 10px;
-    color: black;
-    transition: background 0.4s ease-in-out;
-    border: 2px solid #ccc;
-    margin-bottom: 2rem;
-    padding: 1rem;
-    min-height: 336px;
-  }
- }
 
 
 
+  <div class="container-fluid">
+    <div class="container">
+      <div class="row">
 
-  .event-card:hover {
-    background: #f9f9f9;
-  }
+        <!-- Upcoming Events -->
+          <div class="py-5">
+           <h4 class="text-center text-white caudex-bold p-0 m-0">UPCOMING EVENTS</h4>
+           </div>
+        <div class="col-md-8 mx-auto px-4">
+          <% @upcoming_events.each do |upcoming_event| %>
+            <div class="event-card mb-4 d-flex flex-column flex-md-row">
+              
+              <div class="flex-grow-1 text-start text-white pb-3" style="border-bottom: 2px solid grey;">
 
-  .event-details {
-    font-size: 18px;
-    color: black;
-  }
-
-  h3, h4, h5, p {
-    color: black !important;
-  }
-
-  a {
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-  }
-</style>
-
-
-<div class="container-fluid">
-  <div class="container">
-  <div class="py-5">
-    <h4 class="text-center text-white caudex-bold p-0 m-0">UPCOMING EVENTS</h4>
-  </div>
-
-    <div class="row px-md-0 px-3">
-      <% @upcoming_events.each_with_index do |upcoming_event, index| %>
-        <div class="col-md-6">
-          <div class="event-card">
-            <div class="row d-flex align-items-center py-2">
-              <div class="col-auto">
-                <h5 class="fst-italic"><%= upcoming_event.date.strftime("%B %Y") %></h5>
-              </div>
-              <div class="col">
-                <hr>
-              </div>
-            </div>
-
-            <div class="row align-items-start">
-              <div class="col-md-3 text-start d-flex flex-column align-items-start">
-                <p class="mb-0 text-uppercase fw-bold"><%= upcoming_event.date.strftime("%a") %></p>
-                <h4 class="fw-bold"><%= upcoming_event.date.strftime("%-d") %></h4>
-              </div>
-              <div class="col-md-9">
-                <!-- <p class="mb-1 text-muted"><%= upcoming_event.date.strftime("%B %-d, %Y") %></p> -->
-                 <h3 class="fw-bold fst-italic m-md-0"><%= upcoming_event.title.capitalize %></h3>
-                 <p class="event-details m-0 pt-2" style="font-size: 18px;"><strong>Ensemble :</strong> <%= upcoming_event.ensemble %></p>
-                 <p class="event-details m-0 pt-2" style="font-size: 18px;"><strong>Venue :</strong> <%= upcoming_event.venue %></p>
-                 <p class="event-details m-0 pt-2" style="font-size: 18px;"><strong>City :</strong> <%= upcoming_event.city %></p>
-                  <% if upcoming_event.link.present? %>
+              <div class="event-date d-flex align-items-center justify-content-between gap-2 mb-1 text-nowrap caudex-bold text-white">
+                <strong><%= upcoming_event.date.strftime("%-d %B %Y") %></strong>
+                <% if upcoming_event.link.present? %>
                   <% doc = Nokogiri::HTML.fragment(upcoming_event.link.body.to_s) %>
                   <% anchor = doc.at_css("a") %>
                   <% if anchor && anchor['href'].present? %>
-                    <p class="event-details m-0 fs-6">
-                      <a href="<%= anchor['href'] %>" target="_blank" rel="noopener noreferrer">
-                        <%= anchor.text.presence || "Click here" %>
-                      </a>
-                    </p>
+                    <a href="<%= anchor['href'] %>" class="btn btn-dark ms-2" target="_blank" rel="noopener noreferrer">
+                      <%= anchor.text.presence || "Tickets" %>
+                    </a>
                   <% end %>
                 <% end %>
               </div>
+
+
+                <div class="caudex-bold text-white d-md-flex event-details" style="font-size: 18px;">
+                <div class="col-md-10">
+                  <%= [
+                    upcoming_event.title.presence,
+                    upcoming_event.ensemble.presence,
+                    upcoming_event.venue.presence,
+                    upcoming_event.city.presence
+                  ].compact.join(", ") %>
+                </div>
+
+                </div>
+
+              </div>
+
             </div>
-          </div>
+          <% end %>
         </div>
-      <% end %>
+        </div>
+        
+        <div class="py-2">
+          <%= link_to upcoming_events_path, class: "text-white text-center d-block caudex-bold text-decoration-underline" do %>
+            <h4 class="text-white">All Events</h4>
+          <% end %>
+        </div>
     </div>
-  <div class="py-2">
-    <%= link_to upcoming_events_path, class: "text-white text-center d-block caudex-bold text-decoration-underline" do %>
-      <h4 class="text-white">ALL EVENTS</h4>
-    <% end %>
   </div>
-  </div>
-</div>
-
-
-

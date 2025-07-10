@@ -29,6 +29,6 @@ class UpcomingEventsController < ApplicationController
   private
   
   def event_params
-    params.require(:upcoming_event).permit(:title, :date, :venue, :ensemble, :city, :link)
+    params.require(:upcoming_event).permit(:image, :title, :date, :venue, :ensemble, :city, :link)
   end
 end

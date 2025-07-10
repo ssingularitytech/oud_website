@@ -1,18 +1,25 @@
 <style>
   .photo-image {
-    aspect-ratio: 1.7/1.6;
+    aspect-ratio: 1/1;
     object-fit: cover;
     opacity: 0;
     transition: opacity 0.5s ease-in-out;
-    border-top-left-radius: 0.5rem;
-    border-top-right-radius: 0.5rem;
+    border-radius: 12px;
   }
+
   .photo-image.loaded {
     opacity: 1;
   }
-</style>
 
-<%= render partial: 'layouts/loader' %>
+  .photo-container:hover {
+    transform: translateY(-5px);
+    transition: transform 0.3s ease;
+  }
+
+  .photo-item {
+    display: none;
+  }
+</style>
 
 <div class="container px-md-5">
   <div class="py-md-5 py-4">
@@ -21,31 +28,34 @@
 
   <div class="row row-cols-xl-3 row-cols-md-2 row-cols-1" id="photo-gallery">
     <% @photos.each_with_index do |photo, index| %>
-      <div class="col mt-4 photo-item <%= 'd-none' if index >= 6 %>">
-        <div class="card h-100 bg-dark text-white">
+      <div class="col mt-4 photo-item photo-container">
+        <div class=" h-100 text-white">
           <% if photo.photo.attached? %>
             <img loading="lazy" data-src="<%= url_for(photo.photo) %>" class="card-img-top photo-image lazy-seq-img" alt="photo" />
           <% end %>
-          <div class="card-body text-center">
-            <h5 class="card-title caudex-bold"><%= photo.name %></h5>
-          </div>
         </div>
       </div>
     <% end %>
   </div>
 
   <% if @photos.size > 6 %>
-    <div class="text-center mt-4">
-      <button id="show-more-btn" class="btn btn-outline-light">Show More</button>
+    <div class="text-center my-4">
+        <button id="show-more-photos-btn" class="caudex-bold text-black py-2 px-4 rounded fs-5 back-button text-white" style="border: 2px solid blue; border-radius: 12px; color: white;">Show More</button>
+        <button id="show-less-photos-btn" class="caudex-bold text-black py-2 px-4 rounded fs-5 back-button text-white" style="border: 2px solid blue; border-radius: 12px; color: white;">Show Less</button>
     </div>
   <% end %>
 </div>
 
 <script>
   document.addEventListener("DOMContentLoaded", function () {
-    // Lazy load images sequentially with fade-in
     const images = Array.from(document.querySelectorAll('.lazy-seq-img'));
+    const photoItems = Array.from(document.querySelectorAll('.photo-item'));
+    const showMoreBtn = document.getElementById('show-more-photos-btn');
+    const showLessBtn = document.getElementById('show-less-photos-btn');
 
+    let visibleCount = 6;
+
+    // Sequential lazy loading with fade-in
     function loadNextImage(index) {
       if (index >= images.length) return;
 
@@ -70,22 +80,44 @@
       }
     }
 
-    loadNextImage(0);
+    // Show initial images
+    function updateVisiblePhotos() {
+      photoItems.forEach((item, index) => {
+        if (index < visibleCount) {
+          item.style.display = 'block';
+        } else {
+          item.style.display = 'none';
+        }
+      });
 
-    // Show More functionality
-    const showMoreBtn = document.getElementById('show-more-btn');
-    const photoItems = Array.from(document.querySelectorAll('.photo-item'));
-    let visibleCount = 6;
+      if (visibleCount >= photoItems.length) {
+        showMoreBtn.classList.add('d-none');
+        showLessBtn.classList.remove('d-none');
+      } else {
+        showMoreBtn.classList.remove('d-none');
+        showLessBtn.classList.add('d-none');
+      }
+    }
+
+    updateVisiblePhotos();
+    loadNextImage(0); // Lazy load first visible images
 
     if (showMoreBtn) {
       showMoreBtn.addEventListener('click', function () {
-        const nextItems = photoItems.slice(visibleCount, visibleCount + 3);
-        nextItems.forEach(item => item.classList.remove('d-none'));
         visibleCount += 3;
+        updateVisiblePhotos();
+        loadNextImage(0);
+      });
+    }
 
-        if (visibleCount >= photoItems.length) {
-          showMoreBtn.style.display = 'none';
-        }
+    if (showLessBtn) {
+      showLessBtn.addEventListener('click', function () {
+        visibleCount = 6;
+        updateVisiblePhotos();
+        window.scrollTo({
+          top: document.getElementById("photo-gallery").offsetTop - 100,
+          behavior: "smooth"
+        });
       });
     }
   });

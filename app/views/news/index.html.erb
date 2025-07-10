@@ -1,81 +1,153 @@
 <style>
-    .news-image {
-        aspect-ratio: 1/0.85;
-        width: 100%;
-        object-fit: fill;
-    }
-    .view-details-btn {
-        margin-top: auto; 
-    }
-    
-    .comman-border {
-    border: 2px solid grey; 
+  .news-image {
+    aspect-ratio: 1/0.85;
+    width: 100%;
+    object-fit: fill;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+
+  .view-details-btn {
+    margin-top: auto;
+  }
+
+  .comman-border {
+    border: 2px solid grey;
     box-shadow: 1px 4px 4px rgba(128, 128, 128, 0.5);
+    border-radius: 10px;
+  }
+
+  .news-body-text {
+    color: white;
+    background-color: black;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    min-height: 160px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .news-card-wrapper {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+
+  .news-card-wrapper.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* progressive css */
+    .progressive-image {
+      filter: blur(20px);
+      transition: filter 0.5s ease;
     }
 
-      .news-body-text{
-        color: white;
-        background-color: black;
-        border-bottom-left-radius: 10px;
-        border-bottom-right-radius: 10px;
-        min-height: 160px;
-        display: flex;
-        flex-direction: column;
-      }
-    
-     /* delay loading css */
-    .news-card-wrapper {
-        opacity: 0;
-        transform: translateY(30px);
-        transition: opacity 0.5s ease, transform 0.5s ease;
-        }
-
-    .news-card-wrapper.visible {
-        opacity: 1;
-        transform: translateY(0);
-        }
+    .progressive-image.loaded {
+      filter: blur(0);
+    }
 </style>
-    <%= render partial: 'layouts/loader' %>
-    <div class="container">
-    <div class="py-md-5 py-4">
-         <h4 class="text-center text-white caudex-bold p-0 m-0">NEWS</h4>
-     </div>
-        <div class="row row-cols-xl-3 row-cols-md-2 row-cols-1">
-            <% @news.each do |news| %>
-            <div class="col mt-4 d-flex justify-content-center">
 
-                <div class="news-card-wrapper" style="position: relative; width: 95%;">
-                    <a href="<%= news_path(news) %>" class="news-card-link" style="position: absolute; inset: 0; z-index: 10;"></a>
-                    <div class="news-card comman-border" style="width: 100%; position: relative; z-index: 5;">
-                        <% if news.news_image.attached? %>
-                            <img src="<%= url_for(news.news_image) %>" class="img-fluid news-image" loading="lazy">
-                        <% end %>
-                        <div class="news-body-text py-3 px-3">
-                            <h5 class="caudex-bold"><%= news.news_date.strftime("%d %b %Y") %></h5>
-                            <h5 class="caudex-bold"><%= news.news_name %></h5>
-                            <!-- <p class="caudex-normal" style="font-size: 17px;"><%= news.news_description.to_plain_text.split[0...6].join(' ') %>...</p> -->
-                            <a href="<%= news_path(news) %>" class="text-white view-details-btn caudex-normal">Know More</a>
-                        </div>
-                    </div>
-                </div>
-                
+<div class="container" id="news-section">
+  <div class="py-md-5 py-4">
+    <h4 class="text-center text-white caudex-bold p-0 m-0">NEWS</h4>
+  </div>
+
+  <div class="row row-cols-xl-3 row-cols-md-2 row-cols-1">
+    <% @news.each_with_index do |news, index| %>
+      <div class="col mt-4 d-flex justify-content-center news-col-wrapper <%= 'd-none' if index >= 6 %>">
+        <div class="news-card-wrapper" style="position: relative; width: 95%;">
+          <a href="<%= news_path(news) %>" class="news-card-link" style="position: absolute; inset: 0; z-index: 10;"></a>
+          <div class="news-card comman-border" style="width: 100%; position: relative; z-index: 5;">
+            <% if news.news_image.attached? %>
+              <img src="<%= url_for(news.news_image) %>" class="img-fluid news-image progressive-image" loading="lazy">
+            <% end %>
+            <div class="news-body-text py-3 px-3">
+              <h5 class="caudex-bold"><%= news.news_date.strftime("%-d %B %Y") %></h5>
+              <h5 class="caudex-bold"><%= news.news_name %></h5>
+              <a href="<%= news_path(news) %>" class="text-white view-details-btn caudex-normal">Know More</a>
             </div>
-           <% end %>
+          </div>
         </div>
+      </div>
+    <% end %>
+  </div>
+
+  <% if @news.size > 6 %>
+    <div class="text-center my-4">
+      <button id="NewsShowMoreBtn" class="caudex-bold py-2 px-4 rounded fs-5 back-button text-white"
+        style="border: 2px solid blue; border-radius: 12px;">
+        Show More
+      </button>
+      <button id="NewsShowLessBtn"
+        class="caudex-bold py-2 px-4 rounded fs-5 back-button text-white d-none"
+        style="border: 2px solid blue; border-radius: 12px;">
+        Show Less
+      </button>
     </div>
+  <% end %>
+</div>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const cards = document.querySelectorAll(".news-card-wrapper");
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const cards = document.querySelectorAll(".news-col-wrapper");
+    const showMoreBtn = document.getElementById("NewsShowMoreBtn");
+    const showLessBtn = document.getElementById("NewsShowLessBtn");
 
-            cards.forEach((card, index) => {
-                setTimeout(() => {
-                    card.classList.add("visible");
-                }, index * 300); 
-            });
-        });
-    </script>
+    let visibleCount = 6;
+
+    function updateVisibleCards() {
+      cards.forEach((card, index) => {
+        if (index < visibleCount) {
+          card.classList.remove("d-none");
+          setTimeout(() => card.querySelector('.news-card-wrapper').classList.add("visible"), index * 100);
+        } else {
+          card.classList.add("d-none");
+          card.querySelector('.news-card-wrapper').classList.remove("visible");
+        }
+      });
+
+      if (visibleCount >= cards.length) {
+        showMoreBtn.classList.add("d-none");
+        showLessBtn.classList.remove("d-none");
+      } else {
+        showMoreBtn.classList.remove("d-none");
+        showLessBtn.classList.add("d-none");
+      }
+    }
+
+    updateVisibleCards();
+
+    showMoreBtn.addEventListener("click", () => {
+      visibleCount += 3;
+      updateVisibleCards();
+    });
+
+    showLessBtn.addEventListener("click", () => {
+      visibleCount = 6;
+      updateVisibleCards();
+      window.scrollTo({
+        top: document.getElementById("news-section").offsetTop - 100,
+        behavior: "smooth"
+      });
+    });
+  });
 
 
 
+    document.addEventListener("DOMContentLoaded", function () {
+      const images = document.querySelectorAll(".progressive-image");
 
+      images.forEach((img) => {
+        if (img.complete) {
+          img.classList.add("loaded");
+        } else {
+          img.addEventListener("load", () => {
+            img.classList.add("loaded");
+          });
+        }
+      });
+    });
+
+</script>

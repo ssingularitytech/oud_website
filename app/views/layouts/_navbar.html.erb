@@ -102,12 +102,11 @@
         color: white !important;
     }
 
-    @media (max-width: 768px) {
-    .navbar-logo {
-        height: 40px; 
-        width: 130px; 
+    .navbar-nair-icon {
+        height: 50px;
+        width: 150px;
+        object-fit: contain;
     }
-   }
     </style>
 
     <div class="container-fluid">
@@ -116,14 +115,14 @@
     <div class="row py-3 px-4 justify-space-between align-items-center">
         <div class="col-xl-2 col-6">
             <a href="/">
-                <%= image_tag "logo.png", alt: "Company Logo", class: "img-fluid navbar-logo" %>
+                <%= image_tag "logo.png", alt: "Company Logo", class: "img-fluid navbar-nair-icon" %>
             </a>
         </div>
         
          <div class="col-8 d-xl-block d-none pe-5">
             <ul class="list-unstyled d-flex justify-content-end gap-lg-4 gap-3 m-0 caudex-normal">
                 <li><a href="/">Home</a></li>
-                <li><a href="/aboutus">About</a></li>
+                <li><a href="/about">About</a></li>
                 <li><a href="/upcoming_events">Events</a></li>
                 <li><a href="/news">News</a></li>
                  <li><a href="/projects">Projects</a></li>
@@ -148,30 +147,26 @@
         </div>
         
 
-        <div class="col-xl-2 col-6 justify-content-end d-flex align-items-center">
-            <div class="row d-flex align-items-center justify-content-between">
-            <div class="col-auto d-xl-block d-none">
-                <div class="social-icons d-flex gap-2">
-                    <a href="https://www.facebook.com/nizarrohana2" target="_blank" rel="noopener noreferrer">
-                        <%= image_tag "facebook-icon.png", alt: "Facebook Logo", style: "height: 32px; width: 32px; object-fit: contain;" %>
-                    </a>
-                    <a href="https://www.instagram.com/nizarrohana/" target="_blank" rel="noopener noreferrer">
-                        <%= image_tag "instagram-icon.png", alt: "Instagram Logo", style: "height: 32px; width: 32px; object-fit: contain;" %>
-                    </a>
-
-                    <a href="https://www.youtube.com/@nizarrohana" target="_blank" rel="noopener noreferrer">
-                        <%= image_tag "youtube-icon.png", alt: "YouTube Logo", style: "height: 32px; width: 32px; object-fit: contain;" %>
-                    </a>
-
-                    <a href="https://open.spotify.com/artist/44aAXFZFMN1SHkD3z8rQZ7" target="_blank" rel="noopener noreferrer">
-                        <%= image_tag "spotify-icon.png", alt: "Spotify Logo", style: "height: 32px; width: 32px; object-fit: contain;" %>
-                    </a>
-                </div>
+        <div class="col-xl-2 col-6 gap-3">
+            <div class="social-icons d-flex gap-2 d-xl-flex d-none">
+                <a href="https://www.facebook.com/nizarrohana2" target="_blank" rel="noopener noreferrer">
+                <%= image_tag "facebook-icon.png", alt: "Facebook Logo", style: "height: 32px; width: 32px; object-fit: contain;" %>
+                </a>
+                <a href="https://www.instagram.com/nizarrohana/" target="_blank" rel="noopener noreferrer">
+                <%= image_tag "instagram-icon.png", alt: "Instagram Logo", style: "height: 32px; width: 32px; object-fit: contain;" %>
+                </a>
+                <a href="https://www.youtube.com/@nizarrohana" target="_blank" rel="noopener noreferrer">
+                <%= image_tag "youtube-icon.png", alt: "YouTube Logo", style: "height: 32px; width: 32px; object-fit: contain;" %>
+                </a>
+                <a href="https://open.spotify.com/artist/44aAXFZFMN1SHkD3z8rQZ7" target="_blank" rel="noopener noreferrer">
+                <%= image_tag "spotify-icon.png", alt: "Spotify Logo", style: "height: 32px; width: 32px; object-fit: contain;" %>
+                </a>
             </div>
 
-            <div class="col-auto d-flex gap-2">
+            <div class="row">
+            <div class="d-flex justify-content-end d-xl-none d-block gap-2">
                 <button class="menu-icon btn text-white" id="toggleSidebar">
-                   <i class="bi bi-list"></i>
+                <i class="bi bi-list"></i>
                 </button>
                 <button class="close-icon btn text-white" id="closeSidebarIcon">
                 <i class="bi bi-x-lg"></i>
@@ -180,6 +175,7 @@
             </div>
 
         </div>
+
         
     </div>
 
@@ -191,7 +187,7 @@
                 <div class="col"><li><a href="/" class="text-white d-block py-2">Home</a></li></div>
                 <div class="col text-center"><i class="bi bi-x-lg" id="closeSidebarBtn"></i></div>
             </div>
-            <li><a href="/aboutus" class="text-white d-block py-2">About</a></li>
+            <li><a href="/about" class="text-white d-block py-2">About</a></li>
             <li><a href="/upcoming_events" class="text-white d-block py-2">Events</a></li>
             <li><a href="/news" class="text-white d-block py-2">News</a></li>
             <li><a href="/projects" class="text-white d-block py-2">Projects</a></li>
