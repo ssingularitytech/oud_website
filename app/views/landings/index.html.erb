@@ -12,14 +12,18 @@
       object-fit: cover; */
   }
     /* progressive css */
-    /* .progressive-image {
+    .progressive-image {
       filter: blur(20px);
       transition: filter 0.5s ease;
+      opacity: 0;
     }
 
     .progressive-image.loaded {
       filter: blur(0);
-    } */
+      opacity: 1;
+      transition: opacity 0.5s ease, filter 0.5s ease;
+    }
+
   </style>
   
   <div class="container-fluid p-0" style="overflow: hidden;">
@@ -28,10 +32,11 @@
       <% @landings.each do |home| %>
         <div class="position-relative p-0">
           <% if home.image.present? %>
-            <%= image_tag home.image, 
-                  loading: "lazy", 
-                  class: "img-fluid home-bg-image progressive-image", 
-                  alt: "Landing image" %>
+          <%= image_tag url_for(home.image),
+                loading: "lazy",
+                class: "img-fluid home-bg-image progressive-image",
+                alt: "Landing image" %>
+
           <% else %>
             <p class="text-muted">No image available</p>
           <% end %>
@@ -48,18 +53,19 @@
   </div>
 
   <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const images = document.querySelectorAll(".progressive-image");
+  window.addEventListener("load", function () {
+    const images = document.querySelectorAll(".progressive-image");
 
-      images.forEach((img) => {
-        if (img.complete) {
+    images.forEach((img) => {
+      if (img.complete) {
+        img.classList.add("loaded");
+      } else {
+        img.addEventListener("load", () => {
           img.classList.add("loaded");
-        } else {
-          img.addEventListener("load", () => {
-            img.classList.add("loaded");
-          });
-        }
-      });
+        });
+      }
     });
-  </script>
+  });
+</script>
+
 
