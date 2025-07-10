@@ -94,7 +94,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_07_09_061257) do
     t.string "name"
     t.date "date"
     t.string "description"
-    t.text "link"
+    t.string "link"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "preview"
