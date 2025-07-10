@@ -15,15 +15,11 @@
     .progressive-image {
       filter: blur(20px);
       transition: filter 0.5s ease;
-      opacity: 0;
     }
 
     .progressive-image.loaded {
       filter: blur(0);
-      opacity: 1;
-      transition: opacity 0.5s ease, filter 0.5s ease;
     }
-
   </style>
   
   <div class="container-fluid p-0" style="overflow: hidden;">
@@ -32,9 +28,9 @@
       <% @landings.each do |home| %>
         <div class="position-relative p-0">
           <% if home.image.present? %>
-          <%= image_tag url_for(home.image),
-                loading: "lazy",
-                class: "img-fluid home-bg-image progressive-image",
+          <%= image_tag url_for(home.image), 
+                loading: "lazy", 
+                class: "img-fluid home-bg-image progressive-image", 
                 alt: "Landing image" %>
 
           <% else %>
@@ -53,7 +49,7 @@
   </div>
 
   <script>
-    function loadProgressiveImages() {
+    document.addEventListener("DOMContentLoaded", function () {
       const images = document.querySelectorAll(".progressive-image");
 
       images.forEach((img) => {
@@ -65,10 +61,6 @@
           });
         }
       });
-    }
-
-    document.addEventListener("DOMContentLoaded", loadProgressiveImages);
-    document.addEventListener("turbo:load", loadProgressiveImages);
+    });
   </script>
-
 
