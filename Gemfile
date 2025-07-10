@@ -77,3 +77,4 @@ end
 
   gem 'sendgrid-ruby'
 
+gem 'nokogiri', '1.18.8'
