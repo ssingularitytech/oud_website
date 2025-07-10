@@ -21,7 +21,8 @@ Rails.application.routes.draw do
   resources :aboutus, path: 'about'
   resources :pressquoute
   
- 
+  get  '/test', to: 'landings#test'   
+  
 
   get  '/subscribes', to: 'subscribes#new',    as: 'subscribes'
   post '/subscribes', to: 'subscribes#create'

@@ -22,4 +22,8 @@ class LandingsController < ApplicationController
     params.require(:landing).permit(:image, :text,)
   end
 
+  def test
+
+  end  
+
 end

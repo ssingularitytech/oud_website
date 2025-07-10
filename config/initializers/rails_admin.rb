@@ -215,8 +215,6 @@ end
         field :date
         field :embed_code, :text
         field :description, :action_text
-        # field :link
-        # field :preview, :action_text
         field :image, :active_storage
       end
     
@@ -229,8 +227,6 @@ end
             bindings[:object].description&.body&.to_s&.html_safe
           end
         end
-        field :link
-        field :preview
         field :image do
           pretty_value do
             if bindings[:object].image.attached?
@@ -254,8 +250,6 @@ end
             ActionController::Base.helpers.strip_tags(bindings[:object].description.to_s).truncate(100)
           end
         end
-        field :link
-        field :preview
         field :image do
           pretty_value do
             if bindings[:object].image.attached?
