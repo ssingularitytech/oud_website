@@ -53,19 +53,22 @@
   </div>
 
   <script>
-  window.addEventListener("load", function () {
-    const images = document.querySelectorAll(".progressive-image");
+    function loadProgressiveImages() {
+      const images = document.querySelectorAll(".progressive-image");
 
-    images.forEach((img) => {
-      if (img.complete) {
-        img.classList.add("loaded");
-      } else {
-        img.addEventListener("load", () => {
+      images.forEach((img) => {
+        if (img.complete) {
           img.classList.add("loaded");
-        });
-      }
-    });
-  });
-</script>
+        } else {
+          img.addEventListener("load", () => {
+            img.classList.add("loaded");
+          });
+        }
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", loadProgressiveImages);
+    document.addEventListener("turbo:load", loadProgressiveImages);
+  </script>
 
 
