@@ -217,7 +217,7 @@ end
         field :description, :action_text
         # field :link
         # field :preview, :action_text
-        # field :image, :active_storage
+        field :image, :active_storage
       end
     
       show do
@@ -229,18 +229,18 @@ end
             bindings[:object].description&.body&.to_s&.html_safe
           end
         end
-        # field :link
-        # field :preview
-        # field :image do
-        #   pretty_value do
-        #     if bindings[:object].image.attached?
-        #       bindings[:view].tag(:img, 
-        #         src: Rails.application.routes.url_helpers.rails_blob_path(bindings[:object].image, only_path: true), 
-        #         style: 'max-width: 200px; max-height: 200px;'
-        #       )
-        #     end
-        #   end
-        # end
+        field :link
+        field :preview
+        field :image do
+          pretty_value do
+            if bindings[:object].image.attached?
+              bindings[:view].tag(:img, 
+                src: Rails.application.routes.url_helpers.rails_blob_path(bindings[:object].image, only_path: true), 
+                style: 'max-width: 200px; max-height: 200px;'
+              )
+            end
+          end
+        end
         field :created_at
         field :updated_at
       end
@@ -254,18 +254,18 @@ end
             ActionController::Base.helpers.strip_tags(bindings[:object].description.to_s).truncate(100)
           end
         end
-        # field :link
-        # field :preview
-        # field :image do
-        #   pretty_value do
-        #     if bindings[:object].image.attached?
-        #       bindings[:view].tag(:img, 
-        #         src: Rails.application.routes.url_helpers.rails_blob_path(bindings[:object].image, only_path: true), 
-        #         style: 'max-width: 100px; max-height: 100px;'
-        #       )
-        #     end
-        #   end
-        # end
+        field :link
+        field :preview
+        field :image do
+          pretty_value do
+            if bindings[:object].image.attached?
+              bindings[:view].tag(:img, 
+                src: Rails.application.routes.url_helpers.rails_blob_path(bindings[:object].image, only_path: true), 
+                style: 'max-width: 100px; max-height: 100px;'
+              )
+            end
+          end
+        end
         field :created_at
         field :updated_at
       end
