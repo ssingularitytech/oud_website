@@ -25,18 +25,24 @@
   <div class="container-fluid p-0" style="overflow: hidden;">
     <div class="row">
 
-      <% @landings.each do |home| %>
-        <div class="position-relative p-0">
-          <% if home.image.present? %>
-            <%= image_tag home.image, 
-                  loading: "lazy", 
-                  class: "img-fluid home-bg-image progressive-image", 
-                  alt: "Landing image" %>
-          <% else %>
-            <p class="text-muted">No image available</p>
-          <% end %>
-        </div>
-      <% end %>
+<% @landings.each do |home| %>
+  <div class="position-relative p-0">
+    <% if home.image.present? %>
+      <%= image_tag home.image, 
+            loading: "lazy", 
+            class: "img-fluid home-bg-image progressive-image", 
+            alt: "Landing image" %>
+    <% else %>
+      <p class="text-muted">No image available</p>
+    <% end %>
+
+    <!-- Move the h5 inside the container -->
+    <h5 class="py-3 px-3 caudex-normal" style="position: absolute; bottom: 20px; right: 100px; background: #181d23; color: white; border-radius: 12px; opacity: 0.8;">
+      Oud Player, Composer, Educator
+    </h5>
+  </div>
+<% end %>
+
 
 
       <%= render partial: 'layouts/newrelease' %>
