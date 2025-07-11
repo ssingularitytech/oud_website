@@ -1,28 +1,27 @@
-
-
 <style>
+  .faculty-image {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    border-radius: 12px;
+    object-fit: cover;
+  }
+
+  @media (max-width: 768px) {
+    .faculty-image {
+      max-width: 330px;
+    }
+  }
+
+  .w-md-75 {
+    width: 100%;
+  }
+
   @media (min-width: 768px) {
     .w-md-75 {
       width: 75% !important;
     }
   }
-
-    @media (min-width: 768px) {
-      .faculty-image{
-        width: 450px;
-        height: 450px;
-        border-radius: 15px;
-        object-fit: cover;
-        }
-        }
-    @media (max-width: 768px) {
-        .faculty-image {
-          width: 300px;
-          height: 300px;
-          border-radius: 15px;
-          object-fit: cover;
-          }
-        }
 
   /* Animation Classes */
   .fade-in {
@@ -37,47 +36,38 @@
   }
 </style>
 
-
-
 <div class="container">
-  
-    
-      <div class="row fade-in">
+  <div class="row fade-in">
+    <div class="py-md-5 py-4 text-white text-center">
+      <h4 class="caudex-bold m-0">New Single: Maria by Nizar Rohana Trio</h4>
+      <h4 class="caudex-bold m-0 py-3">6 June 2025</h4>
+    </div>
 
-        <div class="py-md-5 py-4 text-white ">
-            <h4 class="text-center text-white caudex-bold p-0 m-0">New Single: Maria by Nizar Rohana Trio</h4>
-            <h4 class="text-center text-white caudex-bold p-3 m-0">6 June 2025</h4>
-        </div>
+    <div class="row mx-auto w-100 w-md-75 justify-content-center">
+      <div class="col-12 d-flex justify-content-center fade-in">
+        <%= image_tag "nizar-trio.jpg", alt: "Company Logo", class: "img-fluid faculty-image", loading: "lazy" %>
+      </div>
 
-        <div class="row mx-auto w-100 w-md-75">
-
-          <div class="col-12 d-flex justify-content-center fade-in">
-            <%= image_tag "nizar-trio.jpg", alt: "Company Logo", class: "img-fluid faculty-image", loading: "lazy" %>
-          </div>
-
-          <div class="col-12 fade-in pt-5">
-            <div class="marcellus-regular introduction-description fw-normal text-left text-white">
-              <p>Out now on all streaming platforms: Maria by Nizar Rohana Trio.</p> 
-              <a href=""><p>https://orcd.co/jdpxkyx </p></a>
-              <p>This is the first single from a 4 track EP by Nizar Rohana Trio, The MCO Session, set to be released by 18 July 2025. Stay tuned for more.</p>
-            </div>
-          </div>
-
-          <div class="">
-            <a href="/news" style="text-decoration: none;">
-              <button class="back-button mt-3" style="border: 2px solid blue; border-radius: 12px; color: white;">
-                <div class="d-flex justify-content-center align-items-center gap-2 caudex-bold py-2 px-4">
-                  <i style="font-size: 20px;" class="bi bi-chevron-left"></i>
-                  <span style="font-size: 20px;">Go Back</span>
-                </div>
-              </button>
-            </a>
-          </div>
-
+      <div class="col-12 fade-in pt-5">
+        <div class="marcellus-regular introduction-description fw-normal text-white text-start">
+          <p>Out now on all streaming platforms: Maria by Nizar Rohana Trio.</p>
+          <a href=""><p>https://orcd.co/jdpxkyx </p></a>
+          <p>This is the first single from a 4 track EP by Nizar Rohana Trio, The MCO Session, set to be released by 18 July 2025. Stay tuned for more.</p>
         </div>
       </div>
-    
- 
+
+      <div class="col-12 mt-3 text-center">
+        <a href="/news" style="text-decoration: none;">
+          <button class="back-button" style="border: 2px solid blue; border-radius: 12px; color: white;">
+            <div class="d-flex justify-content-center align-items-center gap-2 caudex-bold py-2 px-4">
+              <i class="bi bi-chevron-left" style="font-size: 20px;"></i>
+              <span style="font-size: 20px;">Go Back</span>
+            </div>
+          </button>
+        </a>
+      </div>
+    </div>
+  </div>
 </div>
 
 <script>

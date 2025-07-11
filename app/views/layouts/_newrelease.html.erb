@@ -1,5 +1,9 @@
 
-
+<style>
+  .new-release{
+      border-radius: 12px;
+  }
+</style>
 
 <div class="container">
   <div class="py-5">
@@ -12,7 +16,7 @@
         <div class="col-xl-4 col-md-6 col-12 d-flex justify-content-center">
           <a href="<%= release.youtube_url %>">
             <% if release.image.attached? %>
-              <%= image_tag release.image, alt: release.name, class: "w-100 rounded" %>
+              <%= image_tag release.image, alt: release.name, class: "w-100 new-release" %>
             <% else %>
               <p class="text-white">No image</p>
             <% end %>
