@@ -1,83 +1,146 @@
-  <style>
-    @media (min-width: 768px) {
-      .media-wrapper {
-        height: 25rem;
+    <style>
+      @media (min-width: 768px) {
+        .media-wrapper {
+          height: 25rem;
+        }
+
+        .show-project-image,
+        .youtube-frame {
+          width: 100%;
+          height: 100%;
+          object-fit: fill;
+          border: 2px solid grey;
+          border-radius: 12px;
+        }
       }
 
-      .show-project-image,
-      .youtube-frame {
-        width: 100%;
-        height: 100%;
-        object-fit: fill;
-        border: 2px solid grey;
-        border-radius: 12px;
+      @media (max-width: 767px) {
+        .media-wrapper {
+          height: 15rem;
+        }
+
+        .show-project-image,
+        .youtube-frame {
+          width: 100%;
+          height: 100%;
+          object-fit: fill;
+          border: 2px solid grey;
+          border-radius: 12px;
+        }
       }
+
+
+   /* Animation Classes */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
     }
 
-    @media (max-width: 767px) {
-      .media-wrapper {
-        height: 15rem;
-      }
-
-      .show-project-image,
-      .youtube-frame {
-        width: 100%;
-        height: 100%;
-        object-fit: fill;
-        border: 2px solid grey;
-        border-radius: 12px;
-      }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
-  </style>
+
+    /* progressive css */
+    .progressive-image {
+      filter: blur(20px);
+      transition: filter 0.5s ease;
+    }
+
+    .progressive-image.loaded {
+      filter: blur(0);
+    }
+    </style>
 
   <div class="container">
-    <div class="text-center justify-content-center text-white caudex-bold text-white py-md-5 py-4">
-      <h4><%= @project.name %></h4>
-    </div>
-  <div class="row text-white px-2">
-    <% @project.project_details.each do |detail| %>
-      <!-- Left Column: Image -->
-      <div class="col-lg-6">
-        <% if detail.image.attached? %>
-          <div class="media-wrapper mb-3">
-            <img src="<%= url_for(detail.image) %>" class="img-fluid show-project-image">
-          </div>
-        <% end %>
+    <div class="row fade-in">
+
+      <div class="text-white text-center py-4 fade-in">
+        <p class="caudex-bold m-0" style="font-size: 22px;"><%= @project.name %></p>
       </div>
 
-      <!-- Right Column: YouTube -->
-      <div class="col-lg-6">
-        <% if detail.youtube_url.present? %>
-          <% youtube_id = detail.youtube_url[/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/))([\w-]+)/, 1] %>
-          <% if youtube_id.present? %>
+      <div class="row mx-auto justify-content-center pt-4 fade-in">
+       <% @project.project_details.each do |detail| %>
+        <!-- Left Column: Image -->
+        <div class="col-lg-6 fade-in">
+          <% if detail.image.attached? %>
             <div class="media-wrapper mb-3">
-              <iframe class="youtube-frame"
-                src="https://www.youtube.com/embed/<%= youtube_id %>"
-                title="YouTube video player"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen>
-              </iframe>
+              <img src="<%= url_for(detail.image) %>" class="img-fluid show-project-image progressive-image fade-in">
             </div>
           <% end %>
-        <% end %>
+        </div>
+
+        <!-- Right Column: YouTube -->
+        <div class="col-lg-6 fade-in">
+          <% if detail.youtube_url.present? %>
+            <% youtube_id = detail.youtube_url[/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/))([\w-]+)/, 1] %>
+            <% if youtube_id.present? %>
+              <div class="media-wrapper mb-3">
+                <iframe class="youtube-frame"
+                  src="https://www.youtube.com/embed/<%= youtube_id %>"
+                  title="YouTube video player"
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen>
+                </iframe>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+
+        <!-- Description -->
+        <div class="description py-2 text-white fade-in">
+          <p><%= detail.description %></p>
+        </div>
+      <% end %>
+
+      <div class="fade-in">
+        <a href="/projects" style="text-decoration: none;">
+          <button class="back-button mt-3" style="border: 2px solid grey; border-radius: 12px; color: white;">
+            <div class="d-flex justify-content-center align-items-center gap-2 caudex-bold py-2 px-4">
+              <i style="font-size: 20px;" class="bi bi-chevron-left"></i>
+              <span style="font-size: 20px;">Go Back</span>
+            </div>
+          </button>
+        </a>
+      </div>
       </div>
 
-      <!-- Description -->
-      <div class="description py-2">
-        <p><%= detail.description %></p>
       </div>
-    <% end %>
-
-    <div class="">
-      <a href="/projects" style="text-decoration: none;">
-        <button class="back-button mt-3" style="border: 2px solid grey; border-radius: 12px; color: white;">
-          <div class="d-flex justify-content-center align-items-center gap-2 caudex-bold py-2 px-4">
-            <i style="font-size: 20px;" class="bi bi-chevron-left"></i>
-            <span style="font-size: 20px;">Go Back</span>
-          </div>
-        </button>
-      </a>
     </div>
-  </div>
-  </div>
+
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const elements = document.querySelectorAll('.fade-in');
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.1
+      });
+
+      elements.forEach(el => observer.observe(el));
+    });
+
+    // progressive image loading
+    document.addEventListener("DOMContentLoaded", function () {
+      const images = document.querySelectorAll(".progressive-image");
+
+      images.forEach((img) => {
+        if (img.complete) {
+          img.classList.add("loaded");
+        } else {
+          img.addEventListener("load", () => {
+            img.classList.add("loaded");
+          });
+        }
+      });
+    });
+  </script>    

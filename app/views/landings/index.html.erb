@@ -34,24 +34,21 @@
   <div class="container-fluid p-0" style="overflow: hidden;">
     <div class="row">
 
-<% @landings.each do |home| %>
-  <div class="position-relative p-0">
-    <% if home.image.present? %>
-      <%= image_tag home.image, 
-            loading: "lazy", 
-            class: "img-fluid home-bg-image progressive-image", 
-            alt: "Landing image" %>
-    <% else %>
-      <p class="text-muted">No image available</p>
-    <% end %>
+      <% @landings.each do |home| %>
+        <div class="position-relative p-0">
+          <% if home.image.present? %>
+            <%= image_tag home.image, 
+                  loading: "lazy", 
+                  class: "img-fluid home-bg-image progressive-image", 
+                  alt: "Landing image" %>
+          <% end %>
 
-    <h5 class="py-3 px-3 caudex-normal position-absolute text-white homepage-text-on-image"
-        style="bottom: 20px; right: 100px; background: #181d23; border-radius: 12px; opacity: 0.8;"
-    >
-      Oud Player, Composer, Educator
-    </h5>
-  </div>
-<% end %>
+          <h5 class="py-3 px-3 caudex-normal position-absolute text-white homepage-text-on-image"
+              style="bottom: 20px; right: 100px; background: #181d23; border-radius: 12px; opacity: 0.8;">
+               Oud Player, Composer, Educator
+          </h5>
+        </div>
+      <% end %>
 
 
 

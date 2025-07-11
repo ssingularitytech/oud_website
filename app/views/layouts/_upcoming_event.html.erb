@@ -1,15 +1,27 @@
 
+<style>
+      /* Animation Classes */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
 
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+</style>
 
   <div class="container-fluid">
     <div class="container">
       <div class="row">
 
         <!-- Upcoming Events -->
-          <div class="py-5">
+          <div class="py-5 fade-in">
            <h4 class="text-center text-white caudex-bold p-0 m-0">UPCOMING EVENTS</h4>
            </div>
-        <div class="col-md-8 mx-auto px-4">
+        <div class="col-md-8 mx-auto px-4 fade-in">
           <% @upcoming_events.each do |upcoming_event| %>
             <div class="event-card mb-4 d-flex flex-column flex-md-row">
               
@@ -48,10 +60,30 @@
         </div>
         </div>
         
-        <div class="py-2">
+        <div class="py-2 fade-in">
           <%= link_to upcoming_events_path, class: "text-white text-center d-block caudex-bold text-decoration-underline" do %>
             <h4 class="text-white">All Events</h4>
           <% end %>
         </div>
     </div>
   </div>
+
+  <script>
+        // animation js
+    document.addEventListener("DOMContentLoaded", function () {
+      const elements = document.querySelectorAll('.fade-in');
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.1
+      });
+
+      elements.forEach(el => observer.observe(el));
+    });
+  </script>

@@ -19,7 +19,17 @@
       object-fit: fill;
         }
       }
+  /* Animation Classes */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
 
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
     /* progressive css */
     .progressive-image {
@@ -35,22 +45,22 @@
   <div class="container">
     
 
-      <div class="py-md-5 py-4 text-white">
-          <h4 class="text-center text-white caudex-bold p-0 m-0">ABOUT</h4>
+      <div class="py-4 text-white fade-in">
+          <p class="text-center text-white caudex-bold m-0" style="font-size: 22px;">ABOUT</p>
       </div>
 
         <div class="row">
-            <div class="box">
+            <div class="box fade-in">
             
               <% @aboutus.each do |about| %>
                 <% if about.image.present? %>
                   <%= image_tag about.image,
                     loading: "lazy", 
-                    class: "img-fluid aboutus-image progressive-image p-2", 
+                    class: "img-fluid aboutus-image progressive-image p-2 fade-in", 
                     alt: "About image" %>
                 <% end %>
 
-                <div class="text text-white px-2 pt-1">
+                <div class="text text-white px-2 pt-1 fade-in">
                     <%= about.text.body.to_s.html_safe %>
                 </div>
 
@@ -62,6 +72,25 @@
 
 
   <script>
+    // animation js
+    document.addEventListener("DOMContentLoaded", function () {
+      const elements = document.querySelectorAll('.fade-in');
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.1
+      });
+
+      elements.forEach(el => observer.observe(el));
+    });
+
+
     document.addEventListener("DOMContentLoaded", function () {
       const images = document.querySelectorAll(".progressive-image");
 
