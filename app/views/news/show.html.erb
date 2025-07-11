@@ -36,12 +36,12 @@
 
   <div class="container">
     
-      <div class="py-md-5 py-4 text-white ">
-          <h4 class="text-center text-white caudex-bold p-0 m-0"><%= @news.news_name %></h4>
-          <h4 class="text-center text-white caudex-bold p-3 m-0"><%= @news.news_date.strftime("%-d %B %Y") %></h4>
+      <div class="text-center justify-content-center text-white caudex-bold text-white py-md-5 py-4">
+          <h4 class="p-0"><%= @news.news_name %></h4>
+          <h5 class="p-0"><%= @news.news_date.strftime("%-d %B %Y") %></h5>
       </div>
 
-      <div class="row">
+       <div class="row text-white px-2">
           <div class="box">
 
                 <% if @news.news_image.present? %>
@@ -67,9 +67,8 @@
             </div>
 
           </div>
-      </div>
 
-          <div class="mt-md-5 mt-3">
+          <div class="mt-md-5 mt-3 px-3">
             <a href="/news" style="text-decoration: none;">
               <button class="back-button mt-3" style="border: 2px solid blue; border-radius: 12px; color: white;">
                 <div class="d-flex justify-content-center align-items-center gap-2 caudex-bold py-2 px-4">
@@ -79,6 +78,7 @@
               </button>
             </a>
           </div> 
+      </div>
 
    
    </div>
