@@ -1,25 +1,14 @@
 
   <style>
 
-    @media (min-width: 768px) {
-      .box .show-news-image {
-      float: left;
-      width: 100%;
-      max-width: 450px;
-      aspect-ratio: 1/1;
-      height: auto;
-      border-radius: 20px;
-      object-fit: fill;
-        }
-        }
-    @media (max-width: 768px) {
-        .box .show-news-image {
-      float: left;
-      max-width: 330px;
-      aspect-ratio: 1/1;
-      border-radius: 20px;
-          }
-        }
+  .box .show-news-image {
+    float: left;
+    height: 500px;
+    width: 500px;
+    aspect-ratio: 1/0.85;
+    border-radius: 20px;
+    object-fit: fill;
+  }
 
   /* progressive css */
     .progressive-image {
@@ -34,12 +23,10 @@
 
   <div class="container">
     
-
       <div class="py-md-5 py-4 text-white ">
           <h4 class="text-center text-white caudex-bold p-0 m-0"><%= @news.news_name %></h4>
           <h4 class="text-center text-white caudex-bold p-3 m-0"><%= @news.news_date.strftime("%-d %B %Y") %></h4>
       </div>
-
 
       <div class="row">
           <div class="box">
@@ -65,6 +52,7 @@
              <% end %>
           
             </div>
+
           </div>
       </div>
 
