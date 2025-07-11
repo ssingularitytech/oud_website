@@ -1,59 +1,63 @@
-
-  <style>
-
- @media (min-width: 768px) {
-  .box .show-news-image {
-    float: left;
-    height: 500px;
+<style>
+  .faculty-image {
     width: 500px;
-    aspect-ratio: 1/0.85;
-    border-radius: 20px;
+    aspect-ratio: 1/1;
+    height: auto;
+    border-radius: 12px;
     object-fit: fill;
   }
-  }
 
-  @media (max-width: 767px){
-  .box .show-news-image {
-    float: left;
-    height: 330px;
-    width: 500px;
-    aspect-ratio: 1/0.85;
-    border-radius: 20px;
-    object-fit: fill;
-  }
-  }
-
-  /* progressive css */
-    .progressive-image {
-      filter: blur(20px);
-      transition: filter 0.5s ease;
+  @media (max-width: 768px) {
+    .faculty-image {
+      max-width: 330px;
+      aspect-ratio: 1/1;
     }
+  }
 
-    .progressive-image.loaded {
-      filter: blur(0);
+  .w-md-75 {
+    width: 100%;
+  }
+
+  @media (min-width: 768px) {
+    .w-md-75 {
+      width: 75% !important;
     }
-  </style>
+  }
 
-  <div class="container">
-    
-      <div class="text-center justify-content-center text-white caudex-bold text-white py-md-5 py-4">
-          <h4 class="p-0"><%= @news.news_name %></h4>
-          <h5 class="p-0"><%= @news.news_date.strftime("%-d %B %Y") %></h5>
-      </div>
+  /* Animation Classes */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
 
-       <div class="row text-white px-2">
-          <div class="box">
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
 
-                <% if @news.news_image.present? %>
+<div class="container">
+  <div class="row fade-in">
+    <div class="text-white text-center pt-5">
+      <p class="caudex-bold m-0" style="font-size: 22px;"><%= @news.news_name %></p>
+      <p class="caudex-bold m-0 pt-2" style="font-size: 18px;"><%= @news.news_date.strftime("%-d %B %Y") %></p>
+    </div>
+
+    <div class="row mx-auto w-100 w-md-75 justify-content-center">
+      <div class="col-12 d-flex justify-content-center fade-in pt-4">
+        
+                        <% if @news.news_image.present? %>
                   <%= image_tag @news.news_image,
                     loading: "lazy", 
-                    class: "img-fluid show-news-image progressive-image p-2", 
+                    class: "img-fluid faculty-image", 
                     alt: "About image" %>
                 <% end %>
+      </div>
 
-            <div class="text text-white px-2 pt-1">
-           
-              <p style="position: absolute;"><%= @news.news_description %></p>
+      <div class="col-12 fade-in pt-4">
+        <div class="marcellus-regular introduction-description fw-normal text-white text-start">
+                        <p><%= @news.news_description %></p>
               <% if @news.news_link.present? %>
               <% @news.news_link.split(' ').each do |link| %>
                 <p>
@@ -63,51 +67,38 @@
                 </p>
               <% end %>
              <% end %>
-          
-            </div>
-
-          </div>
-
-          <div class="mt-md-5 mt-3 px-3">
-            <a href="/news" style="text-decoration: none;">
-              <button class="back-button mt-3" style="border: 2px solid blue; border-radius: 12px; color: white;">
-                <div class="d-flex justify-content-center align-items-center gap-2 caudex-bold py-2 px-4">
-                  <i style="font-size: 20px;" class="bi bi-chevron-left"></i>
-                  <span style="font-size: 20px;">Go Back</span>
-                </div>
-              </button>
-            </a>
-          </div> 
+        </div>
       </div>
 
-   
-   </div>
+      <div class="col-12 mt-3 text-left">
+        <a href="/news" style="text-decoration: none;">
+          <button class="back-button" style="border: 2px solid blue; border-radius: 12px; color: white;">
+            <div class="d-flex justify-content-center align-items-center gap-2 caudex-bold py-2 px-4">
+              <i class="bi bi-chevron-left" style="font-size: 20px;"></i>
+              <span style="font-size: 20px;">Go Back</span>
+            </div>
+          </button>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
 
-      <script>
-        document.addEventListener("DOMContentLoaded", function() {
-          document.querySelectorAll(".description a").forEach(function(link) {
-            link.setAttribute("target", "_blank");
-            link.setAttribute("rel", "noopener");
-          });
-        });
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const elements = document.querySelectorAll('.fade-in');
 
-      // Progressive Image Loading
-      document.addEventListener("DOMContentLoaded", function () {
-      const images = document.querySelectorAll(".progressive-image");
-
-      images.forEach((img) => {
-        if (img.complete) {
-          img.classList.add("loaded");
-        } else {
-          img.addEventListener("load", () => {
-            img.classList.add("loaded");
-          });
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
         }
       });
+    }, {
+      threshold: 0.1
     });
-    </script>
 
-
- 
-
-
+    elements.forEach(el => observer.observe(el));
+  });
+</script>
