@@ -1,6 +1,7 @@
 
   <style>
 
+ @media (min-width: 768px) {
   .box .show-news-image {
     float: left;
     height: 500px;
@@ -8,6 +9,18 @@
     aspect-ratio: 1/0.85;
     border-radius: 20px;
     object-fit: fill;
+  }
+  }
+
+  @media (max-width: 767px){
+  .box .show-news-image {
+    float: left;
+    height: 330px;
+    width: 500px;
+    aspect-ratio: 1/0.85;
+    border-radius: 20px;
+    object-fit: fill;
+  }
   }
 
   /* progressive css */
