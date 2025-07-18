@@ -43,7 +43,7 @@ RailsAdmin.config do |config|
       edit do
         field :news_date
         field :news_name
-        field :news_description
+        field :news_description, :action_text
         field :news_link
         field :news_image, :active_storage
       end
