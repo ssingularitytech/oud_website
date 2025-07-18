@@ -1,0 +1,2 @@
+module UpcomingBgImageHelper
+end

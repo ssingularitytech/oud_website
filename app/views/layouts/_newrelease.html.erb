@@ -1,4 +1,21 @@
+
 <style>
+  .new-release{
+      border-radius: 12px;
+  }
+
+  /* Animation Classes */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
     /* progressive css */
     .progressive-image {
       filter: blur(20px);
@@ -10,9 +27,8 @@
     }
 </style>
 
-
 <div class="container">
-  <div class="py-5">
+  <div class="py-5 fade-in">
     <h4 class="text-center text-white caudex-bold p-0 m-0">NEW RELEASE</h4>
   </div>
 
@@ -22,9 +38,10 @@
         <div class="col-xl-4 col-md-6 col-12 d-flex justify-content-center">
           <a href="<%= release.youtube_url %>">
             <% if release.image.attached? %>
-              <%= image_tag release.image, alt: release.name, class: "w-100 rounded progressive-image" %>
-            <% else %>
-              <p class="text-white">No image</p>
+              <%= image_tag release.image,
+               loading: "lazy", 
+               class: "w-100 new-release fade-in progressive-image",
+               alt: release.name %>
             <% end %>
           </a>
         </div>
@@ -36,19 +53,37 @@
 </div>
 
 
-  <script>
-    // progressive image js
+ <script>
+      // animation js
     document.addEventListener("DOMContentLoaded", function () {
-    const images = document.querySelectorAll(".progressive-image");
+      const elements = document.querySelectorAll('.fade-in');
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.1
+      });
+
+      elements.forEach(el => observer.observe(el));
+    });
+
+        // progressive image loading
+    document.addEventListener("DOMContentLoaded", function () {
+      const images = document.querySelectorAll(".progressive-image");
 
       images.forEach((img) => {
-        img.addEventListener("load", () => {
-          img.classList.add("loaded");
-        });
         if (img.complete) {
           img.classList.add("loaded");
+        } else {
+          img.addEventListener("load", () => {
+            img.classList.add("loaded");
+          });
         }
       });
     });
-
-  </script>
+ </script>

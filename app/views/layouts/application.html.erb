@@ -11,6 +11,17 @@
 
 
     <%= stylesheet_link_tag "style.css" %>
+    
+    <!-- Google Analytics -->
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-L8WFR7G59J"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-L8WFR7G59J');
+      </script>
+    <!-- End Google Analytics -->
   </head>
 
     <style>
@@ -51,7 +62,7 @@
     }
   </style>
   <!-- <%= render partial: 'layouts/loader' %> -->
-  <body class="comman-bg-color">
+  <body class="comman-bg-color d-flex flex-column min-vh-100">
       <%= render partial: 'layouts/navbar'%>
       <% if notice %>
         <div class="flash-message" id="notice">

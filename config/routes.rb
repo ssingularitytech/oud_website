@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -21,7 +22,8 @@ Rails.application.routes.draw do
   resources :aboutus, path: 'about'
   resources :pressquoute
   
- 
+  get  '/test', to: 'landings#test'   
+  
 
   get  '/subscribes', to: 'subscribes#new',    as: 'subscribes'
   post '/subscribes', to: 'subscribes#create'

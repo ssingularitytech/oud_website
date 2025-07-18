@@ -7,6 +7,7 @@ class UpcomingEventsController < ApplicationController
     
     Rails.logger.debug "Upcoming Events: #{@upcoming_events.map(&:date)}"
     Rails.logger.debug "Past Events: #{@past_events.map(&:date)}"
+    @upcomingbgimages = UpcomingBgImage.all
   end
 
 

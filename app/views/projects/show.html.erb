@@ -1,84 +1,146 @@
-<style>
-  @media (min-width: 768px) {
-    .show-project-image {
-      aspect-ratio: 1/0.7;
-      object-fit: fill;
-      border : 2px solid grey;
-      border-radius: 12px;
-    }
-    .youtube-frame {
-      height: 20rem;
-      width: 100%;
-    }
-  }
+    <style>
+      @media (min-width: 768px) {
+        .media-wrapper {
+          height: 25rem;
+        }
 
-  @media (max-width: 768px) {
-    .show-project-image {
-      aspect-ratio: 1/0.7;
-      object-fit: fill;
-      border : 2px solid grey;
-      border-radius: 12px;
+        .show-project-image,
+        .youtube-frame {
+          width: 100%;
+          height: 100%;
+          object-fit: fill;
+          border: 2px solid grey;
+          border-radius: 12px;
+        }
+      }
+
+      @media (max-width: 767px) {
+        .media-wrapper {
+          height: 15rem;
+        }
+
+        .show-project-image,
+        .youtube-frame {
+          width: 100%;
+          height: 100%;
+          object-fit: fill;
+          border: 2px solid grey;
+          border-radius: 12px;
+        }
+      }
+
+
+   /* Animation Classes */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
     }
-    .youtube-frame {
-      height: 12rem;
-      width: 100%;
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
-  }
 
-  @media (min-width: 1024px) {
-    .project-black-text-box {
-      background-color: #1b1b1b;
-      border: 2px solid grey;
-      border-radius: 12px;
+    /* progressive css */
+    .progressive-image {
+      filter: blur(20px);
+      transition: filter 0.5s ease;
     }
-  }
-</style>
 
-<div class="container">
-  <div class="text-center mt-2 justify-content-center text-white mt-5 caudex-bold text-white">
-    <h5><%= @project.name %></h5>
-  </div>
+    .progressive-image.loaded {
+      filter: blur(0);
+    }
+    </style>
 
-  <div class="row text-white px-md-5 px-2 mt-5">
-    <% @project.project_details.each do |detail| %>
-      <!-- Left Column: Image and YouTube -->
-      <div class="col-lg-6 d-flex flex-column pe-md-4">
-        <% if detail.image.attached? %>
-          <img src="<%= url_for(detail.image) %>" class="img-fluid show-project-image mb-3">
-        <% end %>
+  <div class="container">
+    <div class="row fade-in">
 
-        <% if detail.youtube_url.present? %>
-          <% youtube_id = detail.youtube_url[/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/))([\w-]+)/, 1] %>
-          <% if youtube_id.present? %>
-            <iframe class="youtube-frame mb-3"
-              src="https://www.youtube.com/embed/<%= youtube_id %>"
-              title="YouTube video player"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen>
-            </iframe>
-          <% end %>
-        <% end %>
+      <div class="text-white text-center py-4 fade-in">
+        <p class="caudex-bold m-0" style="font-size: 22px;"><%= @project.name %></p>
       </div>
 
-      <!-- Right Column: Description -->
-      <div class="col-lg-6 d-flex project-black-text-box">
-        <div class="description py-2">
+      <div class="row mx-auto justify-content-center pt-4 fade-in">
+       <% @project.project_details.each do |detail| %>
+        <!-- Left Column: Image -->
+        <div class="col-lg-6 fade-in">
+          <% if detail.image.attached? %>
+            <div class="media-wrapper mb-3">
+              <img src="<%= url_for(detail.image) %>" class="img-fluid show-project-image progressive-image fade-in">
+            </div>
+          <% end %>
+        </div>
+
+        <!-- Right Column: YouTube -->
+        <div class="col-lg-6 fade-in">
+          <% if detail.youtube_url.present? %>
+            <% youtube_id = detail.youtube_url[/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/))([\w-]+)/, 1] %>
+            <% if youtube_id.present? %>
+              <div class="media-wrapper mb-3">
+                <iframe class="youtube-frame"
+                  src="https://www.youtube.com/embed/<%= youtube_id %>"
+                  title="YouTube video player"
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen>
+                </iframe>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+
+        <!-- Description -->
+        <div class="description py-2 text-white fade-in">
           <p><%= detail.description %></p>
         </div>
-      </div>
-    <% end %>
+      <% end %>
 
-    <!-- Go Back Button -->
-    <div class="">
-      <a href="/projects" style="text-decoration: none;">
-        <button class="back-button mt-3" style="border: 2px solid blue; border-radius: 12px; color: white;">
-          <div class="d-flex justify-content-center align-items-center gap-2 caudex-bold py-2 px-4">
-            <i style="font-size: 20px;" class="bi bi-chevron-left"></i>
-            <span style="font-size: 20px;">Go Back</span>
-          </div>
-        </button>
-      </a>
+      <div class="fade-in">
+        <a href="/projects" style="text-decoration: none;">
+          <button class="back-button mt-3" style="border: 2px solid grey; border-radius: 12px; color: white;">
+            <div class="d-flex justify-content-center align-items-center gap-2 caudex-bold py-2 px-4">
+              <i style="font-size: 20px;" class="bi bi-chevron-left"></i>
+              <span style="font-size: 20px;">Go Back</span>
+            </div>
+          </button>
+        </a>
+      </div>
+      </div>
+
+      </div>
     </div>
-  </div>
-</div>
+
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const elements = document.querySelectorAll('.fade-in');
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.1
+      });
+
+      elements.forEach(el => observer.observe(el));
+    });
+
+    // progressive image loading
+    document.addEventListener("DOMContentLoaded", function () {
+      const images = document.querySelectorAll(".progressive-image");
+
+      images.forEach((img) => {
+        if (img.complete) {
+          img.classList.add("loaded");
+        } else {
+          img.addEventListener("load", () => {
+            img.classList.add("loaded");
+          });
+        }
+      });
+    });
+  </script>    
