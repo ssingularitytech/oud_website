@@ -43,7 +43,7 @@ RailsAdmin.config do |config|
       edit do
         field :news_date
         field :news_name
-        field :news_description
+        field :news_description, :action_text
         field :news_link
         field :news_image, :active_storage
       end
@@ -74,6 +74,8 @@ RailsAdmin.config do |config|
             end
           end
         end
+        field :created_at
+        field :updated_at
       end
     end
 
@@ -123,6 +125,8 @@ RailsAdmin.config do |config|
           end
         end
         field :youtube_url 
+        field :created_at
+        field :updated_at
       end
     end
 
@@ -170,6 +174,8 @@ RailsAdmin.config do |config|
       end
     end
     field :youtube_url
+      field :created_at
+      field :updated_at
   end
 end
 
@@ -206,6 +212,8 @@ end
             end
           end
         end
+        field :created_at
+        field :updated_at
       end
     end
 
@@ -398,6 +406,8 @@ end
             end
           end
         end
+        field :created_at
+        field :updated_at
       end
     end
 
@@ -569,9 +579,8 @@ end
           end
         end
         field :created_at
+        field :updated_at
       end
-
-
     end
 
 
@@ -601,6 +610,8 @@ end
           end
         end
         field :text
+        field :created_at
+        field :updated_at
       end
     end
 
