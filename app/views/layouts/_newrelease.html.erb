@@ -35,8 +35,8 @@
   <% if @new_releases.present? %>
     <div class="row justify-content-center px-4">
       <% @new_releases.each do |release| %>
-        <div class="col-xl-4 col-md-6 col-12 d-flex justify-content-center description">
-          <a href="<%= release.youtube_url %>">
+        <div class="col-xl-4 col-md-6 col-12 d-flex justify-content-center">
+          <a href="<%= release.youtube_url %>" target="_blank">
             <% if release.image.attached? %>
               <%= image_tag release.image,
                loading: "lazy", 
@@ -84,14 +84,6 @@
             img.classList.add("loaded");
           });
         }
-      });
-    });
-
-    // news tab js
-        document.addEventListener("DOMContentLoaded", function() {
-      document.querySelectorAll(".description a").forEach(function(link) {
-        link.setAttribute("target", "_blank");
-        link.setAttribute("rel", "noopener");
       });
     });
  </script>
